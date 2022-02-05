@@ -1,0 +1,103 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+nav {
+  background-color: green;
+}
+nav ul {
+  display: flex;
+  list-style: none;
+  margin-left: -3%;
+  font-size: 20px;
+  font-weight: 600;
+}
+nav .menu a {
+  text-decoration: none;
+  color: black;
+}
+nav .menu .active a {
+  font-weight: 100;
+}
+nav .menu {
+  padding: 3px 7px;
+  padding-right: 65px;
+  position: relative;
+}
+nav .dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 4%;
+  display: inline-block;
+  background-color: rgb(2, 168, 2);
+  width: 100%;
+  display: none;
+}
+nav .dropdown-menu1 {
+  position: absolute;
+  top: 100%;
+  left: 4%;
+  display: inline-block;
+  background-color: rgb(2, 168, 2);
+  width: 100%;
+  display: none;
+}
+nav .dropdown-menu2 {
+  position: absolute;
+  top: 100%;
+  left: 4%;
+  display: inline-block;
+  background-color: rgb(2, 168, 2);
+  width: 100%;
+  display: none;
+}
+nav .menu:hover {
+  background-color: rgb(2, 168, 2);
+  cursor: pointer;
+}
+nav .active a:focus + .dropdown-menu1 {
+  display: block;
+}
+nav .dropdown-menu li,
+nav .dropdown-menu1 li,
+nav .dropdown-menu2 li {
+  margin-left: -40px;
+  padding: 5px 5px;
+  font-size: 18px;
+  font-weight: 400;
+  color: rgb(97, 2, 97);
+}
+nav .dropdown-menu li:hover,
+nav .dropdown-menu1 li:hover,
+nav .dropdown-menu2 li:hover {
+  background-color: rgb(100, 207, 100);
+}
+nav .menu:hover .dropdown-menu,
+nav .menu:hover .dropdown-menu1,
+nav .menu:hover .dropdown-menu2 {
+  display: block;
+}
+body {
+  background-color: rgb(216, 253, 216);
+}
+main {
+  margin: 20px 50px;
+}
+.instructions {
+  padding: 20px 30px;
+  background-color: white;
+  border-left: 6px solid rgb(3, 180, 3);
+}
+h1 {
+  font-size: 25px;
+}
+p {
+  margin-top: 10px;
+  font-size: 20px;
+}
+.extra-credit {
+  padding: 20px 30px;
+  margin-top: 20px;
+  background-color: white;
+  border-left: 6px solid yellow;
+}
