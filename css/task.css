@@ -61,6 +61,15 @@ main .list .card-content .content .time {
 main .card-footer-item {
   font-size: 1.3rem;
 }
+.center {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 5%;
+}
+.center button {
+  border-radius: 4rem;
+  font-size: 1.4rem;
+}
 @media screen and (max-width: 760px) {
   header .level-left .fa-long-arrow-alt-left {
     position: absolute;

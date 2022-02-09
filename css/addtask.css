@@ -1,0 +1,48 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+body {
+  background-image: url("../assets/slider-right-dec.jpg");
+  background-size: cover;
+  height: 100vh;
+}
+header {
+  box-shadow: 0px 3px 5px rgb(226, 223, 223);
+}
+header .title {
+  font-size: 2rem;
+}
+header i {
+  position: absolute;
+  top: 15px;
+  font-size: 25px;
+  cursor: pointer;
+}
+main .select {
+  margin-bottom: 2%;
+}
+main select {
+  width: 500px;
+}
+main form .center {
+  text-align: center;
+}
+main form input {
+  margin-bottom: 5%;
+}
+main form .task-title {
+  width: 60%;
+}
+.center button {
+  border-radius: 4rem;
+  font-size: 1.4rem;
+}
+@media screen and (max-width: 760px) {
+  header i {
+    left: 15px;
+  }
+  main {
+    margin: 5% 5%;
+  }
+}

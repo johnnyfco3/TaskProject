@@ -42,7 +42,11 @@ header .level i:hover {
 .column a .card:hover {
   box-shadow: 8px 6px 6px lightgray;
 }
-.add {
+.center {
   display: flex;
   justify-content: center;
+}
+.center button {
+  border-radius: 4rem;
+  font-size: 1.4rem;
 }
