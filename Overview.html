@@ -15,7 +15,11 @@
             <p class="level-item">
               <a class="link">Task It!</a>
             </p>
-            <i class="fas fa-bars"></i>
+            <i id="bars" class="fas fa-bars"></i>
+            <ul id="dropdown" class="dropdown">
+                <li><a href="">Friends</a></li>
+                <li><a href="">Log Out</a></li>
+            </ul>
         </nav>
     </header>
     <main>
@@ -98,5 +102,18 @@
             </div>
         </div>
     </main>
+    <script>
+        const icon = document.getElementById("bars");
+        const menu = document.getElementById("dropdown")
+
+        icon.addEventListener("click", function(){
+            if(menu.style.display === "block"){
+                menu.style.display = "none"
+            }
+            else{
+                menu.style.display = "block"
+            }
+        })
+    </script>
 </body>
 </html>

@@ -23,6 +23,32 @@ header .level-center .title {
 header .level-center .subtitle {
   font-size: 1.1rem;
 }
+header i {
+  position: relative;
+}
+header .dropdown {
+  position: absolute;
+  top: 95px;
+  right: 0px;
+  display: flex;
+  flex-direction: column;
+  background-color: whitesmoke;
+  display: none;
+  box-shadow: -6px 6px 6px rgb(226, 223, 223);
+}
+header .dropdown li {
+  padding: 10% 0;
+  width: 180px;
+  text-align: center;
+}
+header .dropdown li:hover {
+  background-color: white;
+  cursor: pointer;
+}
+header .dropdown a {
+  font-size: 1.5rem;
+  color: black;
+}
 main .level-item p:hover {
   color: red;
   transition: 0.3s;
