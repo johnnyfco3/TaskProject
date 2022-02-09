@@ -13,6 +13,9 @@ header .level-left,
 header .level-right {
   font-size: 25px;
 }
+header .level-left a {
+  color: black;
+}
 header .level-left:hover,
 header .level-right:hover {
   cursor: pointer;
