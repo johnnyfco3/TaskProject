@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../css/welcome.css">
     <title>Welcome | Task it</title>
 </head>
@@ -16,37 +16,44 @@
                 <h1 class="title">Task it!</h1>
                 <img src="../assets/jan-kahanek-g3O5ZtRk2E4-unsplash.jpg" alt="Welcome">
             </div>
-            <div class="card">
-                <h1 class="title has-text-centered pt-4">Sign In</h1>
-                <div class="card-content">
-                <div class="content">
-                      <div class="field">
-                        <label class="label">Email</label>
-                        <div class="control has-icons-left has-icons-right">
-                          <input class="input" type="email" placeholder="Email input">
-                          <span class="icon is-small is-left">
-                            <i class="fas fa-envelope"></i>
-                          </span>
+              <div class="card">
+                <form action="">
+                  <h1 class="title has-text-centered pt-4">Sign In</h1>
+                  <div class="card-content">
+                  <div class="content">
+                        <div class="field">
+                          <label class="label">Email</label>
+                          <div class="control has-icons-left has-icons-right">
+                            <input class="input" type="email" placeholder="Email Address">
+                            <span class="icon is-small is-left">
+                              <i class="fa-solid fa-envelope"></i>
+                            </span>
+                          </div>
                         </div>
-                      </div>
-                      
-                      <div class="field">
-                        <label class="label">Password</label>
-                        <div class="control has-icons-left has-icons-right">
-                          <input class="input" type="password" placeholder="Password">
-                          <span class="icon is-small is-left">
-                            <i class="fas fa-lock"></i>
-                          </span>
+                        
+                        <div class="field">
+                          <label class="label">Password</label>
+                          <div class="control has-icons-left has-icons-right">
+                            <input class="input" type="password" placeholder="Password">
+                            <span class="icon is-small is-left">
+                              <i class="fa-solid fa-lock"></i>
+                            </span>
+                          </div>
                         </div>
-                      </div>
-                      
-                      <div class="field is-grouped is-flex is-justify-content-center">
-                        <div class="control">
-                          <button class="button is-link">Sign In</button>
+                        
+                        <div class="field is-grouped is-flex is-justify-content-center submit">
+                          <div class="control">
+                            <button class="button is-link">Sign In</button>
+                          </div>
                         </div>
-                      </div>
-                </div>
-                </div>
+                  </div>
+                  </div>
+              </form>
+              <hr>
+              <div class="bottom-content has-text-centered">
+                <h4>Don't have an account? </h4>
+                <a href="Register.html">Register</a>
+              </div>
             </div>
         </div>
     </main>

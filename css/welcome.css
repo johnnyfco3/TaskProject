@@ -22,10 +22,9 @@ main .left-side img {
 }
 main .card {
   margin-left: 10%;
-  margin-top: 7%;
+  margin-top: 2%;
   width: 550px;
   border-radius: 1rem;
-  height: 400px;
   padding: 2%;
 }
 main .card .title {
@@ -33,6 +32,7 @@ main .card .title {
 }
 main .card-content .field {
   padding-bottom: 3%;
+  font-size: 1.2rem;
 }
 main .card-content .field label {
   font-size: 1.2rem;
@@ -41,37 +41,53 @@ main .card-content .field label {
 main .card-content .field input {
   border-radius: 1rem;
 }
-main .card-content .field button {
+main .card-content button {
   font-size: 1.2rem;
 }
-@media screen and (max-width: 760px) {
+#register main {
+  display: flex;
+  flex-direction: column;
+}
+#register .container .app-title {
+  font-family: fantasy;
+  font-size: 5rem;
+  font-weight: 700;
+}
+#register main .card {
+  margin-left: 0;
+  width: 700px;
+}
+#register main .card input {
+  width: 300px;
+}
+#register main .card .confirm input {
+  width: 100%;
+}
+@media screen and (max-width: 800px) {
   main .left-side h1 {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-family: fantasy;
     margin-top: 25%;
   }
   main .left-side img {
-    width: 250px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
     border-radius: 2rem;
-    margin-top: -5%;
   }
   main .card {
     margin-left: 6%;
     margin-right: 3%;
-    width: 250px;
+    width: 200px;
     border-radius: 1rem;
-    height: 270px;
     padding: 0;
-    margin-top: 25%;
+    margin-top: 5%;
   }
   main .card .title {
-    font-size: 1.5rem;
-    margin-bottom: 0;
+    font-size: 1.3rem;
+    margin-bottom: -3%;
   }
   main .card-content .field label {
-    font-size: 12px;
-    font-weight: 500;
+    font-size: 10px;
   }
   main .card-content .field input,
   .icon {
@@ -79,6 +95,29 @@ main .card-content .field button {
     font-size: 10px;
   }
   main .card-content .field button {
-    font-size: 14px;
+    font-size: 10px;
+  }
+  main .card .bottom-content {
+    font-size: 10px;
+    margin-top: -5%;
+    padding-bottom: 5%;
+  }
+  hr {
+    margin-top: -5%;
+  }
+  #register .container .app-title {
+    font-family: fantasy;
+    font-size: 3rem;
+  }
+  #register main .card {
+    margin-left: 0;
+    width: 300px;
+  }
+  #register main .card .first,
+  #register main .card .email {
+    width: 300px;
+  }
+  #register main .card .confirm input {
+    width: 100%;
   }
 }
