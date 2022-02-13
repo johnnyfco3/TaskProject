@@ -117,3 +117,34 @@ main .card-footer-item {
     margin-bottom: 16px;
   }
 }
+#friends {
+  height: 100vh;
+}
+#friends header .level-right {
+  margin-left: -5%;
+}
+#friends .list .card {
+  margin: 2% 10%;
+}
+#friends main .content .left {
+  width: 20%;
+  align-items: center;
+  font-size: 2rem;
+}
+#friends main .content .left p {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+#friends main .content .icons {
+  padding: 0 5%;
+}
+#friends main .content .icons a {
+  padding: 0 40%;
+  font-size: 1.3rem;
+  color: black;
+}
+#friends main .content .icons a:hover {
+  font-size: 1.5rem;
+  color: red;
+  transition: 0.3s;
+}
