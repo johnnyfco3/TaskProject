@@ -170,32 +170,29 @@
                             </p>
                             </div>
                             </form>
-                            <label class="panel-block">
-                                <input type="checkbox" checked>
-                                <span>Make Bulma great again</span>
-                            </label>
-                            <label class="panel-block">
-                                <input type="checkbox">
-                                <span>Add some more features</span>
-                            </label>
-                            <label class="panel-block">
-                                <input type="checkbox">
-                                <span>Make a github account</span>
-                            </label>
-                            <label class="panel-block">
-                                <input type="checkbox">
-                                <span>Learn how to use github</span>
-                            </label>
-                            <label class="panel-block">
-                                <input type="checkbox">
-                                <span>add a .gitignore file</span>
-                            </label>
-                            <div class="addition" v-for="item in items" key="item">
-                                <label class="panel-block" v-if="items.length > 0">
-                                    <input type="checkbox">
+                            
+                            <div class="list" v-for="item in items" key="item" v-if="activeId === 0 || activeId === 3 || activeId === 4">
+                                <label class="panel-block">
+                                    <input type="checkbox" v-on:click="item.checked = !item.checked" v-if="item.checked" checked>
+                                    <input type="checkbox" v-on:click="item.checked = !item.checked" v-else-if="!item.checked">
                                     <span>{{item.text}}</span>
                                 </label>
                             </div>
+
+                            <div class="list" v-for="item in items" key="item" v-if="activeId === 1">
+                                <label class="panel-block" v-if="!item.checked">
+                                    <input type="checkbox" v-on:click="item.checked = !item.checked" v-if="!item.checked">
+                                    <span>{{item.text}}</span>
+                                </label>
+                            </div>
+
+                            <div class="list" v-for="item in items" key="item" v-if="activeId === 2">
+                                <label class="panel-block" v-if="item.checked">
+                                    <input type="checkbox" v-on:click="item.checked = !item.checked" v-if="item.checked" checked>
+                                    <span>{{item.text}}</span>
+                                </label>
+                            </div>
+                           
                         </nav>
                     </div>
                     <div class="column is-one-quarter">
@@ -249,8 +246,15 @@
                 return {
                     message: 'Hello Vue!',
                     activeId: 0,
-                    items: [{}],
-                    newItem: ""
+                    items: [
+                        {text: "Make Bulma great again", checked: true},
+                        {text: "Add some more features", checked: false},
+                        {text: "Make a github account", checked: false},
+                        {text: "Learn how to use github", checked: false},
+                        {text: "add a .gitignore file", checked: false},
+
+                    ],
+                    newItem: "",
                 }
             },
             methods: {
@@ -260,7 +264,8 @@
                 add(){
                     if(this.newItem){
                         this.items.push({
-                            text: this.newItem
+                            text: this.newItem,
+                            checked: false
                         })
                         this.newItem = ""
                     }
