@@ -53,3 +53,28 @@ header .navbar-end a {
   border-radius: 4rem;
   font-size: 1.4rem;
 }
+@media screen and (max-width: 800px) {
+  header .title {
+    font-size: 1.5rem;
+    width: 100px;
+  }
+  .icons {
+    font-size: 1.3rem;
+  }
+  .top-content .title {
+    font-size: 2rem;
+  }
+  .column .card {
+    margin: 0 5%;
+  }
+  .column .card .title {
+    font-size: 1.5rem;
+  }
+  .column .card p {
+    font-size: 1rem;
+  }
+  .center button {
+    border-radius: 4rem;
+    font-size: 1.2rem;
+  }
+}

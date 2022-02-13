@@ -44,3 +44,42 @@ main .center .file {
   display: flex;
   justify-content: center;
 }
+@media screen and (max-width: 800px) {
+  header .title {
+    font-size: 1.3rem;
+  }
+  header i {
+    position: absolute;
+    top: 15px;
+    left: 10px;
+    font-size: 15px;
+  }
+  main form {
+    text-align: center;
+    margin: 0 10%;
+  }
+  main form .select-section {
+    margin-bottom: 2%;
+  }
+  main form .task-title {
+    margin: 0 5%;
+  }
+  main .center button {
+    border-radius: 4rem;
+    font-size: 1rem;
+  }
+  main .control label {
+    font-size: 1rem;
+  }
+  main .center .file-icon,
+  .file-label,
+  .file-name {
+    font-size: 16px;
+  }
+  main .center .file-cta {
+    width: 16%;
+  }
+  main .field-label {
+    padding-top: 5%;
+  }
+}
