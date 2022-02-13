@@ -6,21 +6,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <title>Dashboard | Task It</title>
 </head>
 <body>
     <header>
-        <nav class="level">
-            <p class="level-item">
-              <a class="link">Task It!</a>
-            </p>
-            <i id="bars" class="fas fa-bars"></i>
-            <ul id="dropdown" class="dropdown">
-                <li><a href="">Friends</a></li>
-                <li><a href="">Log Out</a></li>
-            </ul>
-        </nav>
+        <div class="container">
+            <nav class="navbar" role="navigation" aria-label="main navigation">
+                <div class="navbar-brand">
+                    <div class="navbar-start">
+                        <a class="navbar-item">
+                            <h1 class="title">Task it!</h1>
+                        </a>
+                    </div>
+            
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+                </div>
+            
+                <div id="navbarBasicExample" class="navbar-menu">
+                <div class="navbar-start">
+                    <a class="navbar-item">
+                    Home
+                    </a>
+            
+                    <a class="navbar-item">
+                    Friends
+                    </a>
+                </div>
+            
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <a href="Welcome.html" class="button is-info">
+                        Log out
+                        </a>
+                    </div>
+                </div>
+                </div>
+            </nav>
+        </div>
     </header>
     <main>
         <div class="container mb-6">
@@ -98,22 +125,9 @@
                 </div>
             </div>
             <div class="center mt-6">
-                <button class="button is-danger is-hovered pr-6 pl-6 pt-3 pb-3"><i class="fas fa-plus-circle" aria-hidden="true"> Add New</i></button>
+                <a href="AddCategory.html"><button class="button is-danger is-hovered pr-6 pl-6 pt-3 pb-3"><i class="fas fa-plus-circle" aria-hidden="true"> Add New</i></button></a>
             </div>
         </div>
     </main>
-    <script>
-        const icon = document.getElementById("bars");
-        const menu = document.getElementById("dropdown")
-
-        icon.addEventListener("click", function(){
-            if(menu.style.display === "block"){
-                menu.style.display = "none"
-            }
-            else{
-                menu.style.display = "block"
-            }
-        })
-    </script>
 </body>
 </html>

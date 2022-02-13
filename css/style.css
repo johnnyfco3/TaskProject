@@ -9,42 +9,21 @@ body {
 header {
   box-shadow: 0px 3px 5px rgb(226, 223, 223);
 }
-header .level a {
-  font-size: 2.5rem;
-  color: black;
+header h1 {
+  font-family: fantasy;
+  margin-top: 10%;
 }
-header .level i {
-  position: absolute;
-  top: 15px;
-  right: 25px;
-  font-size: 25px;
+header .navbar-item {
+  font-size: 1.2rem;
+  margin: 0 5%;
 }
-header .level i:hover {
-  cursor: pointer;
-}
-header i {
-  position: relative;
-}
-header .dropdown {
-  position: absolute;
-  top: 65px;
-  right: 0;
-  display: block;
-  background-color: whitesmoke;
-  display: block;
-  box-shadow: -6px 6px 6px rgb(226, 223, 223);
-}
-header .dropdown li {
-  padding: 10px 50px;
-  width: 100%;
-  text-align: center;
-}
-header .dropdown li:hover {
+header .navbar-start .navbar-item:hover {
   background-color: white;
-  cursor: pointer;
+  color: red;
 }
-header .dropdown li a {
-  font-size: 1.5rem;
+header .navbar-end a {
+  font-size: 1.1rem;
+  border-radius: 2rem;
 }
 .icons {
   color: rgb(129, 212, 129);

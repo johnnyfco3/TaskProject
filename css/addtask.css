@@ -13,36 +13,34 @@ header {
 header .title {
   font-size: 2rem;
 }
+header a {
+  color: black;
+}
 header i {
   position: absolute;
   top: 15px;
   font-size: 25px;
   cursor: pointer;
 }
-main .select {
-  margin-bottom: 2%;
+header i:hover {
+  color: red;
 }
-main select {
-  width: 500px;
-}
-main form .center {
+main form {
   text-align: center;
+  margin: 0 2%;
 }
-main form input {
-  margin-bottom: 5%;
+main form .select-section {
+  margin-bottom: 2%;
 }
 main form .task-title {
   width: 60%;
+  margin-bottom: 2%;
 }
-.center button {
+main .center button {
   border-radius: 4rem;
   font-size: 1.4rem;
 }
-@media screen and (max-width: 760px) {
-  header i {
-    left: 15px;
-  }
-  main {
-    margin: 5% 5%;
-  }
+main .center .file {
+  display: flex;
+  justify-content: center;
 }
