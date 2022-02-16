@@ -41,20 +41,16 @@ header .level-right .navbar-item:hover {
   color: red;
   transition: 0.3s;
 }
-main .panel {
-  box-shadow: none;
-}
-main .panel .tabs ul li {
-  padding: 0 3%;
-}
-main .panel .tabs ul li a {
-  font-size: 1.2rem;
-}
-main .panel .tabs .is-active a {
+main .level-item p:hover {
   color: red;
+  transition: 0.3s;
+}
+main .level-item a p {
+  font-size: 1rem;
+  color: black;
 }
 main .list .card {
-  width: 100%;
+  margin: 2% 5%;
 }
 main .list .top-content p {
   font-size: 1.4rem;
@@ -109,34 +105,16 @@ main .card-footer-item {
   header .level-center .subtitle {
     font-size: 1rem;
   }
-  main .panel .tabs ul li {
-    padding: 0;
-  }
-  main .panel .tabs ul li a {
-    font-size: 10px;
-  }
-  main .list .top-content p {
-    font-size: 1rem;
-  }
-  main .list .top-content p i {
-    font-size: 1rem;
-  }
-  main .list .card .header .subtitle {
-    margin-left: 25%;
-    margin-top: -0.5%;
-    font-size: 0.7rem;
-  }
-  main .list .card-content .content .subtitle {
-    margin-left: 7%;
-    font-size: 1rem;
-  }
-  main .card-footer-item {
-    font-size: 1rem;
-  }
-  .center {
+  main .center {
     display: flex;
     justify-content: center;
     padding-bottom: 5%;
+  }
+  main .level-item {
+    padding: 0 2%;
+  }
+  main .level-item .date {
+    margin-bottom: 16px;
   }
   .center button {
     border-radius: 4rem;
