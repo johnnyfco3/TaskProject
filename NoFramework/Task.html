@@ -10,125 +10,201 @@
     <title>Task Section | Task it</title>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <nav class="level">
-                <!-- Left side -->
-                <div class="level-left">
-                    <div class="level-item">
-                        <a href="Overview.html"><i class="fas fa-long-arrow-alt-left"></i></a>
+    <div id="app">
+        <header>
+            <div class="container">
+                <nav class="level">
+                    <!-- Left side -->
+                    <div class="level-left">
+                        <div class="level-item">
+                            <a href="Overview.html"><i class="fas fa-long-arrow-alt-left"></i></a>
+                        </div>
                     </div>
+
+                    <!-- Center -->
+                    <div class="level-center pb-4">
+                        <div class="level-item is-flex-direction-column">
+                            <h1 class="title p-2 pb-5">Work Projects</h1>
+                            <h1 class="subtitle">Wednesday 2nd February</h1>
+
+                        </div>
+                    </div>
+                
+                    <!-- Right side -->
+                    <div class="level-right">
+                        <nav class="navbar" role="navigation" aria-label="main navigation">
+                            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                                <span aria-hidden="true"></span>
+                                <span aria-hidden="true"></span>
+                                <span aria-hidden="true"></span>
+                            </a>
+                        
+                            <div id="navbarBasicExample" class="navbar-menu">
+                            <div class="navbar-end">
+                                <a class="navbar-item" href="Friends.html">
+                                Friends
+                                </a>
+                        
+                                <a class="navbar-item" href="Welcome.html">
+                                Log out
+                                </a>
+                            </div>
+                            </div>
+                        </nav>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <main class="container mt-6">
+            <nav class="level mt-2">
+                <div class="level-item has-text-centered">
+                    <p class="heading" v-on:click="activate(0)" v-bind:class="activeID === 0 ? 'active' : ''">All</p>
                 </div>
 
-                <!-- Center -->
-                <div class="level-center pb-4">
-                    <div class="level-item is-flex-direction-column">
-                        <h1 class="title p-2 pb-5">Work Projects</h1>
-                        <h1 class="subtitle">Wednesday 2nd February</h1>
-
-                    </div>
+                <div class="level-item has-text-centered">
+                    <p class="heading" v-on:click="activate(1)" v-bind:class="activeID === 1 ? 'active' : ''">Completed</p>
                 </div>
-            
-                <!-- Right side -->
-                <div class="level-right">
-                    <nav class="navbar" role="navigation" aria-label="main navigation">
-                        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-                            <span aria-hidden="true"></span>
-                            <span aria-hidden="true"></span>
-                            <span aria-hidden="true"></span>
-                        </a>
-                    
-                        <div id="navbarBasicExample" class="navbar-menu">
-                        <div class="navbar-end">
-                            <a class="navbar-item" href="Friends.html">
-                            Friends
-                            </a>
-                    
-                            <a class="navbar-item" href="Welcome.html">
-                            Log out
-                            </a>
-                        </div>
-                        </div>
-                    </nav>
+
+                <div class="level-item has-text-centered">
+                    <p class="heading" v-on:click="activate(2)" v-bind:class="activeID === 2 ? 'active' : ''">Important</p>
+                </div>
+
+                <div class="level-item has-text-centered">
+                    <p id="date" class="heading date" v-on:click="activate(3)" v-bind:class="activeID === 3 ? 'active' : ''">Date</p>
                 </div>
             </nav>
-        </div>
-    </header>
+            <hr>
 
-    <main class="container mt-6">
-        <nav class="level mt-2">
-            <div class="level-item has-text-centered">
-                <a href=""><p class="heading">All</p></a>
-            </div>
-
-            <div class="level-item has-text-centered">
-                <a href=""><p class="heading">Completed</p></a>
-            </div>
-
-            <div class="level-item has-text-centered">
-                  <a href=""><p class="heading">Important</p></a>
-            </div>
-
-            <div class="level-item has-text-centered">
-                  <a href=""><p id="date" class="heading date">Date</p></a>
-            </div>
-        </nav>
-        <hr>
-
-        <div class="list mt-6">
-            <div class="card">
-                <div class="header">
-                    <div class="top-content">
-                        <p class="card-header-title ml-4">
-                            <i class="far fa-circle pr-6"></i>Call Supervisor
+            <div class="list mt-6" v-for="task in Tasks" key="task.id">
+                <div class="card" v-if="activeID === 1 && task.completed">
+                    <div class="header">
+                        <div class="top-content">
+                            <p class="card-header-title ml-4">
+                                <i class="fas fa-check-circle pr-6" v-on:click="toggleCompleted(task, task.id)"></i>
+                                {{task.name}}
+                            </p>
+                        </div>
+                        <p class="subtitle">
+                            {{task.category}}
                         </p>
                     </div>
-                    <p class="subtitle">
-                        Work Projects
-                    </p>
+                    <div class="card-content">
+                    <div class="content is-flex is-justify-content-space-between">
+                            <p class="subtitle"><i class="far fa-calendar-alt"></i> {{task.date}}</p>
+                            <p class="subtitle time">{{task.time}}</p>
+                    </div>
+                    </div>
+                    <footer class="card-footer">
+                    <a href="#" class="card-footer-item"><i class="fas fa-pencil-alt"></i></a>
+                    <a href="#" class="card-footer-item"><i 
+                                                            v-bind:class="task.important ? 'fa-solid fa-star' : 'far fa-star'"
+                                                            v-on:click="toggleImportant(task, task.id)"
+                                                        ></i></a>
+                    <a href="#" class="card-footer-item"><i class="fas fa-minus-circle"></i></a>
+                    </footer>
                 </div>
-                <div class="card-content">
-                  <div class="content is-flex is-justify-content-space-between">
-                        <p class="subtitle"><i class="far fa-calendar-alt"></i> 12th March</p>
-                        <p class="subtitle time">10:30 am</p>
-                  </div>
-                </div>
-                <footer class="card-footer">
-                  <a href="#" class="card-footer-item"><i class="fas fa-pencil-alt"></i></a>
-                  <a href="#" class="card-footer-item"><i class="far fa-star"></i></a>
-                  <a href="#" class="card-footer-item"><i class="fas fa-minus-circle"></i></a>
-                </footer>
-            </div>
 
-            <div class="card">
-                <div class="header">
-                    <div class="top-content">
-                        <p class="card-header-title ml-4">
-                            <i class="fas fa-check-circle pr-6"></i>Meeting with new team
+                <div class="card" v-else-if="activeID === 2 && task.important">
+                    <div class="header">
+                        <div class="top-content">
+                            <p class="card-header-title ml-4">
+                                <i v-bind:class="
+                                    task.completed ? 'fas fa-check-circle pr-6' : 'far fa-circle pr-6'
+                                " v-on:click="toggleCompleted(task, task.id)"></i>
+                                {{task.name}}
+                            </p>
+                        </div>
+                        <p class="subtitle">
+                            {{task.category}}
                         </p>
                     </div>
-                    <p class="subtitle">
-                        Work Projects
-                    </p>
+                    <div class="card-content">
+                    <div class="content is-flex is-justify-content-space-between">
+                            <p class="subtitle"><i class="far fa-calendar-alt"></i> {{task.date}}</p>
+                            <p class="subtitle time">{{task.time}}</p>
+                    </div>
+                    </div>
+                    <footer class="card-footer">
+                    <a href="#" class="card-footer-item"><i class="fas fa-pencil-alt"></i></a>
+                    <a href="#" class="card-footer-item"><i 
+                                                            v-bind:class="task.important ? 'fa-solid fa-star' : 'far fa-star'"
+                                                            v-on:click="toggleImportant(task, task.id)"
+                                                        ></i></a>
+                    <a href="#" class="card-footer-item"><i class="fas fa-minus-circle"></i></a>
+                    </footer>
                 </div>
-                <div class="card-content">
-                  <div class="content is-flex is-justify-content-space-between">
-                        <p class="subtitle"><i class="far fa-calendar-alt"></i> 17th March</p>
-                        <p class="subtitle time">1:00 pm</p>
-                  </div>
-                </div>
-                <footer class="card-footer">
-                  <a href="#" class="card-footer-item"><i class="fas fa-pencil-alt"></i></a>
-                  <a href="#" class="card-footer-item"><i class="far fa-star"></i></a>
-                  <a href="#" class="card-footer-item"><i class="fas fa-minus-circle"></i></a>
-                </footer>
-            </div>
-        </nav>
 
-        <div class="center mt-6">
-            <a href="AddTask.html"><button class="button is-danger pr-6 pl-6 pt-3 pb-3"><i class="fas fa-plus-circle" aria-hidden="true"></i>Add New</button></a>
-        </div>
-        </div>
-    </main>
+                <div class="card" v-else-if="activeID !== 1 && activeID !== 2">
+                    <div class="header">
+                        <div class="top-content">
+                            <p class="card-header-title ml-4">
+                                <i 
+                                v-bind:class="task.completed ? 'fas fa-check-circle pr-6' : 'far fa-circle pr-6'" 
+                                v-on:click="toggleCompleted(task, task.id)">
+                                </i>
+                                {{task.name}}
+                            </p>
+                        </div>
+                        <p class="subtitle">
+                            {{task.category}}
+                        </p>
+                    </div>
+                    <div class="card-content">
+                    <div class="content is-flex is-justify-content-space-between">
+                            <p class="subtitle"><i class="far fa-calendar-alt"></i> {{task.date}}</p>
+                            <p class="subtitle time">{{task.time}}</p>
+                    </div>
+                    </div>
+                    <footer class="card-footer">
+                    <a href="#" class="card-footer-item"><i class="fas fa-pencil-alt"></i></a>
+                    <a href="#" class="card-footer-item"><i 
+                                                            v-bind:class="task.important ? 'fa-solid fa-star' : 'far fa-star'"
+                                                            v-on:click="toggleImportant(task, task.id)"
+                                                        ></i></a>
+                    <a href="#" class="card-footer-item"><i class="fas fa-minus-circle"></i></a>
+                    </footer>
+                </div>
+            </div>
+            <div class="center mt-6">
+                <a href="AddTask.html"><button class="button is-danger pr-6 pl-6 pt-3 pb-3"><i class="fas fa-plus-circle" aria-hidden="true"></i>Add New</button></a>
+            </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://unpkg.com/vue@3"></script>
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    activeID: 0,
+                    Tasks: [
+                        { id: 1, name: "Call Supervisor", category: "Work Projects", date: "12th March", time: "10:30 am", completed: false, important: true },
+                        { id: 2, name: "Meeting with new team", category: "Work Projects", date: "17th March", time: "1:00 pm", completed: true, important: false }
+                    ]
+                }
+            },
+            methods: {
+                activate(id){
+                    this.activeID = id
+                },
+                toggleCompleted(task, id){
+                    this.Tasks.map(element =>{
+                        if(element.id === id){
+                            element.completed = !task.completed
+                        }
+                    })
+                },
+                toggleImportant(task, id){
+                    this.Tasks.map(element =>{
+                        if(element.id === id){
+                            element.important = !task.important
+                        }
+                    })
+                }
+            }
+        }).mount('#app')
+        </script>
 </body>
 </html>

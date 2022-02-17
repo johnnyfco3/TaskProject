@@ -10,81 +10,83 @@
     <title>Friends | Task it</title>
 </head>
 <body id="friends">
-    <header>
-        <div class="container">
-            <nav class="level">
-                <!-- Left side -->
-                <div class="level-left">
-                    <div class="level-item">
-                        <a href="Overview.html"><i class="fas fa-long-arrow-alt-left"></i></a>
+    <div id="app">
+        <header>
+            <div class="container">
+                <nav class="level">
+                    <!-- Left side -->
+                    <div class="level-left">
+                        <div class="level-item">
+                            <a href="Overview.html"><i class="fas fa-long-arrow-alt-left"></i></a>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Center -->
-                <div class="level-center pb-4">
-                    <div class="level-item">
-                        <h1 class="title pt-3">Friends</h1>
+                    <!-- Center -->
+                    <div class="level-center pb-4">
+                        <div class="level-item">
+                            <h1 class="title pt-3">Friends</h1>
+                        </div>
                     </div>
-                </div>
-            
-                <!-- Right side -->
-                <div class="level-right">
-                    <nav class="navbar" role="navigation" aria-label="main navigation">
-                        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-                            <span aria-hidden="true"></span>
-                            <span aria-hidden="true"></span>
-                            <span aria-hidden="true"></span>
-                        </a>
-                    
-                        <div id="navbarBasicExample" class="navbar-menu">
-                        <div class="navbar-end">
-                            <a class="navbar-item" href="Welcome.html">
-                            Log out
+                
+                    <!-- Right side -->
+                    <div class="level-right">
+                        <nav class="navbar" role="navigation" aria-label="main navigation">
+                            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                                <span aria-hidden="true"></span>
+                                <span aria-hidden="true"></span>
+                                <span aria-hidden="true"></span>
                             </a>
-                        </div>
-                        </div>
-                    </nav>
-                </div>
-            </nav>
-        </div>
-    </header>
+                        
+                            <div id="navbarBasicExample" class="navbar-menu">
+                            <div class="navbar-end">
+                                <a class="navbar-item" href="Welcome.html">
+                                Log out
+                                </a>
+                            </div>
+                            </div>
+                        </nav>
+                    </div>
+                </nav>
+            </div>
+        </header>
 
-    <main class="container">
-        <div class="list mt-6">
-            <div class="card">
-                <div class="card-content">
-                  <div class="content is-flex is-justify-content-space-between">
-                        <div class="left is-flex">
-                            <i class="fa-solid fa-user"></i>
-                            <p class="subtitle">Johnny Tejada</p>
-                        </div>
-                        <div class="icons is-flex">
-                            <a href="AddTask.html"><i class="fa-solid fa-plus"></i></a>
-                            <a href="#"><i class="fa-solid fa-trash-can"></i></a>
-                        </div>
-                  </div>
+        <main class="container">
+            <div class="list mt-6" v-for="friend in friends" key="friend">
+                <div class="card">
+                    <div class="card-content">
+                    <div class="content is-flex is-justify-content-space-between">
+                            <div class="left is-flex">
+                                <i class="fa-solid fa-user"></i>
+                                <p class="subtitle">{{friend.firstName}} {{friend.lastName}}</p>
+                            </div>
+                            <div class="icons is-flex">
+                                <a href="AddTask.html"><i class="fa-solid fa-plus"></i></a>
+                                <a href="#"><i class="fa-solid fa-trash-can"></i></a>
+                            </div>
+                    </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="card">
-                <div class="card-content">
-                  <div class="content is-flex is-justify-content-space-between">
-                        <div class="left is-flex">
-                            <i class="fa-solid fa-user"></i>
-                            <p class="subtitle">Joe Biden</p>
-                        </div>
-                        <div class="icons is-flex">
-                            <a href="AddTask.html"><i class="fa-solid fa-plus"></i></a>
-                            <a href="#"><i class="fa-solid fa-trash-can"></i></a>
-                        </div>
-                  </div>
-                </div>
+            <div class="center mt-6">
+                <a href="AddFriends.html"><button class="button is-danger pr-6 pl-6 pt-3 pb-3"><i class="fas fa-plus-circle" aria-hidden="true"></i>Add New</button></a>
             </div>
+            </div>
+        </main>
+    </div>
 
-        <div class="center mt-6">
-            <a href="AddFriends.html"><button class="button is-danger pr-6 pl-6 pt-3 pb-3"><i class="fas fa-plus-circle" aria-hidden="true"></i>Add New</button></a>
-        </div>
-        </div>
-    </main>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    friends: [
+                        { firstName: "Johnny", lastName: "Tejada", email: "johnnyfran20002@gmail.com"},
+                        { firstName: "Joe", lastName: "Biden", email: "joeBiden2022@gmail.com"}
+                    ]
+                }
+            }
+        }).mount('#app')
+        </script>
 </body>
 </html>

@@ -44,10 +44,15 @@ header .level-right .navbar-item:hover {
 main .level-item p:hover {
   color: red;
   transition: 0.3s;
+  cursor: pointer;
 }
-main .level-item a p {
+main .level-item p {
   font-size: 1rem;
   color: black;
+}
+main .level-item .active {
+  color: red;
+  border-bottom: 2px solid red;
 }
 main .list .card {
   margin: 2% 5%;

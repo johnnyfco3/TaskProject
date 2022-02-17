@@ -10,49 +10,69 @@
     <title>New Category | Task it</title>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <a href="Overview.html"><i class="fas fa-long-arrow-alt-left"></i></a>
-            <div class="top has-text-centered">
-                <h1 class="title p-3">Add New Category</h1>
+    <div id="app">
+        <header>
+            <div class="container">
+                <a href="Overview.html"><i class="fas fa-long-arrow-alt-left"></i></a>
+                <div class="top has-text-centered">
+                    <h1 class="title p-3">Add New Category</h1>
+                </div>
             </div>
-        </div>
-    </header>
-    <main>
-        <div class="container">
-            <div class="center">
-                <form action="">
-                    <label class="label mt-6">Image : <em>optional</em></label>
-                    <div class="control">
-                        <div class="file has-name mb-5">
-                            <label class="file-label">
-                            <input class="file-input" type="file" name="resume">
-                            <span class="file-cta">
-                                <span class="file-icon">
-                                <i class="fas fa-upload"></i>
-                                </span>
+        </header>
+        <main>
+            <div class="container">
+                <div class="center">
+                    <form @submit.prevent="handleSubmit">
+                        <label class="label mt-6">Name of Category</label>
+                        <div class="control has-icons-left task-title">
+                            <input class="input is-info" type="text" required v-model="newCategory.name">
+                            <span class="icon is-small is-left">
+                                <i class="fa-solid fa-pen"></i>
                             </span>
-                            <span class="file-name">
-                                Screen Shot 2017-07-29 at 15.54.25.png
-                            </span>
-                            </label>
                         </div>
-                    </div>
-
-                    <label class="label mt-6">Name of Category</label>
-                    <div class="control has-icons-left task-title">
-                        <input class="input is-info" type="text">
-                        <span class="icon is-small is-left">
-                            <i class="fa-solid fa-pen"></i>
-                        </span>
-                    </div>
-                    
-                    <div class="center mt-6">
-                        <button class="button is-danger pr-6 pl-6 pt-3 pb-3"><i class="fas fa-plus-circle" aria-hidden="true"></i>Add New</button>
-                    </div>
-                </form>
+                        
+                        <div class="center mt-6">
+                            <button class="button is-danger pr-6 pl-6 pt-3 pb-3"><i class="fas fa-plus-circle" aria-hidden="true"></i>Add New</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
-    </main>
+        </main>
+    </div>
+    
+    <script src="https://unpkg.com/vue@3"></script>
+    <script>
+    Vue.createApp({
+        data() {
+            return {
+                categories: [
+                    {name: "Schedule Plan", icon:"fas fa-calendar-alt", tasks: 57},
+                    {name: "Personal Errands", icon:"fas fa-user-alt", tasks: 7},
+                    {name: "Work Projects", icon:"fas fa-briefcase", tasks: 13},
+                    {name: "Grocery List", icon:"fas fa-shopping-cart", tasks: 0},
+                    {name: "School", icon:"fas fa-book", tasks: 6},
+                    {name: "Assigned", icon:"fa-solid fa-user-group", tasks: 0},
+                ],
+                newCategory: {
+                    name: ""
+                }
+            }
+        },
+        methods: {
+            handleSubmit(){
+                if(this.newCategory.name){
+                    this.categories.push(
+                        {
+                            name: this.newCategory.name,
+                            icon: "none",
+                            tasks: 0
+                        }
+                    )
+                    console.log(this.categories);
+                }
+            }
+        },
+    }).mount('#app')
+    </script>
 </body>
 </html>

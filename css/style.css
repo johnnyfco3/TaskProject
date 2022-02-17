@@ -20,10 +20,15 @@ header .navbar-item {
 header .navbar-start .navbar-item:hover {
   background-color: white;
   color: red;
+  transition: 0.3s ease;
 }
 header .navbar-end a {
-  font-size: 1.1rem;
-  border-radius: 2rem;
+  font-size: 1.2rem;
+  color: black;
+}
+header .navbar-end a:hover {
+  color: red;
+  transition: 0.3s ease;
 }
 .icons {
   color: rgb(129, 212, 129);

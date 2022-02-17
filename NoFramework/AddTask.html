@@ -10,68 +10,106 @@
     <title>New Task | Task it</title>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <a href="Overview.html"><i class="fas fa-long-arrow-alt-left"></i></a>
-            <div class="top has-text-centered">
-                <h1 class="title p-3">Add New Task</h1>
+    <div id="app">
+        <header>
+            <div class="container">
+                <a href="Overview.html"><i class="fas fa-long-arrow-alt-left"></i></a>
+                <div class="top has-text-centered">
+                    <h1 class="title p-3">Add New Task</h1>
+                </div>
             </div>
-        </div>
-    </header>
-    <main>
-        <div class="container">
-            <div class="center">
-                <form action="">
-                    <label class="label mt-6">Select Category</em></label>
-                    <div class="control">
-                        <div class="select is-info select-section is-normal">
-                            <select>
-                            <option>Schedule Plan</option>
-                            <option>Personal Errands</option>
-                            <option>Work Projects</option>
-                            <option>Grocery List</option>
-                            <option>School</option>
-                            </select>
+        </header>
+        <main>
+            <div class="container">
+                <div class="center">
+                    <form @submit.prevent="handleSubmit">
+                        <label class="label mt-6">Select Category</em></label>
+                        <div class="control">
+                            <div class="select is-info select-section is-normal">
+                                <select required v-model="newTask.category">
+                                <option>Schedule Plan</option>
+                                <option>Personal Errands</option>
+                                <option>Work Projects</option>
+                                <option>Grocery List</option>
+                                <option>School</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
 
-                    <label class="label mt-2">New Task</em></label>
-                    <div class="control has-icons-left task-title">
-                        <input class="input is-info" type="text">
-                        <span class="icon is-small is-left">
-                            <i class="fa-solid fa-pen"></i>
-                        </span>
-                    </div>
-                
-                    <div class="field is-horizontal mt-6">
-                        <div class="field-label is-normal">
-                            <label class="label">Date</label>
+                        <label class="label mt-2">New Task</em></label>
+                        <div class="control has-icons-left task-title">
+                            <input class="input is-info" type="text" required v-model="newTask.name">
+                            <span class="icon is-small is-left">
+                                <i class="fa-solid fa-pen"></i>
+                            </span>
                         </div>
-                        <div class="field-body">
-                            <div class="field">
+                    
+                        <div class="field is-horizontal mt-6">
+                            <div class="field-label is-normal">
+                                <label class="label">Date</label>
+                            </div>
+                            <div class="field-body">
+                                <div class="field">
+                                    <p class="control is-expanded">
+                                    <input class="input is-info" type="date" required v-model="newTask.date">
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="field-label is-normal">
+                                <label class="label">Time</label>
+                            </div>
+                            <div class="field-body">
+                                <div class="field">
                                 <p class="control is-expanded">
-                                <input class="input is-info" type="date">
+                                    <input class="input is-info" type="time" required v-model="newTask.time">
                                 </p>
+                                </div>
                             </div>
                         </div>
-                        <div class="field-label is-normal">
-                            <label class="label">Time</label>
+                    
+                        <div class="center mt-6">
+                            <button class="button is-danger pr-6 pl-6 pt-3 pb-3"><i class="fas fa-plus-circle" aria-hidden="true"></i> Add New</button>
                         </div>
-                        <div class="field-body">
-                            <div class="field">
-                            <p class="control is-expanded">
-                                <input class="input is-info" type="time">
-                            </p>
-                            </div>
-                        </div>
-                    </div>
-                
-                    <div class="center mt-6">
-                        <button class="button is-danger pr-6 pl-6 pt-3 pb-3"><i class="fas fa-plus-circle" aria-hidden="true"></i> Add New</button>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
-    </main>
+        </main>
+    </div>
+
+    <script src="https://unpkg.com/vue@3"></script>
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    Tasks: [
+                        { name: "Call Supervisor", category: "Work Projects", date: "12th March", time: "10:30 am", completed: false },
+                        { name: "Meeting with new team", category: "Work Projects", date: "17th March", time: "1:00 pm", completed: true }
+                    ],
+                    newTask: {
+                        name: "",
+                        category: "",
+                        date: "",
+                        time: ""
+                    }
+                }
+            },
+            methods: {
+                handleSubmit(){
+                    if(this.newTask){
+                        this.Tasks.push(
+                            {
+                                name: this.newTask.name,
+                                category: this.newTask.category,
+                                date: this.newTask.date,
+                                time: this.newTask.time,
+                                completed: false
+                            }
+                        )
+                        console.log(this.Tasks);
+                    }
+                }
+            },
+        }).mount('#app')
+        </script>
 </body>
 </html>

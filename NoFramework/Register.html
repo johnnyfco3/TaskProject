@@ -10,76 +10,124 @@
     <title>Register | Task it</title>
 </head>
 <body id="register">
-    <main>
-        <div class="container">
-            <h1 class="app-title has-text-centered">Task it!</h1>
-            <div class="card">
-                <form action="">
-                  <h1 class="title has-text-centered pt-4">Register</h1>
-                  <div class="card-content">
-                    <div class="field is-horizontal">
-                        <div class="field pr-6 first">
-                            <label class="label">First Name</label>
-                            <div class="control has-icons-left has-icons-right">
-                                <input class="input" type="text">
-                                <span class="icon is-small is-left">
-                                    <i class="fas fa-user"></i>
-                                </span>
+    <div id="app">
+        <main>
+            <div class="container">
+                <h1 class="app-title has-text-centered">Task it!</h1>
+                <div class="card">
+                    <form @submit.prevent="handleSubmit">
+                    <h1 class="title has-text-centered pt-4">Register</h1>
+                    <div class="card-content">
+                        <div class="field is-horizontal">
+                            <div class="field pr-6 first">
+                                <label class="label">First Name</label>
+                                <div class="control has-icons-left has-icons-right">
+                                    <input class="input" type="text" required v-model="newUser.firstName">
+                                    <span class="icon is-small is-left">
+                                        <i class="fas fa-user"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <div class="field">
+                                <label class="label">Last Name</label>
+                                <div class="control has-icons-left has-icons-right">
+                                    <input class="input" type="text" required v-model="newUser.lastName">
+                                    <span class="icon is-small is-left">
+                                        <i class="fas fa-user"></i>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                         
-                        <div class="field">
-                            <label class="label">Last Name</label>
-                            <div class="control has-icons-left has-icons-right">
-                                <input class="input" type="text">
-                                <span class="icon is-small is-left">
-                                    <i class="fas fa-user"></i>
-                                </span>
+                        <div class="field is-horizontal">
+                            <div class="field pr-6 email">
+                                <label class="label">Email Address</label>
+                                <div class="control has-icons-left has-icons-right">
+                                    <input class="input" type="email" required v-model="newUser.email">
+                                    <span class="icon is-small is-left">
+                                        <i class="fa-solid fa-envelope"></i>
+                                    </span>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                      
-                    <div class="field is-horizontal">
-                        <div class="field pr-6 email">
-                            <label class="label">Email Address</label>
-                            <div class="control has-icons-left has-icons-right">
-                                <input class="input" type="email">
-                                <span class="icon is-small is-left">
-                                    <i class="fa-solid fa-envelope"></i>
-                                </span>
+                            
+                            <div class="field">
+                                <label class="label">Password</label>
+                                <div class="control has-icons-left has-icons-right">
+                                    <input class="input" type="password" required v-model="newUser.password">
+                                    <span class="icon is-small is-left">
+                                        <i class="fa-solid fa-lock"></i>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                         
+                        <div class="field confirm">
+                            <label class="label">Confirm Password</label>
+                                <div class="control has-icons-left has-icons-right">
+                                    <input class="input" type="password" required v-model="newUser.confirm">
+                                    <span class="icon is-small is-left">
+                                        <i class="fa-solid fa-check-double"></i>
+                                    </span>
+                                </div>
+                        </div>
+                        
                         <div class="field">
-                            <label class="label">Password</label>
-                            <div class="control has-icons-left has-icons-right">
-                                <input class="input" type="password">
-                                <span class="icon is-small is-left">
-                                    <i class="fa-solid fa-lock"></i>
-                                </span>
+                            <div class="control has-text-centered">
+                            <button class="button is-link">Get Started</button>
                             </div>
                         </div>
                     </div>
-                      
-                      <div class="field confirm">
-                        <label class="label">Confirm Password</label>
-                            <div class="control has-icons-left has-icons-right">
-                                <input class="input" type="password">
-                                <span class="icon is-small is-left">
-                                    <i class="fa-solid fa-check-double"></i>
-                                </span>
-                            </div>
-                      </div>
-                      
-                      <div class="field">
-                        <div class="control has-text-centered">
-                          <button class="button is-link">Get Started</button>
-                        </div>
-                      </div>
-                  </div>
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
-    </main>
+        </main>
+    </div>
+
+    <script src="https://unpkg.com/vue@3"></script>
+    <script>
+    Vue.createApp({
+        data() {
+            return {
+                users: [
+                    { firstName: "Johnny", lastName: "Tejada", email: "johnnyfran20002@gmail.com", password: "12345"},
+                    { firstName: "Joe", lastName: "Biden", email: "joeBiden2022@gmail.com", password: "12345"}
+                ],
+                newUser: {
+                    firstName: "",
+                    lastName: "",
+                    email: "",
+                    password: "",
+                    confirm: ""
+                }
+            }
+        },
+        methods: {
+            handleSubmit(){
+                if(this.newUser){
+                    if(this.newUser.password !== this.newUser.confirm){
+                        alert("Passwords do not match!");
+                    }
+                    else{
+                        this.users.push(
+                        {
+                            firstName: this.newUser.firstName,
+                            lastName: this.newUser.lastName,
+                            email: this.newUser.email,
+                            password: this.newUser.password
+                        }
+                    )
+                    this.newUser.firstName = "";
+                    this.newUser.lastName = "";
+                    this.newUser.email = "";
+                    this.newUser.passowrd = "";
+                    this.newUser.confirm = "";
+                    console.log(this.users);
+                    }
+                }
+            }
+        },
+    }).mount('#app')
+    </script>
 </body>
 </html>
