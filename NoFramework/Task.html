@@ -25,7 +25,7 @@
                     <div class="level-center pb-4">
                         <div class="level-item is-flex-direction-column">
                             <h1 class="title p-2 pb-5">Work Projects</h1>
-                            <h1 class="subtitle">Wednesday 2nd February</h1>
+                            <h1 class="subtitle">{{today}}</h1>
 
                         </div>
                     </div>
@@ -68,10 +68,6 @@
 
                 <div class="level-item has-text-centered">
                     <p class="heading" v-on:click="activate(2)" v-bind:class="activeID === 2 ? 'active' : ''">Important</p>
-                </div>
-
-                <div class="level-item has-text-centered">
-                    <p id="date" class="heading date" v-on:click="activate(3)" v-bind:class="activeID === 3 ? 'active' : ''">Date</p>
                 </div>
             </nav>
             <hr>
@@ -135,7 +131,7 @@
                     </footer>
                 </div>
 
-                <div class="card" v-else-if="activeID !== 1 && activeID !== 2">
+                <div class="card" v-else-if="activeID === 0">
                     <div class="header">
                         <div class="top-content">
                             <p class="card-header-title ml-4">
@@ -178,6 +174,7 @@
         Vue.createApp({
             data() {
                 return {
+                    today: new Date().toLocaleDateString('en-us', { weekday:"long", month:"long", day:"numeric"}),
                     activeID: 0,
                     Tasks: [
                         { id: 1, name: "Call Supervisor", category: "Work Projects", date: "12th March", time: "10:30 am", completed: false, important: true },
