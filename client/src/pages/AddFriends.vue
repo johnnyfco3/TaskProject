@@ -1,5 +1,28 @@
 <script setup lang="ts">
+import { reactive } from 'vue';
 import AddBar from '../components/AddBar.vue';
+
+  const friends = reactive([
+          { firstName: "Johnny", lastName: "Tejada", email: "johnnyfran20002@gmail.com"},
+          { firstName: "Joe", lastName: "Biden", email: "joeBiden2022@gmail.com"}
+  ])
+  
+  const newFriend = reactive({
+          email: ""
+  })
+  
+  function handleSubmit(){
+      if(newFriend.email){
+          friends.push(
+              {
+                  firstName: "",
+                  lastName: "",
+                  email: newFriend.email
+              }
+          )
+          console.log(friends);
+      }
+  }
 
 </script>
 

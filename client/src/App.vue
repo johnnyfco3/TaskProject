@@ -11,7 +11,7 @@ import AddCategory from './pages/AddCategory.vue'
 
 <template>
 <div>
-  <!-- <Welcome /> -->
+  <Welcome />
   <!-- <Register /> -->
   <!-- <Overview /> -->
   <!-- <AddCategory /> -->

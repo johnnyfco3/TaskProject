@@ -1,4 +1,41 @@
 <script setup lang="ts">
+import { reactive } from 'vue';
+
+  const users = reactive([
+    { firstName: "Johnny", lastName: "Tejada", email: "johnnyfran20002@gmail.com", password: "12345"},
+    { firstName: "Joe", lastName: "Biden", email: "joeBiden2022@gmail.com", password: "12345"}
+  ])
+  const newUser = reactive({
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      confirm: ""
+  })
+  
+  function handleSubmit(){
+      if(newUser){
+          if(newUser.password !== newUser.confirm){
+              alert("Passwords do not match!");
+          }
+          else{
+              users.push(
+              {
+                  firstName: newUser.firstName,
+                  lastName: newUser.lastName,
+                  email: newUser.email,
+                  password: newUser.password
+              }
+          )
+          newUser.firstName = "";
+          newUser.lastName = "";
+          newUser.email = "";
+          newUser.password = "";
+          newUser.confirm = "";
+          console.log (users);
+          }
+      }
+  }
 
 </script>
 
@@ -8,16 +45,14 @@
         <div class="container">
             <h1 class="app-title has-text-centered">Task it!</h1>
             <div class="card">
-                <form>
-                <!-- <form @submit.prevent="handleSubmit"> -->
+                <form @submit.prevent="handleSubmit">
                 <h1 class="title has-text-centered pt-4">Register</h1>
                 <div class="card-content">
                     <div class="field is-horizontal">
                         <div class="field pr-6 first">
                             <label class="label">First Name</label>
                             <div class="control has-icons-left has-icons-right">
-                                <!-- <input class="input" type="text" required v-model="newUser.firstName"> -->
-                                <input class="input" type="text" required />
+                                <input class="input" type="text" required v-model="newUser.firstName">
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-user"></i>
                                 </span>
@@ -27,8 +62,7 @@
                         <div class="field">
                             <label class="label">Last Name</label>
                             <div class="control has-icons-left has-icons-right">
-                                <!-- <input class="input" type="text" required v-model="newUser.lastName"> -->
-                                <input class="input" type="text" required />
+                                <input class="input" type="text" required v-model="newUser.lastName">
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-user"></i>
                                 </span>
@@ -40,8 +74,7 @@
                         <div class="field pr-6 email">
                             <label class="label">Email Address</label>
                             <div class="control has-icons-left has-icons-right">
-                                <!-- <input class="input" type="email" required v-model="newUser.email"> -->
-                                <input class="input" type="email" required />
+                                <input class="input" type="email" required v-model="newUser.email">
                                 <span class="icon is-small is-left">
                                     <i class="fa-solid fa-envelope"></i>
                                 </span>
@@ -51,8 +84,7 @@
                         <div class="field">
                             <label class="label">Password</label>
                             <div class="control has-icons-left has-icons-right">
-                                <!-- <input class="input" type="password" required v-model="newUser.password"> -->
-                                <input class="input" type="password" required />
+                                <input class="input" type="password" required v-model="newUser.password">
                                 <span class="icon is-small is-left">
                                     <i class="fa-solid fa-lock"></i>
                                 </span>
@@ -63,8 +95,7 @@
                     <div class="field confirm">
                         <label class="label">Confirm Password</label>
                             <div class="control has-icons-left has-icons-right">
-                                <!-- <input class="input" type="password" required v-model="newUser.confirm"> -->
-                                <input class="input" type="password" required />
+                                <input class="input" type="password" required v-model="newUser.confirm">
                                 <span class="icon is-small is-left">
                                     <i class="fa-solid fa-check-double"></i>
                                 </span>

@@ -8,8 +8,8 @@
         <a href="Overview.html"><i class="fas fa-long-arrow-alt-left"></i></a>
         <div class="top has-text-centered">
             <h1 class="title p-3">Add New Category</h1>
-            <h1 class="title p-3">Add New Task</h1>
-            <h1 class="title p-3">Find New Friend</h1>
+            <!-- <h1 class="title p-3">Add New Task</h1>
+            <h1 class="title p-3">Find New Friend</h1> -->
         </div>
     </div>
 </header>

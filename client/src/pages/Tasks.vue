@@ -1,34 +1,56 @@
 <script setup lang="ts">
 import TasksBar from "../components/TasksBar.vue";
-import TaskList from "../components/TaskList.vue"
+import TaskList from "../components/TaskList.vue";
+import { reactive, ref } from "vue";
+  const currentTab = ref('All')
+  const today = ref(new Date().toLocaleDateString('en-us', { weekday:"long", month:"long", day:"numeric"}));
+  const Tasks = reactive([
+            { id: 1, name: "Call Supervisor", category: "Work Projects", date: "12th March", time: "10:30 am", completed: false, important: true },
+            { id: 2, name: "Meeting with new team", category: "Work Projects", date: "17th March", time: "1:00 pm", completed: true, important: false }
+        ])
+
+  function toggleCompleted(task:any, id:number){
+        Tasks.map(element =>{
+            if(element.id === id){
+                element.completed = !task.completed
+            }
+        })
+    }
+  function toggleImportant(task:any, id:number){
+        Tasks.map(element =>{
+            if(element.id === id){
+                element.important = !task.important
+            }
+        })
+    }
 
 </script>
 
 <template>
 <div id="tasks">
     <header>
-        <TasksBar />
+        <TasksBar :today="today"/>
     </header>
 
     <main class="container mt-6">
         <nav class="level mt-2">
-            <!-- <div class="level-item has-text-centered">
-                <p class="heading" v-on:click="activate(0)" v-bind:class="activeID === 0 ? 'active' : ''">All</p>
+            <div class="level-item has-text-centered">
+                <p class="heading" :class="{ 'active': currentTab == 'All' }" @click=" currentTab = 'All' ">All</p>
             </div>
 
             <div class="level-item has-text-centered">
-                <p class="heading" v-on:click="activate(1)" v-bind:class="activeID === 1 ? 'active' : ''">Completed</p>
+                <p class="heading" :class="{ 'active': currentTab == 'Completed' }" @click=" currentTab = 'Completed' ">Completed</p>
             </div>
 
             <div class="level-item has-text-centered">
-                <p class="heading" v-on:click="activate(2)" v-bind:class="activeID === 2 ? 'active' : ''">Important</p>
-            </div> -->
+                <p class="heading" :class="{ 'active': currentTab == 'Important' }" @click=" currentTab = 'Important' ">Important</p>
+            </div>
         </nav>
         <hr>
 
-        <!-- <div class="list mt-6" v-for="task in Tasks" key="task.id">
-            <TaskList />
-        </div> -->
+        <div class="list mt-6" v-for="(task,i) in Tasks" v-bind:key="i">
+            <TaskList :task="task" :currentTab="currentTab" :toggleCompleted="toggleCompleted" :toggleImportant="toggleImportant"/>
+        </div>
         <div class="center mt-6">
             <a href="AddTask.html"><button class="button is-danger pr-6 pl-6 pt-3 pb-3"><i class="fas fa-plus-circle" aria-hidden="true"></i>Add New</button></a>
         </div>

@@ -1,6 +1,18 @@
 <script setup lang="ts">
 import Homebar from '../components/Homebar.vue';
 import Categories from '../components/Categories.vue'
+import { reactive, ref } from 'vue';
+
+  const today = ref(new Date().toLocaleDateString('en-us', { weekday:"long", month:"long", day:"numeric"}));
+  const categories = reactive([
+      {name: "Schedule Plan", icon:"fas fa-calendar-alt", tasks: 57, link: "Task.html"},
+      {name: "Personal Errands", icon:"fas fa-user-alt", tasks: 7, link: "Task.html"},
+      {name: "Work Projects", icon:"fas fa-briefcase", tasks: 13, link: "Task.html"},
+      {name: "Grocery List", icon:"fas fa-shopping-cart", tasks: 0, link: "Task.html"},
+      {name: "School", icon:"fas fa-book", tasks: 6, link: "Task.html"},
+      {name: "Assigned", icon:"fa-solid fa-user-group", tasks: 0, link: "Task.html"},
+  ])
+
 </script>
 
 <template>
@@ -12,8 +24,7 @@ import Categories from '../components/Categories.vue'
         <div class="container mb-6">
             <div class="top-content has-text-centered mt-6 mb-6">
                 <h1 class="title"><span>Hello</span> Johnny</h1>
-                <!-- <h1 class="subtitle">{{today}}</h1> -->
-                <h1 class="subtitle">today</h1>
+                <h1 class="subtitle">{{today}}</h1>
             </div>
 
             <hr>
@@ -33,7 +44,7 @@ import Categories from '../components/Categories.vue'
             </nav>
             <hr>
             <div class="columns is-multiline mt-6">
-                <!-- <Categories /> -->
+                <Categories :categories="categories"/>
             </div>
             <div class="center mt-6">
                 <a href="AddCategory.html"><button class="button is-danger is-hovered pr-6 pl-6 pt-3 pb-3"><i class="fas fa-plus-circle" aria-hidden="true"></i>Add New</button></a>

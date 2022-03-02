@@ -1,6 +1,12 @@
 <script setup lang="ts">
+import { reactive } from 'vue';
 import FriendsBar from '../components/FriendsBar.vue';
-import FriendsList from "../components/FriendsList.vue"
+import FriendsList from "../components/FriendsList.vue";
+
+const friends = reactive([
+    { firstName: "Johnny", lastName: "Tejada", email: "johnnyfran20002@gmail.com"},
+    { firstName: "Joe", lastName: "Biden", email: "joeBiden2022@gmail.com"}
+])
 
 </script>
 
@@ -11,9 +17,9 @@ import FriendsList from "../components/FriendsList.vue"
     </header>
 
     <main class="container">
-        <!-- <div class="list mt-6" v-for="friend in friends" key="friend">
-            <FriendsList />
-        </div> -->
+        <div class="list mt-6" v-for="(friend,i) in friends" v-bind:key="i">
+            <FriendsList :friend="friend" />
+        </div>
 
         <div class="center mt-6">
             <a href="AddFriends.html"><button class="button is-danger pr-6 pl-6 pt-3 pb-3"><i class="fas fa-plus-circle" aria-hidden="true"></i>Add New</button></a>

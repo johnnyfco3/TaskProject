@@ -1,23 +1,50 @@
 <script setup lang="ts">
+import { reactive, ref } from 'vue';
 import AddBar from '../components/AddBar.vue';
+
+  const Tasks = reactive([
+      { name: "Call Supervisor", category: "Work Projects", date: "12th March", time: "10:30 am", completed: false },
+      { name: "Meeting with new team", category: "Work Projects", date: "17th March", time: "1:00 pm", completed: true }
+  ])
+
+  const message = ref("Add New Task")
+  
+  const newTask = reactive({
+            name: "",
+            category: "",
+            date: "",
+            time: ""
+  })
+
+  function handleSubmit(){
+      if(newTask){
+          Tasks.push(
+              {
+                  name: newTask.name,
+                  category: newTask.category,
+                  date: newTask.date,
+                  time: newTask.time,
+                  completed: false
+              }
+          )
+      }
+  }
 
 </script>
 
 <template>
 <div id="add-task">
     <header>
-        <AddBar />
+        <AddBar :message="message"/>
     </header>
     <main>
         <div class="container">
             <div class="center">
-                <!-- <form @submit.prevent="handleSubmit"> -->
-                    <form>
+                <form @submit.prevent="handleSubmit">
                     <label class="label mt-6">Select Category</label>
                     <div class="control">
                         <div class="select is-info select-section is-normal">
-                            <!-- <select required v-model="newTask.category"> -->
-                            <select required>
+                            <select required v-model="newTask.category">
                             <option>Schedule Plan</option>
                             <option>Personal Errands</option>
                             <option>Work Projects</option>
@@ -29,8 +56,7 @@ import AddBar from '../components/AddBar.vue';
 
                     <label class="label mt-2">New Task</label>
                     <div class="control has-icons-left task-title">
-                        <!-- <input class="input is-info" type="text" required v-model="newTask.name"> -->
-                        <input class="input is-info" type="text" required />
+                        <input class="input is-info" type="text" required v-model="newTask.name">
                         <span class="icon is-small is-left">
                             <i class="fa-solid fa-pen"></i>
                         </span>
@@ -43,8 +69,7 @@ import AddBar from '../components/AddBar.vue';
                         <div class="field-body">
                             <div class="field">
                                 <p class="control is-expanded">
-                                <!-- <input class="input is-info" type="date" required v-model="newTask.date"> -->
-                                <input class="input is-info" type="text" required />
+                                <input class="input is-info" type="date" required v-model="newTask.date">
                                 </p>
                             </div>
                         </div>
@@ -53,10 +78,9 @@ import AddBar from '../components/AddBar.vue';
                         </div>
                         <div class="field-body">
                             <div class="field">
-                            <p class="control is-expanded">
-                                <!-- <input class="input is-info" type="time" required v-model="newTask.time"> -->
-                                <input class="input is-info" type="time" required />
-                            </p>
+                              <p class="control is-expanded">
+                                <input class="input is-info" type="time" required v-model="newTask.time">
+                              </p>
                             </div>
                         </div>
                     </div>

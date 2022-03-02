@@ -4,7 +4,7 @@
 
 <template>
 <div class="list">
-  <div class="card" v-if="activeID === 1 && task.completed">
+  <div class="card" v-if="currentTab == 'Completed' && task.completed">
         <div class="header">
             <div class="top-content">
                 <p class="card-header-title ml-4">
@@ -32,7 +32,7 @@
         </footer>
     </div>
 
-    <div class="card" v-else-if="activeID === 2 && task.important">
+    <div class="card" v-else-if="currentTab == 'Important' && task.important">
         <div class="header">
             <div class="top-content">
                 <p class="card-header-title ml-4">
@@ -62,7 +62,7 @@
         </footer>
     </div>
 
-    <div class="card" v-else-if="activeID === 0">
+    <div class="card" v-else-if="currentTab == 'All'">
         <div class="header">
             <div class="top-content">
                 <p class="card-header-title ml-4">
