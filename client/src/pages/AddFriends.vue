@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 import AddBar from '../components/AddBar.vue';
 
   const friends = reactive([
@@ -10,6 +10,8 @@ import AddBar from '../components/AddBar.vue';
   const newFriend = reactive({
           email: ""
   })
+
+  const message = ref("Add New Task")
   
   function handleSubmit(){
       if(newFriend.email){
@@ -29,17 +31,15 @@ import AddBar from '../components/AddBar.vue';
 <template>
 <div id="add-friends">
     <header>
-        <AddBar />
+        <AddBar :message="message"/>
     </header>
     <main>
         <div class="container">
             <div class="center">
-                <!-- <form @submit.prevent="handleSubmit"> -->
-                    <form>
+                <form @submit.prevent="handleSubmit">
                     <label class="label mt-6">Enter Friend's Email</label>
                     <div class="control has-icons-left task-title">
-                        <!-- <input class="input is-info" type="email" required v-model="newFriend.email"> -->
-                        <input class="input is-info" type="email" required>
+                        <input class="input is-info" type="email" required v-model="newFriend.email">
                         <span class="icon is-small is-left">
                             <i class="fa-solid fa-envelope"></i>
                         </span>

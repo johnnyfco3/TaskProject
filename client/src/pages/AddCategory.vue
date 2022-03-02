@@ -1,22 +1,49 @@
 <script setup lang="ts">
+import { reactive, ref } from 'vue';
 import AddBar from '../components/AddBar.vue';
+
+  const categories = reactive([
+      {name: "Schedule Plan", icon:"fas fa-calendar-alt", tasks: 57},
+      {name: "Personal Errands", icon:"fas fa-user-alt", tasks: 7},
+      {name: "Work Projects", icon:"fas fa-briefcase", tasks: 13},
+      {name: "Grocery List", icon:"fas fa-shopping-cart", tasks: 0},
+      {name: "School", icon:"fas fa-book", tasks: 6},
+      {name: "Assigned", icon:"fa-solid fa-user-group", tasks: 0},
+  ])
+  
+  const newCategory = reactive({
+      name: ""
+  })
+  
+  function handleSubmit(){
+      if(newCategory.name){
+          categories.push(
+              {
+                  name: newCategory.name,
+                  icon: "none",
+                  tasks: 0
+              }
+          )
+          console.log(categories);
+      }
+  }
+
+  const message = ref("Add New Task")
 
 </script>
 
 <template>
 <div id="add-category">
     <header>
-        <AddBar />
+        <AddBar :message="message"/>
     </header>
     <main>
         <div class="container">
             <div class="center">
-                <!-- <form @submit.prevent="handleSubmit"> -->
-                    <form>
+                <form @submit.prevent="handleSubmit">
                     <label class="label mt-6">Name of Category</label>
                     <div class="control has-icons-left task-title">
-                        <!-- <input class="input is-info" type="text" required v-model="newCategory.name"> -->
-                        <input class="input is-info" type="text" required>
+                        <input class="input is-info" type="text" required v-model="newCategory.name">
                         <span class="icon is-small is-left">
                             <i class="fa-solid fa-pen"></i>
                         </span>

@@ -17,8 +17,7 @@
             <div class="level-center pb-4">
                 <div class="level-item is-flex-direction-column">
                     <h1 class="title p-2 pb-5">Work Projects</h1>
-                    <!-- <h1 class="subtitle">{{today}}</h1> -->
-                    <h1 class="subtitle">today</h1>
+                    <h1 class="subtitle">{{today}}</h1>
 
                 </div>
             </div>
