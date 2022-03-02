@@ -4,20 +4,20 @@
 
 <template>
 <div class="list">
-<div class="card">
-    <div class="card-content">
-    <div class="content is-flex is-justify-content-space-between">
-            <div class="left is-flex">
-                <i class="fa-solid fa-user"></i>
-                <p class="subtitle">{{friend.firstName}} {{friend.lastName}}</p>
-            </div>
-            <div class="icons is-flex">
-                <a href="AddTask.html"><i class="fa-solid fa-plus"></i></a>
-                <a href="#"><i class="fa-solid fa-trash-can"></i></a>
-            </div>
-    </div>
-    </div>
-</div>
+  <div class="card">
+      <div class="card-content">
+      <div class="content is-flex is-justify-content-space-between">
+              <div class="left is-flex">
+                  <i class="fa-solid fa-user"></i>
+                  <!-- <p class="subtitle">{{friend.firstName}} {{friend.lastName}}</p> -->
+              </div>
+              <div class="icons is-flex">
+                  <a href="AddTask.html"><i class="fa-solid fa-plus"></i></a>
+                  <a href="#"><i class="fa-solid fa-trash-can"></i></a>
+              </div>
+      </div>
+      </div>
+  </div>
 </div>
 </template>
 

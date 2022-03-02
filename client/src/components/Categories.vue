@@ -4,7 +4,7 @@
 
 <template>
 <div id="categories">
-    <div class="column is-half" v-for="category in categories" v-bind:key="category">
+    <!-- <div class="column is-half" v-for="category in categories" v-bind:key="category">
         <a v-bind:href="category.link">
             <div class="card has-text-centered">
                 <div class="card-content">
@@ -13,7 +13,7 @@
                 </div>
             </div>
         </a>
-    </div>
+    </div> -->
 </div>
 </template>
 

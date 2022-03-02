@@ -4,7 +4,7 @@
 
 <template>
 <div class="list">
-  <div class="card" v-if="currentTab == 'Completed' && task.completed">
+  <!-- <div class="card" v-if="currentTab == 'Completed' && task.completed">
         <div class="header">
             <div class="top-content">
                 <p class="card-header-title ml-4">
@@ -91,7 +91,7 @@
                                             ></i></a>
         <a href="#" class="card-footer-item"><i class="fas fa-minus-circle"></i></a>
         </footer>
-    </div>
+    </div> -->
 </div>
 </template>
 
