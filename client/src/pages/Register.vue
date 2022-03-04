@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
+import WelcomeBar from '../components/WelcomeBar.vue';
 
   const users = reactive([
     { firstName: "Johnny", lastName: "Tejada", email: "johnnyfran20002@gmail.com", password: "12345"},
@@ -41,6 +42,9 @@ import { reactive } from 'vue';
 
 <template>
 <div id="register">
+  <header>
+    <WelcomeBar />
+  </header>
    <main>
         <div class="container">
             <h1 class="app-title has-text-centered">Task it!</h1>
@@ -119,7 +123,7 @@ import { reactive } from 'vue';
 #register {
   background-image: url("../assets/images/slider-right-dec.jpg");
   background-size: cover;
-  height: 130vh;
+  height: 180vh;
 }
 main {
   height: 100vh;

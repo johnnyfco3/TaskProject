@@ -1,12 +1,17 @@
 <script setup lang="ts">
+import WelcomeBar from '../components/WelcomeBar.vue';
+import { RouterLink } from 'vue-router';
 
 </script>
 
 <template>
 <div id="welcome">
+  <header>
+    <WelcomeBar />
+  </header>
     <main>
         <div class="container is-flex">
-            <div class="left-side is-flex-direction-column has-text-centered mt-6">
+            <div class="left-side is-flex-direction-column has-text-centered pt-6" id="main">
                 <h1 class="title">Task it!</h1>
                 <img src="../assets/images/jan-kahanek-g3O5ZtRk2E4-unsplash.jpg" alt="Welcome">
             </div>
@@ -49,7 +54,7 @@
                 <hr>
                 <div class="bottom-content has-text-centered">
                 <h4>Don't have an account? </h4>
-                <a href="Register.html">Register</a>
+                <router-link to="/register">Register</router-link>
                 </div>
             </div>
         </div>
