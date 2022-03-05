@@ -7,6 +7,7 @@ import Friends from '../pages/Friends.vue'
 import AddTask from '../pages/AddTask.vue'
 import AddFriends from '../pages/AddFriends.vue'
 import AddCategory from '../pages/AddCategory.vue'
+import EditTasks from '../pages/EditTasks.vue'
 import session from "../models/session";
 
 const routes: RouteRecordRaw[] = [
@@ -17,7 +18,8 @@ const routes: RouteRecordRaw[] = [
     { path: '/friends', component: Friends },
     { path: '/add-tasks', component: AddTask },
     { path: '/add-friends', component: AddFriends },
-    { path: '/add-category', component: AddCategory }
+    { path: '/add-category', component: AddCategory },
+    { path: '/edit-task', component: EditTasks }
 ];
 
 const router = createRouter({

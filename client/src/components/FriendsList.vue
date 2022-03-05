@@ -7,6 +7,10 @@ import { RouterLink } from 'vue-router';
       type: Array
     }
   })
+
+  function remove(index:number){
+    props.friends.splice(index,index);
+  }
 </script>
 
 <template>
@@ -21,7 +25,7 @@ import { RouterLink } from 'vue-router';
                 </div>
                 <div class="icons is-flex">
                     <router-link to="/add-tasks"><i class="fa-solid fa-plus"></i></router-link>
-                    <a href="#"><i class="fa-solid fa-trash-can"></i></a>
+                    <a href="#"><i class="fa-solid fa-trash-can" @click="remove(i)"></i></a>
                 </div>
         </div>
         </div>

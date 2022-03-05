@@ -5,8 +5,8 @@ import FriendsList from "../components/FriendsList.vue";
 import Homebar from '../components/Homebar.vue';
 
 const friends = reactive([
-    { firstName: "Johnny", lastName: "Tejada", email: "johnnyfran20002@gmail.com"},
-    { firstName: "Joe", lastName: "Biden", email: "joeBiden2022@gmail.com"}
+    { firstName: "Johnny", lastName: "Tejada", email: "johnnyfran20002@gmail.com", userID: 1},
+    { firstName: "Joe", lastName: "Biden", email: "joeBiden2022@gmail.com", userID: 1}
 ])
 
 </script>

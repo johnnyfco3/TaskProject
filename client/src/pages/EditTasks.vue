@@ -1,14 +1,25 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue';
+import { reactive, defineProps } from 'vue';
 import Homebar from '../components/Homebar.vue';
-import router from '../router';
 
   const Tasks = reactive([
       { id: 1, name: "Call Supervisor", category: "Work Projects", date: "12th March", time: "10:30 am", completed: false },
       { id: 2, name: "Meeting with new team", category: "Work Projects", date: "17th March", time: "1:00 pm", completed: true }
   ])
+
+  const props = defineProps({
+      task: {
+          type: Object,
+          id: Number,
+          name: String, 
+          category: String, 
+          date: String, 
+          time: String, 
+          completed: Boolean
+      }
+  })
   
-  const newTask = reactive({
+  const editTask = reactive({
             name: "",
             category: "",
             date: "",
@@ -16,37 +27,37 @@ import router from '../router';
   })
 
   function handleSubmit(){
-      if(newTask){
-          Tasks.push(
-              {
-                id: Tasks.length + 1,
-                name: newTask.name,
-                category: newTask.category,
-                date: newTask.date,
-                time: newTask.time,
-                completed: false
-              }
-          )
-          router.push('/overview')
-      }
+    //   if(edit){
+    //       Tasks.push(
+    //           {
+    //             id: Tasks.length + 1,
+    //             name: edit.name,
+    //             category: edit.category,
+    //             date: edit.date,
+    //             time: edit.time,
+    //             completed: false
+    //           }
+    //       )
+    //       router.push('/overview')
+    //   }
   }
 
 </script>
 
 <template>
-<div id="add-task">
+<div id="edit-task">
     <header>
         <Homebar />
     </header>
     <main>
         <div class="container">
             <div class="center">
-              <h1 class="title has-text-centered pt-6">Add New Task</h1>
+              <h1 class="title has-text-centered pt-6">Edit Task</h1>
                 <form @submit.prevent="handleSubmit">
                     <label class="label pt-4">Select Category</label>
                     <div class="control">
                         <div class="select is-info select-section is-normal">
-                            <select required v-model="newTask.category">
+                            <select required v-model="editTask.category">
                             <option>Schedule Plan</option>
                             <option>Personal Errands</option>
                             <option>Work Projects</option>
@@ -58,7 +69,7 @@ import router from '../router';
 
                     <label class="label mt-2">New Task</label>
                     <div class="control has-icons-left task-title">
-                        <input class="input is-info" type="text" required v-model="newTask.name">
+                        <input class="input is-info" type="text" required v-model="editTask.name">
                         <span class="icon is-small is-left">
                             <i class="fa-solid fa-pen"></i>
                         </span>
@@ -71,7 +82,7 @@ import router from '../router';
                         <div class="field-body">
                             <div class="field">
                                 <p class="control is-expanded">
-                                <input class="input is-info" type="date" required v-model="newTask.date">
+                                <input class="input is-info" type="date" required v-model="editTask.date">
                                 </p>
                             </div>
                         </div>
@@ -81,7 +92,7 @@ import router from '../router';
                         <div class="field-body">
                             <div class="field">
                               <p class="control is-expanded">
-                                <input class="input is-info" type="time" required v-model="newTask.time">
+                                <input class="input is-info" type="time" required v-model="editTask.time">
                               </p>
                             </div>
                         </div>
@@ -98,7 +109,7 @@ import router from '../router';
 </template>
 
 <style scoped>
-#add-task {
+#edit-task {
   background-image: url("../assets/images/slider-right-dec.jpg");
   background-size: cover;
   height: 100vh;

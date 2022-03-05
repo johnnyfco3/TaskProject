@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { defineProps } from 'vue';
+import router from '../router';
 
     const props = defineProps({
         Tasks: {
@@ -16,7 +17,14 @@ import { defineProps } from 'vue';
         }
     })
 
+    function edit(index:number){
+        router.push('/edit-task')
+        //pass the index through router
+    }
 
+    function remove(index:number){
+        props.Tasks.splice(index,index);
+    }
 </script>
 
 <template>
@@ -26,7 +34,7 @@ import { defineProps } from 'vue';
             <div class="header">
                 <div class="top-content">
                     <p class="card-header-title ml-4">
-                        <i class="fas fa-check-circle pr-6" v-on:click="props.toggleCompleted(task, task.id)"></i>
+                        <i class="fas fa-check-circle pr-6" v-on:click="toggleCompleted(task, task.id)"></i>
                         {{task.name}}
                     </p>
                 </div>
@@ -41,12 +49,12 @@ import { defineProps } from 'vue';
             </div>
             </div>
             <footer class="card-footer">
-            <a href="#" class="card-footer-item"><i class="fas fa-pencil-alt"></i></a>
+            <a href="#" class="card-footer-item"><i class="fas fa-pencil-alt" @click="edit(task.id)"></i></a>
             <a href="#" class="card-footer-item"><i 
                                                     v-bind:class="task.important ? 'fa-solid fa-star' : 'far fa-star'"
-                                                    v-on:click="props.toggleImportant(task, task.id)"
+                                                    v-on:click="toggleImportant(task, task.id)"
                                                 ></i></a>
-            <a href="#" class="card-footer-item"><i class="fas fa-minus-circle"></i></a>
+            <a href="#" class="card-footer-item"><i class="fas fa-minus-circle" @click="remove(i)"></i></a>
             </footer>
         </div>
 
@@ -56,7 +64,7 @@ import { defineProps } from 'vue';
                     <p class="card-header-title ml-4">
                         <i v-bind:class="
                             task.completed ? 'fas fa-check-circle pr-6' : 'far fa-circle pr-6'
-                        " v-on:click="props.toggleCompleted(task, task.id)"></i>
+                        " v-on:click="toggleCompleted(task, task.id)"></i>
                         {{task.name}}
                     </p>
                 </div>
@@ -71,12 +79,12 @@ import { defineProps } from 'vue';
             </div>
             </div>
             <footer class="card-footer">
-            <a href="#" class="card-footer-item"><i class="fas fa-pencil-alt"></i></a>
+            <a href="#" class="card-footer-item"><i class="fas fa-pencil-alt" @click="edit(task.id)"></i></a>
             <a href="#" class="card-footer-item"><i 
                                                     v-bind:class="task.important ? 'fa-solid fa-star' : 'far fa-star'"
-                                                    v-on:click="props.toggleImportant(task, task.id)"
+                                                    v-on:click="toggleImportant(task, task.id)"
                                                 ></i></a>
-            <a href="#" class="card-footer-item"><i class="fas fa-minus-circle"></i></a>
+            <a href="#" class="card-footer-item"><i class="fas fa-minus-circle" @click="remove(i)"></i></a>
             </footer>
         </div>
 
@@ -86,7 +94,7 @@ import { defineProps } from 'vue';
                     <p class="card-header-title ml-4">
                         <i 
                         v-bind:class="task.completed ? 'fas fa-check-circle pr-6' : 'far fa-circle pr-6'" 
-                        v-on:click="props.toggleCompleted(task, task.id)">
+                        v-on:click="toggleCompleted(task, task.id)">
                         </i>
                         {{task.name}}
                     </p>
@@ -102,12 +110,12 @@ import { defineProps } from 'vue';
             </div>
             </div>
             <footer class="card-footer">
-            <a href="#" class="card-footer-item"><i class="fas fa-pencil-alt"></i></a>
+            <a href="#" class="card-footer-item"><i class="fas fa-pencil-alt" @click="edit(task.id)"></i></a>
             <a href="#" class="card-footer-item"><i 
                                                     v-bind:class="task.important ? 'fa-solid fa-star' : 'far fa-star'"
-                                                    v-on:click="props.toggleImportant(task, task.id)"
+                                                    v-on:click="toggleImportant(task, task.id)"
                                                 ></i></a>
-            <a href="#" class="card-footer-item"><i class="fas fa-minus-circle"></i></a>
+            <a href="#" class="card-footer-item"><i class="fas fa-minus-circle" @click="remove(i)"></i></a>
             </footer>
         </div>
     </div>

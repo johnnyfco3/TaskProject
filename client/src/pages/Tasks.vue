@@ -50,7 +50,7 @@ import Homebar from "../components/Homebar.vue";
         </nav>
         <hr>
 
-        <div class="list mt-6">
+        <div class="list pt-6">
             <TaskList :Tasks="Tasks" :currentTab="currentTab" :toggleCompleted="toggleCompleted" :toggleImportant="toggleImportant"/>
         </div>
         <div class="center pt-6">
