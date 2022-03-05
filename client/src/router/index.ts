@@ -7,6 +7,7 @@ import Friends from '../pages/Friends.vue'
 import AddTask from '../pages/AddTask.vue'
 import AddFriends from '../pages/AddFriends.vue'
 import AddCategory from '../pages/AddCategory.vue'
+import session from "../models/session";
 
 const routes: RouteRecordRaw[] = [
     { path: '/', component: Welcome },
@@ -23,5 +24,13 @@ const router = createRouter({
     history: createWebHistory(),
     routes
 });
+
+router.beforeEach((to,from) =>{
+    if(['/overview', '/tasks', '/friends', '/add-tasks', '/add-friends', '/add-category'].includes(to.path)){
+        if(!session.user){
+            return '/'
+        }
+    }
+})
 
 export default router;
