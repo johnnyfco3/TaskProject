@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import TasksBar from "../components/TasksBar.vue";
-import TaskList from "../components/TaskList.vue";
 import { reactive, ref } from "vue";
+import { RouterLink } from "vue-router";
+import TaskList from "../components/TaskList.vue";
+import Homebar from "../components/Homebar.vue";
+
   const currentTab = ref('All')
   const today = ref(new Date().toLocaleDateString('en-us', { weekday:"long", month:"long", day:"numeric"}));
   const Tasks = reactive([
@@ -29,11 +31,11 @@ import { reactive, ref } from "vue";
 <template>
 <div id="tasks">
     <header>
-        <TasksBar :today="today"/>
+        <Homebar />
     </header>
 
-    <main class="container mt-6">
-        <nav class="level mt-2">
+    <main class="container pt-6">
+        <nav class="level pt-2">
             <div class="level-item has-text-centered">
                 <p class="heading" :class="{ 'active': currentTab == 'All' }" @click=" currentTab = 'All' ">All</p>
             </div>
@@ -48,11 +50,11 @@ import { reactive, ref } from "vue";
         </nav>
         <hr>
 
-        <div class="list mt-6" v-for="(task,i) in Tasks" v-bind:key="i">
-            <TaskList :task="task" :currentTab="currentTab" :toggleCompleted="toggleCompleted" :toggleImportant="toggleImportant"/>
+        <div class="list mt-6">
+            <TaskList :Tasks="Tasks" :currentTab="currentTab" :toggleCompleted="toggleCompleted" :toggleImportant="toggleImportant"/>
         </div>
-        <div class="center mt-6">
-            <a href="AddTask.html"><button class="button is-danger pr-6 pl-6 pt-3 pb-3"><i class="fas fa-plus-circle" aria-hidden="true"></i>Add New</button></a>
+        <div class="center pt-6">
+            <router-link to="/add-tasks" href="AddTask.html"><button class="button is-danger pr-6 pl-6 pt-3 pb-3"><i class="fas fa-plus-circle" aria-hidden="true"></i>Add New Task</button></router-link>
         </div>
     </main>
 </div>

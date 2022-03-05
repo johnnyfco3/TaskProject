@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
-import AddBar from '../components/AddBar.vue';
+import router from '../router';
+import Homebar from '../components/Homebar.vue';
 
   const categories = reactive([
       {name: "Schedule Plan", icon:"fas fa-calendar-alt", tasks: 57},
@@ -24,24 +25,23 @@ import AddBar from '../components/AddBar.vue';
                   tasks: 0
               }
           )
-          console.log(categories);
+          router.push('/overview')
       }
   }
-
-  const message = ref("Add New Task")
 
 </script>
 
 <template>
 <div id="add-category">
     <header>
-        <AddBar :message="message"/>
+        <Homebar />
     </header>
     <main>
         <div class="container">
             <div class="center">
+              <h1 class="title has-text-centered pt-6">Add New Category</h1>
                 <form @submit.prevent="handleSubmit">
-                    <label class="label mt-6">Name of Category</label>
+                    <label class="label pt-4">Name of Category</label>
                     <div class="control has-icons-left task-title">
                         <input class="input is-info" type="text" required v-model="newCategory.name">
                         <span class="icon is-small is-left">
@@ -49,7 +49,7 @@ import AddBar from '../components/AddBar.vue';
                         </span>
                     </div>
                     
-                    <div class="center mt-6">
+                    <div class="center pt-6">
                         <button class="button is-danger pr-6 pl-6 pt-3 pb-3"><i class="fas fa-plus-circle" aria-hidden="true"></i>Add New</button>
                     </div>
                 </form>
@@ -64,6 +64,10 @@ import AddBar from '../components/AddBar.vue';
   background-image: url("../assets/images/slider-right-dec.jpg");
   background-size: cover;
   height: 100vh;
+}
+.container .title{
+  font-size: 2.5rem;
+  font-family: fantasy;
 }
 main form {
   text-align: center;

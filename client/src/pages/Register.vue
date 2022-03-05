@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
+import router from '../router';
 import WelcomeBar from '../components/WelcomeBar.vue';
 
   const users = reactive([
@@ -33,8 +34,8 @@ import WelcomeBar from '../components/WelcomeBar.vue';
           newUser.email = "";
           newUser.password = "";
           newUser.confirm = "";
-          console.log (users);
           }
+          router.push("/")
       }
   }
 

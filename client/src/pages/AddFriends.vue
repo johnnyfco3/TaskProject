@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
-import AddBar from '../components/AddBar.vue';
+import router from '../router';
+import Homebar from '../components/Homebar.vue';
 
   const friends = reactive([
           { firstName: "Johnny", lastName: "Tejada", email: "johnnyfran20002@gmail.com"},
@@ -10,8 +11,6 @@ import AddBar from '../components/AddBar.vue';
   const newFriend = reactive({
           email: ""
   })
-
-  const message = ref("Add New Task")
   
   function handleSubmit(){
       if(newFriend.email){
@@ -22,7 +21,7 @@ import AddBar from '../components/AddBar.vue';
                   email: newFriend.email
               }
           )
-          console.log(friends);
+          router.push('/friends')
       }
   }
 
@@ -31,13 +30,14 @@ import AddBar from '../components/AddBar.vue';
 <template>
 <div id="add-friends">
     <header>
-        <AddBar :message="message"/>
+        <Homebar />
     </header>
     <main>
         <div class="container">
             <div class="center">
+              <h1 class="title has-text-centered pt-6">Add New Friend</h1>
                 <form @submit.prevent="handleSubmit">
-                    <label class="label mt-6">Enter Friend's Email</label>
+                    <label class="label pt-4">Enter Friend's Email</label>
                     <div class="control has-icons-left task-title">
                         <input class="input is-info" type="email" required v-model="newFriend.email">
                         <span class="icon is-small is-left">
@@ -45,7 +45,7 @@ import AddBar from '../components/AddBar.vue';
                         </span>
                     </div>
                 
-                    <div class="center mt-6">
+                    <div class="center pt-6">
                         <button class="button is-danger pr-6 pl-6 pt-3 pb-3"><i class="fas fa-plus-circle" aria-hidden="true"></i> Add New</button>
                     </div>
                 </form>
@@ -60,6 +60,10 @@ import AddBar from '../components/AddBar.vue';
   background-image: url("../assets/images/slider-right-dec.jpg");
   background-size: cover;
   height: 100vh;
+}
+.container .title{
+  font-size: 2.5rem;
+  font-family: fantasy;
 }
 main form {
   text-align: center;

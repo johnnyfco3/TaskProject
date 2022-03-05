@@ -4,6 +4,7 @@ import { RouterLink } from 'vue-router'
 
 <template>
 <div id="welcome-bar">
+  <header>
   <div class="container">
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
@@ -37,11 +38,15 @@ import { RouterLink } from 'vue-router'
             </div>
             </div>
         </nav>
-    </div>
+  </div>
+  </header>
 </div>
 </template>
 
 <style scoped>
+header {
+  box-shadow: 0px 3px 5px rgb(226, 223, 223);
+}
 #welcome-bar h1 {
   font-family: fantasy;
   margin-top: 10%;

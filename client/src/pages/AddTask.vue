@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
-import AddBar from '../components/AddBar.vue';
+import Homebar from '../components/Homebar.vue';
+import router from '../router';
 
   const Tasks = reactive([
       { name: "Call Supervisor", category: "Work Projects", date: "12th March", time: "10:30 am", completed: false },
       { name: "Meeting with new team", category: "Work Projects", date: "17th March", time: "1:00 pm", completed: true }
   ])
-
-  const message = ref("Add New Task")
   
   const newTask = reactive({
             name: "",
@@ -27,6 +26,7 @@ import AddBar from '../components/AddBar.vue';
                   completed: false
               }
           )
+          router.push('/overview')
       }
   }
 
@@ -35,13 +35,14 @@ import AddBar from '../components/AddBar.vue';
 <template>
 <div id="add-task">
     <header>
-        <AddBar :message="message"/>
+        <Homebar />
     </header>
     <main>
         <div class="container">
             <div class="center">
+              <h1 class="title has-text-centered pt-6">Add New Task</h1>
                 <form @submit.prevent="handleSubmit">
-                    <label class="label mt-6">Select Category</label>
+                    <label class="label pt-4">Select Category</label>
                     <div class="control">
                         <div class="select is-info select-section is-normal">
                             <select required v-model="newTask.category">
@@ -85,7 +86,7 @@ import AddBar from '../components/AddBar.vue';
                         </div>
                     </div>
                 
-                    <div class="center mt-6">
+                    <div class="center pt-6">
                         <button class="button is-danger pr-6 pl-6 pt-3 pb-3"><i class="fas fa-plus-circle" aria-hidden="true"></i> Add New</button>
                     </div>
                 </form>
@@ -100,6 +101,10 @@ import AddBar from '../components/AddBar.vue';
   background-image: url("../assets/images/slider-right-dec.jpg");
   background-size: cover;
   height: 100vh;
+}
+.container .title{
+  font-size: 2.5rem;
+  font-family: fantasy;
 }
 main form {
   text-align: center;

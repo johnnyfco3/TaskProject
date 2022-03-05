@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
-import FriendsBar from '../components/FriendsBar.vue';
+import { RouterLink } from 'vue-router';
 import FriendsList from "../components/FriendsList.vue";
+import Homebar from '../components/Homebar.vue';
 
 const friends = reactive([
     { firstName: "Johnny", lastName: "Tejada", email: "johnnyfran20002@gmail.com"},
@@ -13,16 +14,16 @@ const friends = reactive([
 <template>
 <div id="friends">
     <header>
-        <FriendsBar />
+        <Homebar />
     </header>
 
     <main class="container">
-        <div class="list mt-6" v-for="(friend,i) in friends" v-bind:key="i">
-            <FriendsList :friend="friend" />
+        <div class="list pt-6">
+            <FriendsList :friends="friends" />
         </div>
 
-        <div class="center mt-6">
-            <a href="AddFriends.html"><button class="button is-danger pr-6 pl-6 pt-3 pb-3"><i class="fas fa-plus-circle" aria-hidden="true"></i>Add New</button></a>
+        <div class="center pt-6">
+            <router-link to="/add-friends"><button class="button is-danger pr-6 pl-6 pt-3 pb-3"><i class="fas fa-plus-circle" aria-hidden="true"></i>Add New Friend</button></router-link>
         </div>
         
     </main>
@@ -75,56 +76,6 @@ const friends = reactive([
   .center button {
     border-radius: 4rem;
     font-size: 1rem;
-  }
-}
-#friends .list .card {
-  margin: 2% 10%;
-  width: 80%;
-}
-#friends main .content .left {
-  width: 20%;
-  align-items: center;
-  font-size: 2rem;
-}
-#friends main .content .left p {
-  font-size: 1.5rem;
-  font-weight: 400;
-}
-#friends main .content .icons {
-  padding: 0 5%;
-}
-#friends main .content .icons a {
-  padding: 0 40%;
-  font-size: 1.3rem;
-  color: black;
-}
-#friends main .content .icons a:hover {
-  font-size: 1.5rem;
-  color: red;
-  transition: 0.3s;
-}
-@media screen and (max-width: 800px) {
-  #friends .list .card {
-    margin: 2% 5%;
-    width: 90%;
-  }
-  #friends main .content .left {
-    width: 100%;
-    align-items: center;
-    font-size: 1rem;
-  }
-  #friends main .content .left p {
-    font-size: 1rem;
-  }
-  #friends main .content .icons {
-    padding: 0 10%;
-  }
-  #friends main .content .icons a {
-    padding: 0 40%;
-    font-size: 1rem;
-  }
-  #friends main .content .icons a:hover {
-    font-size: 1.2rem;
   }
 }
 </style>

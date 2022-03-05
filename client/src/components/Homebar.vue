@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { RouterLink } from 'vue-router';
 
 </script>
 
@@ -22,20 +23,28 @@
         
             <div id="navbarBasicExample" class="navbar-menu">
             <div class="navbar-start">
-                <a class="navbar-item" href="Overview.html">
+                <router-link to="/overview" class="navbar-item">
                 Home
-                </a>
+                </router-link>
+                
+                <router-link to="/add-tasks" class="navbar-item">
+                New Task
+                </router-link>
         
-                <a class="navbar-item" href="Friends.html">
+                <router-link to="/friends" class="navbar-item">
                 Friends
-                </a>
+                </router-link>
+
+                <router-link to="/add-friends" class="navbar-item">
+                New Friend
+                </router-link>
             </div>
         
             <div class="navbar-end">
                 <div class="navbar-item">
-                    <a href="Welcome.html">
+                    <router-link to="/">
                     Log out
-                    </a>
+                    </router-link>
                 </div>
             </div>
             </div>

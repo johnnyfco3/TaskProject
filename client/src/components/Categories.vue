@@ -1,19 +1,27 @@
 <script setup lang="ts">
+import { defineProps } from 'vue';
+import { RouterLink } from 'vue-router';
+
+  const props = defineProps({
+        categories: {
+            type: Array,
+        }
+    })
 
 </script>
 
 <template>
 <div id="categories">
-    <!-- <div class="column is-half" v-for="category in categories" v-bind:key="category">
-        <a v-bind:href="category.link">
+    <div class="column" v-for="(category, i) in props.categories" v-bind:key="i">
+        <router-link to="/tasks" v-bind:href="category.link">
             <div class="card has-text-centered">
                 <div class="card-content">
                     <h1 class="title"><i class="fa-solid fa-list icons" aria-hidden="true"></i> {{category.name}}</h1>
                     <p>{{category.tasks}} tasks</p>
                 </div>
             </div>
-        </a>
-    </div> -->
+        </router-link>
+    </div>
 </div>
 </template>
 

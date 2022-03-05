@@ -1,6 +1,40 @@
 <script setup lang="ts">
-import WelcomeBar from '../components/WelcomeBar.vue';
 import { RouterLink } from 'vue-router';
+import { reactive } from 'vue';
+import WelcomeBar from '../components/WelcomeBar.vue';
+import { Login } from '../models/session';
+
+  const users = reactive([
+      { firstName: "Johnny", lastName: "Tejada", email: "johnnyfran20002@gmail.com", password: "12345"},
+      { firstName: "Joe", lastName: "Biden", email: "joeBiden2022@gmail.com", password: "12345"}
+    ])
+      
+  const returningUser = reactive({
+    email: "",
+    password: "",
+  })
+
+  function handleSubmit(){
+      if(returningUser){
+        Login(returningUser.email, returningUser.password)
+        returningUser.email = "";
+        returningUser.password = "";
+          // let hasAccount = false;
+          // users.map(user =>{
+          //   if(user.email === returningUser.email && user.password === returningUser.password){
+          //     hasAccount = true
+          //   }
+          // })
+
+          // if(hasAccount){
+          //   returningUser.email = "";
+          //   returningUser.password = "";
+          // }
+          // else{
+          //   alert("Account not found")
+          // }
+      }
+  }
 
 </script>
 
@@ -16,16 +50,14 @@ import { RouterLink } from 'vue-router';
                 <img src="../assets/images/jan-kahanek-g3O5ZtRk2E4-unsplash.jpg" alt="Welcome">
             </div>
                 <div class="card">
-                    <form>
-                <!-- <form @submit.prevent="handleSubmit"> -->
+                    <form @submit.prevent="handleSubmit">
                     <h1 class="title has-text-centered pt-4">Sign In</h1>
                     <div class="card-content">
                     <div class="content">
                         <div class="field">
                             <label class="label">Email</label>
                             <div class="control has-icons-left has-icons-right">
-                            <!-- <input class="input" type="email" placeholder="Email Address" required v-model="returningUser.email"> -->
-                            <input class="input" type="email" placeholder="Email Address" required />
+                            <input class="input" type="email" placeholder="Email Address" required v-model="returningUser.email">
                             <span class="icon is-small is-left">
                                 <i class="fa-solid fa-envelope"></i>
                             </span>
@@ -35,8 +67,7 @@ import { RouterLink } from 'vue-router';
                         <div class="field">
                             <label class="label">Password</label>
                             <div class="control has-icons-left has-icons-right">
-                            <!-- <input class="input" type="password" placeholder="Password" required v-model="returningUser.password"> -->
-                            <input class="input" type="password" placeholder="Password" required />
+                            <input class="input" type="password" placeholder="Password" required v-model="returningUser.password">
                             <span class="icon is-small is-left">
                                 <i class="fa-solid fa-lock"></i>
                             </span>
