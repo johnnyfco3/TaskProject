@@ -1,23 +1,17 @@
 <script setup lang="ts">
 import { defineProps } from 'vue';
 import { RouterLink } from 'vue-router';
-
-  const props = defineProps({
-        categories: {
-            type: Array,
-        }
-    })
+import { cList } from '../models/categories';
 
 </script>
 
 <template>
 <div id="categories">
-    <div class="column" v-for="(category, i) in props.categories" v-bind:key="i">
-        <router-link to="/tasks" v-bind:href="category.link">
+    <div class="column" v-for="(category, i) in cList" v-bind:key="i">
+        <router-link :to="`/tasks/${category.name}`" >
             <div class="card has-text-centered">
                 <div class="card-content">
                     <h1 class="title"><i class="fa-solid fa-list icons" aria-hidden="true"></i> {{category.name}}</h1>
-                    <p>{{category.tasks}} tasks</p>
                 </div>
             </div>
         </router-link>
@@ -32,6 +26,7 @@ import { RouterLink } from 'vue-router';
 }
 .column .card {
   background-color: rgb(250, 246, 246);
+  padding-bottom: 2%;
 }
 .column .card p {
   font-size: 1.2rem;

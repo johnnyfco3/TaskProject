@@ -14,7 +14,7 @@ const routes: RouteRecordRaw[] = [
     { path: '/', component: Welcome },
     { path: '/register', component: Register },
     { path: '/overview', component: Overview },
-    { path: '/tasks', component: Tasks },
+    { path: '/tasks/:category', component: Tasks, props: true },
     { path: '/friends', component: Friends },
     { path: '/add-tasks', component: AddTask },
     { path: '/add-friends', component: AddFriends },

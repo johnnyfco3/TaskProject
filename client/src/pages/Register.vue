@@ -1,12 +1,9 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
 import router from '../router';
+import { list } from '../models/users'
 import WelcomeBar from '../components/WelcomeBar.vue';
 
-  const users = reactive([
-    { firstName: "Johnny", lastName: "Tejada", email: "johnnyfran20002@gmail.com", password: "12345"},
-    { firstName: "Joe", lastName: "Biden", email: "joeBiden2022@gmail.com", password: "12345"}
-  ])
   const newUser = reactive({
       firstName: "",
       lastName: "",
@@ -21,12 +18,13 @@ import WelcomeBar from '../components/WelcomeBar.vue';
               alert("Passwords do not match!");
           }
           else{
-              users.push(
+              list.push(
               {
                   firstName: newUser.firstName,
                   lastName: newUser.lastName,
                   email: newUser.email,
-                  password: newUser.password
+                  password: newUser.password,
+                  id: list.length + 1
               }
           )
           newUser.firstName = "";
@@ -35,6 +33,7 @@ import WelcomeBar from '../components/WelcomeBar.vue';
           newUser.password = "";
           newUser.confirm = "";
           }
+          
           router.push("/")
       }
   }

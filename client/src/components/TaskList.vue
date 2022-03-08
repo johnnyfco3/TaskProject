@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { defineProps } from 'vue';
 import router from '../router';
+import { tList } from '../models/tasks';
+import session from '../models/session';
+import { list } from '../models/users';
 
     const props = defineProps({
-        Tasks: {
-            type: Array
-        },
         currentTab: {
             type: String
         },
@@ -14,31 +14,48 @@ import router from '../router';
         },
         toggleImportant: {
             type: Function
+        },
+        type: {
+            type: String
         }
     })
 
-    function edit(index:number){
-        router.push('/edit-task')
+    function edit(index:Number){
+        router.push(`/edit-task/${index}`)
         //pass the index through router
     }
 
     function remove(index:number){
-        props.Tasks.splice(index,index);
+        tList.splice(index,index);
+    }
+
+    function getUser(userID:Number){
+        const user = list.find(u => u.id === userID)
+
+        if(!user){
+            throw {message: 'No user correspondence'}
+        }
+
+        return `${user.firstName} ${user.lastName}`
     }
 </script>
 
 <template>
 <div class="list">
-    <div v-for="(task,i) in props.Tasks" v-bind:key="i">
-    <div class="card" v-if="currentTab == 'Completed' && task.completed">
+    <div v-for="(task,i) in tList" v-bind:key="i">
+    <div v-if="task.category === props.type && task.userID === session.user?.id">
+        <div class="card" v-if="currentTab == 'Completed' && task.completed">
             <div class="header">
                 <div class="top-content">
                     <p class="card-header-title ml-4">
-                        <i class="fas fa-check-circle pr-6" v-on:click="toggleCompleted(task, task.id)"></i>
+                        <i class="fas fa-check-circle pr-6" v-on:click="toggleCompleted(task.id)"></i>
                         {{task.name}}
                     </p>
                 </div>
-                <p class="subtitle">
+                <p class="subtitle" v-if="task.assignedBy !== null">
+                    {{task.category}} - Assigned by {{getUser(task.assignedBy)}}
+                </p>
+                <p class="subtitle" v-else>
                     {{task.category}}
                 </p>
             </div>
@@ -52,7 +69,7 @@ import router from '../router';
             <a href="#" class="card-footer-item"><i class="fas fa-pencil-alt" @click="edit(task.id)"></i></a>
             <a href="#" class="card-footer-item"><i 
                                                     v-bind:class="task.important ? 'fa-solid fa-star' : 'far fa-star'"
-                                                    v-on:click="toggleImportant(task, task.id)"
+                                                    v-on:click="toggleImportant(task.id)"
                                                 ></i></a>
             <a href="#" class="card-footer-item"><i class="fas fa-minus-circle" @click="remove(i)"></i></a>
             </footer>
@@ -64,11 +81,14 @@ import router from '../router';
                     <p class="card-header-title ml-4">
                         <i v-bind:class="
                             task.completed ? 'fas fa-check-circle pr-6' : 'far fa-circle pr-6'
-                        " v-on:click="toggleCompleted(task, task.id)"></i>
+                        " v-on:click="toggleCompleted(task.id)"></i>
                         {{task.name}}
                     </p>
                 </div>
-                <p class="subtitle">
+                <p class="subtitle" v-if="task.assignedBy !== null">
+                    {{task.category}} - Assigned by {{getUser(task.assignedBy)}}
+                </p>
+                <p class="subtitle" v-else>
                     {{task.category}}
                 </p>
             </div>
@@ -82,7 +102,37 @@ import router from '../router';
             <a href="#" class="card-footer-item"><i class="fas fa-pencil-alt" @click="edit(task.id)"></i></a>
             <a href="#" class="card-footer-item"><i 
                                                     v-bind:class="task.important ? 'fa-solid fa-star' : 'far fa-star'"
-                                                    v-on:click="toggleImportant(task, task.id)"
+                                                    v-on:click="toggleImportant(task.id)"
+                                                ></i></a>
+            <a href="#" class="card-footer-item"><i class="fas fa-minus-circle" @click="remove(i)"></i></a>
+            </footer>
+        </div>
+
+        <div class="card" v-else-if="currentTab == 'Assigned' && task.assignedBy !== null">
+            <div class="header">
+                <div class="top-content">
+                    <p class="card-header-title ml-4">
+                        <i v-bind:class="
+                            task.completed ? 'fas fa-check-circle pr-6' : 'far fa-circle pr-6'
+                        " v-on:click="toggleCompleted(task.id)"></i>
+                        {{task.name}}
+                    </p>
+                </div>
+                <p class="subtitle">
+                    {{task.category}} - Assigned by {{getUser(task.assignedBy)}}
+                </p>
+            </div>
+            <div class="card-content">
+            <div class="content is-flex is-justify-content-space-between">
+                    <p class="subtitle"><i class="far fa-calendar-alt"></i> {{task.date}}</p>
+                    <p class="subtitle time">{{task.time}}</p>
+            </div>
+            </div>
+            <footer class="card-footer">
+            <a href="#" class="card-footer-item"><i class="fas fa-pencil-alt" @click="edit(task.id)"></i></a>
+            <a href="#" class="card-footer-item"><i 
+                                                    v-bind:class="task.important ? 'fa-solid fa-star' : 'far fa-star'"
+                                                    v-on:click="toggleImportant(task.id)"
                                                 ></i></a>
             <a href="#" class="card-footer-item"><i class="fas fa-minus-circle" @click="remove(i)"></i></a>
             </footer>
@@ -94,12 +144,15 @@ import router from '../router';
                     <p class="card-header-title ml-4">
                         <i 
                         v-bind:class="task.completed ? 'fas fa-check-circle pr-6' : 'far fa-circle pr-6'" 
-                        v-on:click="toggleCompleted(task, task.id)">
+                        v-on:click="toggleCompleted(task.id)">
                         </i>
                         {{task.name}}
                     </p>
                 </div>
-                <p class="subtitle">
+                <p class="subtitle" v-if="task.assignedBy !== null">
+                    {{task.category}} - Assigned by {{getUser(task.assignedBy)}}
+                </p>
+                <p class="subtitle" v-else>
                     {{task.category}}
                 </p>
             </div>
@@ -113,11 +166,12 @@ import router from '../router';
             <a href="#" class="card-footer-item"><i class="fas fa-pencil-alt" @click="edit(task.id)"></i></a>
             <a href="#" class="card-footer-item"><i 
                                                     v-bind:class="task.important ? 'fa-solid fa-star' : 'far fa-star'"
-                                                    v-on:click="toggleImportant(task, task.id)"
+                                                    v-on:click="toggleImportant(task.id)"
                                                 ></i></a>
             <a href="#" class="card-footer-item"><i class="fas fa-minus-circle" @click="remove(i)"></i></a>
             </footer>
         </div>
+    </div>
     </div>
 </div>
 </template>

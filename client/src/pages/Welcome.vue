@@ -3,11 +3,6 @@ import { RouterLink } from 'vue-router';
 import { reactive } from 'vue';
 import WelcomeBar from '../components/WelcomeBar.vue';
 import { Login } from '../models/session';
-
-  const users = reactive([
-      { firstName: "Johnny", lastName: "Tejada", email: "johnnyfran20002@gmail.com", password: "12345"},
-      { firstName: "Joe", lastName: "Biden", email: "joeBiden2022@gmail.com", password: "12345"}
-    ])
       
   const returningUser = reactive({
     email: "",
@@ -19,20 +14,6 @@ import { Login } from '../models/session';
         Login(returningUser.email, returningUser.password)
         returningUser.email = "";
         returningUser.password = "";
-          // let hasAccount = false;
-          // users.map(user =>{
-          //   if(user.email === returningUser.email && user.password === returningUser.password){
-          //     hasAccount = true
-          //   }
-          // })
-
-          // if(hasAccount){
-          //   returningUser.email = "";
-          //   returningUser.password = "";
-          // }
-          // else{
-          //   alert("Account not found")
-          // }
       }
   }
 

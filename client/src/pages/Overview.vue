@@ -1,18 +1,11 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
 import { RouterLink } from 'vue-router';
+import session from '../models/session';
 import Homebar from '../components/Homebar.vue';
-import Categories from '../components/Categories.vue'
+import Categories from '../components/Categories.vue';
 
   const today = ref(new Date().toLocaleDateString('en-us', { weekday:"long", month:"long", day:"numeric"}));
-  const categories = reactive([
-      {name: "Schedule Plan", icon:"fas fa-calendar-alt", tasks: 57},
-      {name: "Personal Errands", icon:"fas fa-user-alt", tasks: 7},
-      {name: "Work Projects", icon:"fas fa-briefcase", tasks: 13},
-      {name: "Grocery List", icon:"fas fa-shopping-cart", tasks: 0},
-      {name: "School", icon:"fas fa-book", tasks: 6},
-      {name: "Assigned", icon:"fa-solid fa-user-group", tasks: 0},
-  ])
 
 </script>
 
@@ -24,7 +17,7 @@ import Categories from '../components/Categories.vue'
     <main>
         <div class="container mb-6">
             <div class="top-content has-text-centered pt-6 pb-6">
-                <h1 class="title"><span>Hello</span> Johnny</h1>
+                <h1 class="title"><span>Hello</span> {{session.user?.firstName}}</h1>
                 <h1 class="subtitle">{{today}}</h1>
             </div>
 
@@ -46,7 +39,7 @@ import Categories from '../components/Categories.vue'
             <hr>
             <div class="columns is-multiline pt-6">
                 <div class="column">
-                  <Categories :categories="categories"/>
+                  <Categories />
                 </div>
             </div>
             <div class="center pt-6">
