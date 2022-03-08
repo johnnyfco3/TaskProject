@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
+import { Logout } from '../models/session';
 
   const isOpen = ref(false)
 
@@ -45,9 +46,9 @@ import { RouterLink } from 'vue-router';
         
             <div class="navbar-end">
                 <div class="navbar-item">
-                    <router-link to="/">
+                    <a @click="Logout()">
                     Log out
-                    </router-link>
+                    </a>
                 </div>
             </div>
             </div>

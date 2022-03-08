@@ -23,6 +23,7 @@ export async function Login(email: String, password: String) {
 
 export function Logout(){
     session.user = null
+    router.push('/')
 }
 
 export default session;
