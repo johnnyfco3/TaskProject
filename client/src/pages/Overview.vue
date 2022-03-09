@@ -41,15 +41,6 @@ import Categories from '../components/Categories.vue';
             <div class="columns is-multiline pt-6">
                 <div class="column">
                   <Categories />
-                  <div v-for="(category, i) in cList" v-bind:key="i">
-                      <router-link :to="`/tasks/${category.name}`" v-if="category.userID === session.user?.id">
-                          <div class="card has-text-centered">
-                              <div class="card-content">
-                                  <h1 class="title"><i class="fa-solid fa-list icons" aria-hidden="true"></i> {{category.name}}</h1>
-                              </div>
-                          </div>
-                      </router-link>
-                  </div>
                 </div>
             </div>
             <div class="center pt-6">
