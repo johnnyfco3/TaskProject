@@ -6,7 +6,7 @@ export interface Task {
     completed: Boolean,
     important: Boolean,
     assignedBy: Number | null,
-    userID: Number,
+    userID: Number | undefined,
     id: Number
 }
 

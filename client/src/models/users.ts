@@ -3,6 +3,7 @@ export interface User {
     lastName: String,
     email: String,
     password: String,
+    friends: any,
     id: Number
 }
 
@@ -12,6 +13,7 @@ export const list: User[] = [
         lastName: 'Tejada',
         email: 'example@gmail.com',
         password: 'password',
+        friends: ['john@doe.com', 'kamila@whitehouse.org'],
         id: 1
     },
     {
@@ -19,6 +21,7 @@ export const list: User[] = [
         lastName: 'Putin',
         password: 'long table',
         email: 'john@doe.com',
+        friends: ['example@gmail.com', 'kamila@whitehouse.org'],
         id: 2
     },
     {
@@ -26,6 +29,7 @@ export const list: User[] = [
         lastName: 'Harris',
         password: 'password',
         email: 'kamila@whitehouse.org',
+        friends: ['example@gmail.com', 'john@doe.com'],
         id: 3
     }
 ]
