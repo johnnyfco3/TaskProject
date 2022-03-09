@@ -2,18 +2,30 @@
 import { RouterLink } from 'vue-router';
 import session from '../models/session';
 import { list } from '../models/users'
+import router from '../router';
 
-const friends = list.find(u => u.id === session.user?.id)
+const user = list.find(u => u.id === session.user?.id)
 
-  function remove(index:number){
-    friends?.friends.splice(index, index)
-  }
+function remove(index:number){
+  user?.friends.splice(index, index)
+}
+
+const info = {
+  uEmail: "",
+  assign: false
+}
+
+function assignTo(email:string){
+  info.uEmail = email
+  info.assign = true
+  router.push(`/add-tasks/${info.assign}/${info.uEmail}`)
+}
 
 </script>
 
 <template>
 <div class="list">
-  <div class="friend" v-for="(friend,i) in friends?.friends" v-bind:key="i">
+  <div class="friend" v-for="(friend,i) in user?.friends" v-bind:key="i">
     <div class="card">
         <div class="card-content">
         <div class="content is-flex is-justify-content-space-between">
@@ -22,7 +34,7 @@ const friends = list.find(u => u.id === session.user?.id)
                     <p class="subtitle">{{friend}}</p>
                 </div>
                 <div class="icons is-flex">
-                    <router-link to="/add-tasks"><i class="fa-solid fa-plus"></i></router-link>
+                    <a href="#"><i class="fa-solid fa-plus" @click="assignTo(friend)"></i></a>
                     <a href="#"><i class="fa-solid fa-trash-can" @click="remove(i)"></i></a>
                 </div>
         </div>

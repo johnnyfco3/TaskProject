@@ -53,7 +53,8 @@ import router from '../router';
                     <label class="label pt-4">Select Category</label>
                     <div class="control">
                         <div class="select is-info select-section is-normal">
-                            <select v-model="editTask.category" :placeholder="task.category">
+                            <select v-model="editTask.category">
+                            <option disabled>{{task.category}}</option>
                             <option>Schedule Plan</option>
                             <option>Personal Errands</option>
                             <option>Work Projects</option>
@@ -78,7 +79,7 @@ import router from '../router';
                         <div class="field-body">
                             <div class="field">
                                 <p class="control is-expanded">
-                                <input class="input is-info" type="date" v-model="editTask.date" :placeholder="task.category">
+                                <input class="input is-info" type="date" v-model="editTask.date">
                                 </p>
                             </div>
                         </div>
@@ -88,7 +89,7 @@ import router from '../router';
                         <div class="field-body">
                             <div class="field">
                               <p class="control is-expanded">
-                                <input class="input is-info" type="time" v-model="editTask.time" :placeholder="task.time">
+                                <input class="input is-info" type="time" v-model="editTask.time">
                               </p>
                             </div>
                         </div>
@@ -98,7 +99,7 @@ import router from '../router';
                             <div class="field">
                               <p class="control is-flex is-justify-content-center is-align-items-center">
                                 <label class="label pr-3 pt-1" for="important">Completed?</label>
-                                <input class="is-info" type="checkbox" v-model="editTask.completed" :checked="task.completed">
+                                <input class="is-info" type="checkbox" v-model="editTask.completed">
                               </p>
                             </div>
                         </div>
@@ -106,7 +107,7 @@ import router from '../router';
                             <div class="field">
                               <p class="control is-flex is-justify-content-center is-align-items-center">
                                 <label class="label pr-3 pt-1" for="important">Important?</label>
-                                <input class="is-info" type="checkbox" v-model="editTask.important" :checked="task.important">
+                                <input class="is-info" type="checkbox" v-model="editTask.important">
                               </p>
                             </div>
                         </div>
@@ -120,8 +121,8 @@ import router from '../router';
                             </div>
                         </div>
 
-                    <div class="center pt-6">
-                        <button class="button is-danger pr-6 pl-6 pt-3 pb-3"><i class="fas fa-plus-circle" aria-hidden="true"></i> Add New</button>
+                    <div class="center pt-6 pb-5">
+                        <button class="button is-danger pr-6 pl-6 pt-3 pb-3">Submit Changes</button>
                     </div>
                 </form>
             </div>
@@ -134,7 +135,6 @@ import router from '../router';
 #edit-task {
   background-image: url("../assets/images/slider-right-dec.jpg");
   background-size: cover;
-  height: 100vh;
 }
 .container .title{
   font-size: 2.5rem;

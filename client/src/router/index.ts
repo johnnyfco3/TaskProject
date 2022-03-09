@@ -16,7 +16,7 @@ const routes: RouteRecordRaw[] = [
     { path: '/overview', component: Overview },
     { path: '/tasks/:category', component: Tasks, props: true },
     { path: '/friends', component: Friends },
-    { path: '/add-tasks', component: AddTask },
+    { path: '/add-tasks/:assign/:email', component: AddTask, props: true },
     { path: '/add-friends', component: AddFriends },
     { path: '/add-category', component: AddCategory },
     { path: '/edit-task/:id', component: EditTasks, props: true }

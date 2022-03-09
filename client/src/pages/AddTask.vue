@@ -1,10 +1,21 @@
 <script setup lang="ts">
-import { reactive } from 'vue';
+import { reactive, defineProps } from 'vue';
 import Homebar from '../components/Homebar.vue';
 import session from '../models/session';
 import { tList } from '../models/tasks';
 import { list } from '../models/users';
 import router from '../router';
+
+const props = defineProps({
+  assign: String,
+  email: String
+})
+
+let user:any;
+
+if(props.assign === "true"){
+  user = list.find(u => u.email === props.email)
+}
   
   const newTask = reactive({
             name: "",
@@ -16,13 +27,13 @@ import router from '../router';
   })
 
   function getUser(email:String){
-    const user = list.find(u => u.email === email)
+    const getUser = list.find(u => u.email === email)
 
-    if(user){
-      return user.id
+    if(getUser){
+      return getUser.id
     }
     else{
-      throw {message: 'Could not find user in add task'}
+      throw {message: 'Could not find user in getUser'}
     }
   }
 
@@ -42,7 +53,6 @@ import router from '../router';
               }
           )
           router.push('/overview')
-          console.log(tList)
       }
   }
 
@@ -113,7 +123,10 @@ import router from '../router';
                         <label class="label pt-4">Assign to a Friend?</label>
                         <div class="control is-expanded">
                             <div class="select is-info select-section is-normal">
-                                <select required v-model="newTask.assignTo">
+                              <select disabled v-model="newTask.assignTo" v-if="props.assign === 'true'">
+                                  <option>{{user.email}}</option>
+                                </select>
+                                <select required v-model="newTask.assignTo" v-else>
                                   <option v-for="(friend,i) in session.user?.friends" :key="i">{{friend}}</option>
                                   <option :value="null">No one</option>
                                 </select>

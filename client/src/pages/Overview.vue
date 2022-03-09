@@ -5,8 +5,23 @@ import { cList } from '../models/categories';
 import session from '../models/session';
 import Homebar from '../components/Homebar.vue';
 import Categories from '../components/Categories.vue';
+import { tList } from '../models/tasks';
 
   const today = ref(new Date().toLocaleDateString('en-us', { weekday:"long", month:"long", day:"numeric"}));
+
+  const total = {
+    createdTasks: 0,
+    completedTasks: 0
+  }
+  tList.map(t => {
+    if(t.userID === session.user?.id){
+      total.createdTasks++
+    }
+    if(t.userID === session.user?.id && t.completed){
+      total.completedTasks++
+    }
+    return total
+  })
 
 </script>
 
@@ -27,13 +42,13 @@ import Categories from '../components/Categories.vue';
                 <div class="level-item has-text-centered">
                 <div>
                     <p class="heading">Created Tasks</p>
-                    <p class="title">57</p>
+                    <p class="title">{{total.createdTasks}}</p>
                 </div>
                 </div>
                 <div class="level-item has-text-centered">
                 <div>
                     <p class="heading">Completed Tasks</p>
-                    <p class="title">35</p>
+                    <p class="title">{{total.completedTasks}}</p>
                 </div>
                 </div>
             </nav>

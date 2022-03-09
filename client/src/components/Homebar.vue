@@ -31,7 +31,7 @@ import { Logout } from '../models/session';
                 Home
                 </router-link>
                 
-                <router-link to="/add-tasks" class="navbar-item">
+                <router-link to="/add-tasks/false/null" class="navbar-item">
                 New Task
                 </router-link>
         
