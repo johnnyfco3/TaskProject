@@ -3,6 +3,8 @@ import { RouterLink } from 'vue-router';
 import { reactive } from 'vue';
 import WelcomeBar from '../components/WelcomeBar.vue';
 import { Login } from '../models/session';
+import About from '../components/About.vue';
+import Footer from '../components/Footer.vue';
       
   const returningUser = reactive({
     email: "",
@@ -70,28 +72,10 @@ import { Login } from '../models/session';
                 </div>
             </div>
         </div>
-        <div class="section" id="about">
-          <h1 class="title has-text-centered pt-6">About</h1>
-          <div class="columns pt-4">
-            <div class="column is-half pt-6">
-              <p class="pt-6">
-                Welcome to <strong>Task it!</strong> If you are looking to organize your responsibilities or keep track of tasks for
-                your work, school, or your personal life, this is the application for you. Here you can create
-                different types of tasks, mark them as completed when done or important and you can assign tasks to 
-                your friends, coworker, manager, and so on. What are you waiting for, get started by hitting that Register
-                link!
-              </p>
-            </div>
-            <div class="column is-half">
-              <img src="../assets/images/about-dec-v3.png" alt="About" />
-            </div>
-          </div>
-        </div>
+        
+        <About />
     </main>
-    <footer class="has-text-centered pt-6 pb-6">
-      <h4 class="pt-6">Made with <i className="fas fa-heart"></i> by Johnny Tejada.</h4>
-      <h5>Advanced Programming Spring 2022 &copy;</h5>
-    </footer>
+    <Footer />
 </div>
 </template>
 
@@ -139,18 +123,6 @@ main .card-content .field input {
 }
 main .card-content button {
   font-size: 1.2rem;
-}
-.section .title{
-  font-size: 4rem;
-  font-family: fantasy;
-}
-.section p{
-  font-size: 1.3rem;
-  line-height: 1.6;
-  width: 90%;
-}
-footer{
-  font-size: 1.3rem;
 }
 #register main {
   display: flex;

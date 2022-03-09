@@ -3,6 +3,7 @@ import { reactive } from 'vue';
 import router from '../router';
 import { list } from '../models/users'
 import WelcomeBar from '../components/WelcomeBar.vue';
+import Footer from '../components/Footer.vue';
 
   const newUser = reactive({
       firstName: "",
@@ -24,6 +25,7 @@ import WelcomeBar from '../components/WelcomeBar.vue';
                   lastName: newUser.lastName,
                   email: newUser.email,
                   password: newUser.password,
+                  friends: [],
                   id: list.length + 1
               }
           )
@@ -116,6 +118,7 @@ import WelcomeBar from '../components/WelcomeBar.vue';
             </div>
         </div>
     </main>
+    <Footer />
 </div>
 </template>
 
@@ -123,10 +126,6 @@ import WelcomeBar from '../components/WelcomeBar.vue';
 #register {
   background-image: url("../assets/images/slider-right-dec.jpg");
   background-size: cover;
-  height: 180vh;
-}
-main {
-  height: 100vh;
 }
 main .container {
   padding: 5% 0;
