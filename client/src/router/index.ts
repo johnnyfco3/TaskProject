@@ -19,7 +19,7 @@ const routes: RouteRecordRaw[] = [
     { path: '/add-tasks', component: AddTask },
     { path: '/add-friends', component: AddFriends },
     { path: '/add-category', component: AddCategory },
-    { path: '/edit-task', component: EditTasks }
+    { path: '/edit-task/:id', component: EditTasks, props: true }
 ];
 
 const router = createRouter({

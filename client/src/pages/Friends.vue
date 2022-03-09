@@ -4,11 +4,6 @@ import { RouterLink } from 'vue-router';
 import FriendsList from "../components/FriendsList.vue";
 import Homebar from '../components/Homebar.vue';
 
-const friends = reactive([
-    { firstName: "Johnny", lastName: "Tejada", email: "johnnyfran20002@gmail.com", userID: 1},
-    { firstName: "Joe", lastName: "Biden", email: "joeBiden2022@gmail.com", userID: 1}
-])
-
 </script>
 
 <template>
@@ -19,7 +14,7 @@ const friends = reactive([
 
     <main class="container">
         <div class="list pt-6">
-            <FriendsList :friends="friends" />
+            <FriendsList />
         </div>
 
         <div class="center pt-6">

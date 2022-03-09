@@ -2,29 +2,28 @@
 import { reactive, ref } from 'vue';
 import router from '../router';
 import Homebar from '../components/Homebar.vue';
-
-  const friends = reactive([
-          { firstName: "Johnny", lastName: "Tejada", email: "johnnyfran20002@gmail.com"},
-          { firstName: "Joe", lastName: "Biden", email: "joeBiden2022@gmail.com"}
-  ])
+import { list } from '../models/users';
+import session from '../models/session';
   
   const newFriend = reactive({
           email: ""
   })
+
+  const user = list.find(u => u.id === session.user?.id)
   
   function handleSubmit(){
-      if(newFriend.email){
-          friends.push(
-              {
-                  firstName: "",
-                  lastName: "",
-                  email: newFriend.email
-              }
-          )
+      if(newFriend){
+        const checkUser = list.find(u => u.email === newFriend.email)
+
+        if(checkUser){
+          user?.friends.push(newFriend.email)
           router.push('/friends')
+        }
+        else{
+          throw {message: 'No user found'}
+        }
       }
   }
-
 </script>
 
 <template>

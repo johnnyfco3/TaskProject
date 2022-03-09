@@ -1,33 +1,48 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue';
+import { reactive } from 'vue';
 import Homebar from '../components/Homebar.vue';
+import session from '../models/session';
+import { tList } from '../models/tasks';
+import { list } from '../models/users';
 import router from '../router';
-
-  const Tasks = reactive([
-      { id: 1, name: "Call Supervisor", category: "Work Projects", date: "12th March", time: "10:30 am", completed: false },
-      { id: 2, name: "Meeting with new team", category: "Work Projects", date: "17th March", time: "1:00 pm", completed: true }
-  ])
   
   const newTask = reactive({
             name: "",
             category: "",
             date: "",
-            time: ""
+            time: "",
+            important: false,
+            assignTo: null
   })
+
+  function getUser(email:String){
+    const user = list.find(u => u.email === email)
+
+    if(user){
+      return user.id
+    }
+    else{
+      throw {message: 'Could not find user in add task'}
+    }
+  }
 
   function handleSubmit(){
       if(newTask){
-          Tasks.push(
+          tList.push(
               {
-                id: Tasks.length + 1,
+                id: tList.length + 1,
                 name: newTask.name,
                 category: newTask.category,
                 date: newTask.date,
                 time: newTask.time,
-                completed: false
+                completed: false,
+                important: newTask.important,
+                assignedBy: newTask.assignTo === null ? null : session.user?.id,
+                userID: newTask.assignTo === null ? session.user?.id : getUser(newTask.assignTo)
               }
           )
           router.push('/overview')
+          console.log(tList)
       }
   }
 
@@ -86,6 +101,24 @@ import router from '../router';
                             </div>
                         </div>
                     </div>
+                        
+                        <div class="field-body">
+                            <div class="field">
+                              <p class="control is-flex is-justify-content-center is-align-items-center">
+                                <label class="label pr-3 pt-1" for="important">Important?</label>
+                                <input class="is-info" type="checkbox" id="important" v-model="newTask.important"> 
+                              </p>
+                            </div>
+                        </div>
+                        <label class="label pt-4">Assign to a Friend?</label>
+                        <div class="control is-expanded">
+                            <div class="select is-info select-section is-normal">
+                                <select required v-model="newTask.assignTo">
+                                  <option v-for="(friend,i) in session.user?.friends" :key="i">{{friend}}</option>
+                                  <option :value="null">No one</option>
+                                </select>
+                            </div>
+                        </div>
                 
                     <div class="center pt-6">
                         <button class="button is-danger pr-6 pl-6 pt-3 pb-3"><i class="fas fa-plus-circle" aria-hidden="true"></i> Add New</button>

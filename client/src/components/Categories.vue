@@ -1,8 +1,11 @@
 <script setup lang="ts">
-import { defineProps } from 'vue';
 import { RouterLink } from 'vue-router';
 import { cList } from '../models/categories';
 
+  function remove(index:number){
+        cList.splice(index, index)
+    }
+    
 </script>
 
 <template>

@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { defineProps } from 'vue';
-import router from '../router';
-import { tList } from '../models/tasks';
-import session from '../models/session';
+import { RouterLink } from 'vue-router';
 import { list } from '../models/users';
+import { tList } from '../models/tasks';
+import router from '../router';
+import session from '../models/session';
 
     const props = defineProps({
         currentTab: {
@@ -20,13 +21,8 @@ import { list } from '../models/users';
         }
     })
 
-    function edit(index:Number){
-        router.push(`/edit-task/${index}`)
-        //pass the index through router
-    }
-
     function remove(index:number){
-        tList.splice(index,index);
+        tList.splice(index, index)
     }
 
     function getUser(userID:Number){
@@ -66,7 +62,7 @@ import { list } from '../models/users';
             </div>
             </div>
             <footer class="card-footer">
-            <a href="#" class="card-footer-item"><i class="fas fa-pencil-alt" @click="edit(task.id)"></i></a>
+            <a href="#" class="card-footer-item"><router-link :to="`/edit-task/${task.id}`"><i class="fas fa-pencil-alt"></i></router-link></a>
             <a href="#" class="card-footer-item"><i 
                                                     v-bind:class="task.important ? 'fa-solid fa-star' : 'far fa-star'"
                                                     v-on:click="toggleImportant(task.id)"
@@ -99,7 +95,7 @@ import { list } from '../models/users';
             </div>
             </div>
             <footer class="card-footer">
-            <a href="#" class="card-footer-item"><i class="fas fa-pencil-alt" @click="edit(task.id)"></i></a>
+            <a href="#" class="card-footer-item"><router-link :to="`/edit-task/${task.id}`"><i class="fas fa-pencil-alt"></i></router-link></a>
             <a href="#" class="card-footer-item"><i 
                                                     v-bind:class="task.important ? 'fa-solid fa-star' : 'far fa-star'"
                                                     v-on:click="toggleImportant(task.id)"
@@ -129,7 +125,7 @@ import { list } from '../models/users';
             </div>
             </div>
             <footer class="card-footer">
-            <a href="#" class="card-footer-item"><i class="fas fa-pencil-alt" @click="edit(task.id)"></i></a>
+            <a href="#" class="card-footer-item"><router-link :to="`/edit-task/${task.id}`"><i class="fas fa-pencil-alt"></i></router-link></a>
             <a href="#" class="card-footer-item"><i 
                                                     v-bind:class="task.important ? 'fa-solid fa-star' : 'far fa-star'"
                                                     v-on:click="toggleImportant(task.id)"
@@ -163,7 +159,7 @@ import { list } from '../models/users';
             </div>
             </div>
             <footer class="card-footer">
-            <a href="#" class="card-footer-item"><i class="fas fa-pencil-alt" @click="edit(task.id)"></i></a>
+            <a href="#" class="card-footer-item"><router-link :to="`/edit-task/${task.id}`"><i class="fas fa-pencil-alt"></i></router-link></a>
             <a href="#" class="card-footer-item"><i 
                                                     v-bind:class="task.important ? 'fa-solid fa-star' : 'far fa-star'"
                                                     v-on:click="toggleImportant(task.id)"

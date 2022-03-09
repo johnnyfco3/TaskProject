@@ -2,15 +2,8 @@
 import { reactive, ref } from 'vue';
 import router from '../router';
 import Homebar from '../components/Homebar.vue';
-
-  const categories = reactive([
-      {name: "Schedule Plan", icon:"fas fa-calendar-alt", tasks: 57},
-      {name: "Personal Errands", icon:"fas fa-user-alt", tasks: 7},
-      {name: "Work Projects", icon:"fas fa-briefcase", tasks: 13},
-      {name: "Grocery List", icon:"fas fa-shopping-cart", tasks: 0},
-      {name: "School", icon:"fas fa-book", tasks: 6},
-      {name: "Assigned", icon:"fa-solid fa-user-group", tasks: 0},
-  ])
+import { cList } from '../models/categories';
+import session from '../models/session';
   
   const newCategory = reactive({
       name: ""
@@ -18,11 +11,12 @@ import Homebar from '../components/Homebar.vue';
   
   function handleSubmit(){
       if(newCategory.name){
-          categories.push(
+          cList.push(
               {
                   name: newCategory.name,
-                  icon: "none",
-                  tasks: 0
+                  total: 0,
+                  userID: session.user?.id,
+                  id: cList.length + 1
               }
           )
           router.push('/overview')
