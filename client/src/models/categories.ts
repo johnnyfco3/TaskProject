@@ -1,8 +1,8 @@
 export interface Category {
-    name: String,
-    total: Number,
-    userID: Number | null,
-    id: Number
+    name: string,
+    total: number,
+    userID: number | null,
+    id: number
 }
 
 export const cList: Category[] = [

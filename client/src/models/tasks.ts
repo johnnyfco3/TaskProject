@@ -1,13 +1,13 @@
 export interface Task {
-    name: String,
-    category: String,
-    date: String,
-    time: String,
-    completed: Boolean,
-    important: Boolean,
-    assignedBy: Number | null,
-    userID: Number | undefined,
-    id: Number
+    name: string,
+    category: string,
+    date: string,
+    time: string,
+    completed: boolean,
+    important: boolean,
+    assignedBy: number | null,
+    userID: number | undefined,
+    id: number
 }
 
 export const tList: Task[] = [

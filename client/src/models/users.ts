@@ -1,10 +1,10 @@
 export interface User {
-    firstName: String,
-    lastName: String,
-    email: String,
-    password: String,
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string,
     friends: any,
-    id: Number
+    id: number
 }
 
 export const list: User[] = [

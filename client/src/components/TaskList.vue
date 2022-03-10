@@ -11,10 +11,10 @@ import session from '../models/session';
             type: String
         },
         toggleCompleted: {
-            type: Function
+            type: Function || undefined
         },
         toggleImportant: {
-            type: Function
+            type: Function || undefined
         },
         type: {
             type: String
