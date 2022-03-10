@@ -1,20 +1,18 @@
 <script setup lang="ts">
-import { defineProps } from 'vue';
+import { defineProps, defineEmits } from 'vue';
 import { RouterLink } from 'vue-router';
 import { list } from '../models/users';
 import { tList } from '../models/tasks';
 import router from '../router';
 import session from '../models/session';
 
+
+    defineEmits([
+        'toggleCompleted', 'toggleImportant'
+    ])
     const props = defineProps({
         currentTab: {
             type: String
-        },
-        toggleCompleted: {
-            type: Function || undefined
-        },
-        toggleImportant: {
-            type: Function || undefined
         },
         type: {
             type: String
@@ -22,7 +20,7 @@ import session from '../models/session';
     })
 
     function remove(index:number){
-        tList.splice(index, index)
+        tList.splice(index, 1)
     }
 
     function getUser(userID:Number){
@@ -38,13 +36,13 @@ import session from '../models/session';
 
 <template>
 <div class="list">
-    <div v-for="(task,i) in tList" v-bind:key="i">
+    <div v-for="(task,i) in tList" :key="i">
     <div v-if="task.category === props.type && task.userID === session.user?.id">
-        <div class="card" v-if="currentTab == 'Completed' && task.completed">
+        <div class="card" v-if="props.currentTab == 'Completed' && task.completed">
             <div class="header">
                 <div class="top-content">
                     <p class="card-header-title ml-4">
-                        <i class="fas fa-check-circle pr-6" v-on:click="toggleCompleted(task.id)"></i>
+                        <i class="fas fa-check-circle pr-6" @click="$emit('toggleCompleted', task.id)"></i>
                         {{task.name}}
                     </p>
                 </div>
@@ -64,20 +62,20 @@ import session from '../models/session';
             <footer class="card-footer">
             <a href="#" class="card-footer-item"><router-link :to="`/edit-task/${task.id}`"><i class="fas fa-pencil-alt"></i></router-link></a>
             <a href="#" class="card-footer-item"><i 
-                                                    v-bind:class="task.important ? 'fa-solid fa-star' : 'far fa-star'"
-                                                    v-on:click="toggleImportant(task.id)"
+                                                    :class="task.important ? 'fa-solid fa-star' : 'far fa-star'"
+                                                    @click="$emit('toggleImportant', task.id)"
                                                 ></i></a>
             <a href="#" class="card-footer-item"><i class="fas fa-minus-circle" @click="remove(i)"></i></a>
             </footer>
         </div>
 
-        <div class="card" v-else-if="currentTab == 'Important' && task.important">
+        <div class="card" v-else-if="props.currentTab == 'Important' && task.important">
             <div class="header">
                 <div class="top-content">
                     <p class="card-header-title ml-4">
                         <i v-bind:class="
                             task.completed ? 'fas fa-check-circle pr-6' : 'far fa-circle pr-6'
-                        " v-on:click="toggleCompleted(task.id)"></i>
+                        " @click="$emit('toggleCompleted', task.id)"></i>
                         {{task.name}}
                     </p>
                 </div>
@@ -97,20 +95,20 @@ import session from '../models/session';
             <footer class="card-footer">
             <a href="#" class="card-footer-item"><router-link :to="`/edit-task/${task.id}`"><i class="fas fa-pencil-alt"></i></router-link></a>
             <a href="#" class="card-footer-item"><i 
-                                                    v-bind:class="task.important ? 'fa-solid fa-star' : 'far fa-star'"
-                                                    v-on:click="toggleImportant(task.id)"
+                                                    :class="task.important ? 'fa-solid fa-star' : 'far fa-star'"
+                                                    @click="$emit('toggleImportant', task.id)"
                                                 ></i></a>
             <a href="#" class="card-footer-item"><i class="fas fa-minus-circle" @click="remove(i)"></i></a>
             </footer>
         </div>
 
-        <div class="card" v-else-if="currentTab == 'Assigned' && task.assignedBy !== null">
+        <div class="card" v-else-if="props.currentTab == 'Assigned' && task.assignedBy !== null">
             <div class="header">
                 <div class="top-content">
                     <p class="card-header-title ml-4">
                         <i v-bind:class="
                             task.completed ? 'fas fa-check-circle pr-6' : 'far fa-circle pr-6'
-                        " v-on:click="toggleCompleted(task.id)"></i>
+                        " @click="$emit('toggleCompleted', task.id)"></i>
                         {{task.name}}
                     </p>
                 </div>
@@ -127,20 +125,20 @@ import session from '../models/session';
             <footer class="card-footer">
             <a href="#" class="card-footer-item"><router-link :to="`/edit-task/${task.id}`"><i class="fas fa-pencil-alt"></i></router-link></a>
             <a href="#" class="card-footer-item"><i 
-                                                    v-bind:class="task.important ? 'fa-solid fa-star' : 'far fa-star'"
-                                                    v-on:click="toggleImportant(task.id)"
+                                                    :class="task.important ? 'fa-solid fa-star' : 'far fa-star'"
+                                                    @click="$emit('toggleImportant', task.id)"
                                                 ></i></a>
             <a href="#" class="card-footer-item"><i class="fas fa-minus-circle" @click="remove(i)"></i></a>
             </footer>
         </div>
 
-        <div class="card" v-else-if="currentTab == 'All'">
+        <div class="card" v-else-if="props.currentTab == 'All'">
             <div class="header">
                 <div class="top-content">
                     <p class="card-header-title ml-4">
                         <i 
                         v-bind:class="task.completed ? 'fas fa-check-circle pr-6' : 'far fa-circle pr-6'" 
-                        v-on:click="toggleCompleted(task.id)">
+                        @click="$emit('toggleCompleted', task.id)">
                         </i>
                         {{task.name}}
                     </p>
@@ -161,8 +159,8 @@ import session from '../models/session';
             <footer class="card-footer">
             <a href="#" class="card-footer-item"><router-link :to="`/edit-task/${task.id}`"><i class="fas fa-pencil-alt"></i></router-link></a>
             <a href="#" class="card-footer-item"><i 
-                                                    v-bind:class="task.important ? 'fa-solid fa-star' : 'far fa-star'"
-                                                    v-on:click="toggleImportant(task.id)"
+                                                    :class="task.important ? 'fa-solid fa-star' : 'far fa-star'"
+                                                    @click="$emit('toggleImportant', task.id)"
                                                 ></i></a>
             <a href="#" class="card-footer-item"><i class="fas fa-minus-circle" @click="remove(i)"></i></a>
             </footer>

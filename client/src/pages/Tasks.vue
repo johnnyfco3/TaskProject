@@ -59,7 +59,7 @@ import Homebar from "../components/Homebar.vue";
         <hr>
 
         <div class="list pt-6">
-            <TaskList :currentTab="currentTab" :toggleCompleted="toggleCompleted" :toggleImportant="toggleImportant" :type="props.category"/>
+            <TaskList :currentTab="currentTab" @toggleCompleted="toggleCompleted" @toggle-important="toggleImportant" :type="props.category"/>
         </div>
         <div class="center pt-6">
             <router-link to="/add-tasks" href="AddTask.html"><button class="button is-danger pr-6 pl-6 pt-3 pb-3"><i class="fas fa-plus-circle" aria-hidden="true"></i>Add New Task</button></router-link>
