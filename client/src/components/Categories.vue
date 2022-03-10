@@ -4,14 +4,14 @@ import { cList } from '../models/categories';
 import session from '../models/session';
 
   function remove(index:number){
-        cList.splice(index, index)
+        cList.splice(index, 1)
     }
     
 </script>
 
 <template>
 <div id="categories">
-    <div class="column" v-for="(category, i) in cList" v-bind:key="i">
+    <div class="column" v-for="(category, i) in cList" :key="i">
       <div v-if="category.userID === null || category.userID === session.user?.id">
         <router-link :to="`/tasks/${category.name}`" >
             <div class="card has-text-centered">

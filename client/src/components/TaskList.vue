@@ -6,10 +6,10 @@ import { tList } from '../models/tasks';
 import router from '../router';
 import session from '../models/session';
 
-
     defineEmits([
         'toggleCompleted', 'toggleImportant'
     ])
+
     const props = defineProps({
         currentTab: {
             type: String
@@ -23,7 +23,7 @@ import session from '../models/session';
         tList.splice(index, 1)
     }
 
-    function getUser(userID:Number){
+    function getUser(userID:number | undefined){
         const user = list.find(u => u.id === userID)
 
         if(!user){

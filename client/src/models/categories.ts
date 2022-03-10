@@ -1,7 +1,7 @@
 export interface Category {
     name: string,
     total: number,
-    userID: number | null,
+    userID: number | null | undefined,
     id: number
 }
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
-import router from '../router';
 import { list } from '../models/users'
+import router from '../router';
 import WelcomeBar from '../components/WelcomeBar.vue';
 import Footer from '../components/Footer.vue';
 

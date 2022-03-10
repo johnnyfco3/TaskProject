@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
-import session from '../models/session';
 import { list } from '../models/users'
 import router from '../router';
+import session from '../models/session';
 
 const user = list.find(u => u.id === session.user?.id)
 
 function remove(index:number){
-  user?.friends.splice(index, index)
+  user?.friends.splice(index, 1)
 }
 
 const info = {
@@ -25,7 +25,7 @@ function assignTo(email:string){
 
 <template>
 <div class="list">
-  <div class="friend" v-for="(friend,i) in user?.friends" v-bind:key="i">
+  <div class="friend" v-for="(friend,i) in user?.friends" :key="i">
     <div class="card">
         <div class="card-content">
         <div class="content is-flex is-justify-content-space-between">

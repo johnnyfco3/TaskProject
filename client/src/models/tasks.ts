@@ -5,7 +5,7 @@ export interface Task {
     time: string,
     completed: boolean,
     important: boolean,
-    assignedBy: number | null,
+    assignedBy: number | undefined | null,
     userID: number | undefined,
     id: number
 }

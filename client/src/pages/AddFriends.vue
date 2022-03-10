@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue';
-import router from '../router';
-import Homebar from '../components/Homebar.vue';
+import { reactive } from 'vue';
 import { list } from '../models/users';
 import session from '../models/session';
+import router from '../router';
+import Homebar from '../components/Homebar.vue';
   
   const newFriend = reactive({
           email: ""

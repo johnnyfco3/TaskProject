@@ -2,10 +2,10 @@
 import { reactive, ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import { cList } from '../models/categories';
+import { tList } from '../models/tasks';
 import session from '../models/session';
 import Homebar from '../components/Homebar.vue';
 import Categories from '../components/Categories.vue';
-import { tList } from '../models/tasks';
 
   const today = ref(new Date().toLocaleDateString('en-us', { weekday:"long", month:"long", day:"numeric"}));
 

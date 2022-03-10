@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { reactive, defineProps } from 'vue';
-import Homebar from '../components/Homebar.vue';
-import session from '../models/session';
 import { tList } from '../models/tasks';
 import { list } from '../models/users';
 import router from '../router';
+import session from '../models/session';
+import Homebar from '../components/Homebar.vue';
 
 const props = defineProps({
   assign: String,

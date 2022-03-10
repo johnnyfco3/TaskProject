@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
 import { reactive } from 'vue';
-import WelcomeBar from '../components/WelcomeBar.vue';
 import { Login } from '../models/session';
+import WelcomeBar from '../components/WelcomeBar.vue';
 import About from '../components/About.vue';
 import Footer from '../components/Footer.vue';
       
