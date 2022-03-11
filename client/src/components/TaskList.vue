@@ -32,6 +32,17 @@ import session from '../models/session';
 
         return `${user.firstName} ${user.lastName}`
     }
+
+    let copy:any = tList.slice()
+
+    function sortArray(){
+        copy.sort((a:any,b:any) => {
+            let first:any = new Date(a.date)
+            let second:any = new Date(b.date)
+            return second - first
+        })
+    }
+
 </script>
 
 <template>
@@ -73,7 +84,7 @@ import session from '../models/session';
             <div class="header">
                 <div class="top-content">
                     <p class="card-header-title ml-4">
-                        <i v-bind:class="
+                        <i :class="
                             task.completed ? 'fas fa-check-circle pr-6' : 'far fa-circle pr-6'
                         " @click="$emit('toggleCompleted', task.id)"></i>
                         {{task.name}}
@@ -106,7 +117,7 @@ import session from '../models/session';
             <div class="header">
                 <div class="top-content">
                     <p class="card-header-title ml-4">
-                        <i v-bind:class="
+                        <i :class="
                             task.completed ? 'fas fa-check-circle pr-6' : 'far fa-circle pr-6'
                         " @click="$emit('toggleCompleted', task.id)"></i>
                         {{task.name}}
@@ -137,7 +148,7 @@ import session from '../models/session';
                 <div class="top-content">
                     <p class="card-header-title ml-4">
                         <i 
-                        v-bind:class="task.completed ? 'fas fa-check-circle pr-6' : 'far fa-circle pr-6'" 
+                        :class="task.completed ? 'fas fa-check-circle pr-6' : 'far fa-circle pr-6'" 
                         @click="$emit('toggleCompleted', task.id)">
                         </i>
                         {{task.name}}
@@ -166,6 +177,44 @@ import session from '../models/session';
             </footer>
         </div>
     </div>
+    </div>
+
+    <div v-if="props.currentTab == 'Date'">
+        {{sortArray()}}
+        <div class="card" v-for="(task,i) in copy" :key="i">
+            <div v-if="task.category === props.type && task.userID === session.user?.id">
+            <div class="header">
+                <div class="top-content">
+                    <p class="card-header-title ml-4">
+                        <i :class="
+                            task.completed ? 'fas fa-check-circle pr-6' : 'far fa-circle pr-6'"
+                        @click="$emit('toggleCompleted', task.id)"></i>
+                        {{task.name}}
+                    </p>
+                </div>
+                <p class="subtitle" v-if="task.assignedBy !== null">
+                    {{task.category}} - Assigned by {{getUser(task.assignedBy)}}
+                </p>
+                <p class="subtitle" v-else>
+                    {{task.category}}
+                </p>
+            </div>
+            <div class="card-content">
+            <div class="content is-flex is-justify-content-space-between">
+                    <p class="subtitle"><i class="far fa-calendar-alt"></i> {{task.date}}</p>
+                    <p class="subtitle time">{{task.time}}</p>
+            </div>
+            </div>
+            <footer class="card-footer">
+            <a href="#" class="card-footer-item"><router-link :to="`/edit-task/${task.id}`"><i class="fas fa-pencil-alt"></i></router-link></a>
+            <a href="#" class="card-footer-item"><i 
+                                                    :class="task.important ? 'fa-solid fa-star' : 'far fa-star'"
+                                                    @click="$emit('toggleImportant', task.id)"
+                                                ></i></a>
+            <a href="#" class="card-footer-item"><i class="fas fa-minus-circle" @click="remove(i)"></i></a>
+            </footer>
+        </div>
+        </div>
     </div>
 </div>
 </template>

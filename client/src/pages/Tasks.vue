@@ -55,6 +55,9 @@ import Homebar from "../components/Homebar.vue";
             <div class="level-item has-text-centered">
                 <p class="heading" :class="{ 'active': currentTab == 'Assigned' }" @click=" currentTab = 'Assigned' ">Assigned</p>
             </div>
+            <div class="level-item has-text-centered">
+                <p class="heading" :class="{ 'active': currentTab == 'Date' }" @click=" currentTab = 'Date' ">Date</p>
+            </div>
         </nav>
         <hr>
 
