@@ -66,24 +66,26 @@ import Categories from '../components/Categories.vue';
 </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 #overview {
   background-image: url("../assets/images/slider-right-dec.jpg");
   background-size: cover;
-}
-.top-content .title {
-  font-size: 3.3rem;
-}
-.top-content .title span {
-  font-weight: 300;
-}
-.center {
-  display: flex;
-  justify-content: center;
-}
-.center button {
-  border-radius: 4rem;
-  font-size: 1.4rem;
+  .top-content {
+    .title {
+      font-size: 3.3rem;
+      span {
+        font-weight: 300;
+      }
+    }
+  }
+  .center {
+    display: flex;
+    justify-content: center;
+    button {
+      border-radius: 4rem;
+      font-size: 1.4rem;
+    }
+  }
 }
 @media screen and (max-width: 800px) {
   .top-content .title {

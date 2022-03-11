@@ -22,15 +22,16 @@
     </div>
 </template>
 
-<style scoped>
-.section .title{
-  font-size: 4rem;
-  font-family: fantasy;
+<style scoped lang="scss">
+.section {
+  .title{
+    font-size: 4rem;
+    font-family: fantasy;
+  }
+  p{
+    font-size: 1.3rem;
+    line-height: 1.6;
+    width: 90%;
+  }
 }
-.section p{
-  font-size: 1.3rem;
-  line-height: 1.6;
-  width: 90%;
-}
-
 </style>

@@ -53,46 +53,46 @@ import Homebar from '../components/Homebar.vue';
 </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 #add-category {
   background-image: url("../assets/images/slider-right-dec.jpg");
   background-size: cover;
   height: 100vh;
-}
-.container .title{
-  font-size: 2.5rem;
-  font-family: fantasy;
-}
-main form {
-  text-align: center;
-  margin: 0 2%;
-}
-main form .task-title {
-  margin: 0 20%;
-  margin-bottom: 2%;
-}
-main .center button {
-  border-radius: 4rem;
-  font-size: 1.4rem;
-}
-main .center .file {
-  display: flex;
-  justify-content: center;
+  .container .title{
+    font-size: 2.5rem;
+    font-family: fantasy;
+  }
+  main {
+    form {
+      text-align: center;
+      margin: 0 2%;
+      .task-title {
+        margin: 0 20%;
+        margin-bottom: 2%;
+      }
+    }
+    .center button {
+        border-radius: 4rem;
+        font-size: 1.4rem;
+    }
+  }
 }
 @media screen and (max-width: 800px) {
  form {
     text-align: center;
     margin: 0 10%;
-  }
-  main form .task-title {
-    margin: 0 5%;
-  }
-  main .center button {
-    border-radius: 4rem;
-    font-size: 1rem;
-  }
-  main .control label {
-    font-size: 1rem;
+    .task-title {
+      margin: 0 5%;
+    }
+ }
+  main {
+    .center button {
+      border-radius: 4rem;
+      font-size: 1rem;
+    }
+    .control label {
+      font-size: 1rem;
+    }
   }
 }
 </style>

@@ -25,21 +25,23 @@ import session from '../models/session';
 </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .icons {
   color: rgb(129, 212, 129);
   margin-right: 1%;
 }
-.column .card {
-  background-color: rgb(250, 246, 246);
-  padding-bottom: 2%;
-}
-.column .card p {
-  font-size: 1.2rem;
-  font-weight: 100;
-}
-.column a .card:hover {
-  box-shadow: 8px 6px 6px lightgray;
+.column {
+  .card {
+    background-color: rgb(250, 246, 246);
+    padding-bottom: 2%;
+    p {
+      font-size: 1.2rem;
+      font-weight: 100;
+    }
+  }
+  a .card:hover {
+    box-shadow: 8px 6px 6px lightgray;
+  }
 }
 @media screen and (max-width: 800px) {
   header .title {
@@ -49,14 +51,16 @@ import session from '../models/session';
   .icons {
     font-size: 1.3rem;
   }
-  .column .card {
-    margin: 0 5%;
-  }
-  .column .card .title {
-    font-size: 1.5rem;
-  }
-  .column .card p {
-    font-size: 1rem;
+  .column {
+    .card {
+      margin: 0 5%;
+      .title {
+        font-size: 1.5rem;
+      }
+      p {
+        font-size: 1rem;
+      }
+    }
   }
 }
 </style>

@@ -57,30 +57,34 @@ import { Logout } from '../models/session';
 </header>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 header {
   box-shadow: 0px 3px 5px rgb(226, 223, 223);
-}
-header h1 {
-  font-family: fantasy;
-  margin-top: 10%;
-}
-header .navbar-item {
-  font-size: 1.2rem;
-  margin: 0 5%;
-}
-header .navbar-start .navbar-item:hover {
-  background-color: white;
-  color: red;
-  transition: 0.3s ease;
-}
-header .navbar-end a {
-  font-size: 1.2rem;
-  color: black;
-}
-header .navbar-end a:hover {
-  color: red;
-  transition: 0.3s ease;
+ h1 {
+    font-family: fantasy;
+    margin-top: 10%;
+  }
+  .navbar-item {
+    font-size: 1.2rem;
+    margin: 0 5%;
+  }
+  .navbar-start{
+    .navbar-item:hover {
+      background-color: white;
+      color: red;
+      transition: 0.3s ease;
+    }
+  }
+  .navbar-end{
+    a {
+      font-size: 1.2rem;
+      color: black;
+    }
+    a:hover {
+      color: red;
+      transition: 0.3s ease;
+    }
+  }
 }
 @media screen and (max-width: 800px) {
   header .title {

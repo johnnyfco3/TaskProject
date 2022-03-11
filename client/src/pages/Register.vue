@@ -122,103 +122,101 @@ import Footer from '../components/Footer.vue';
 </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 #register {
   background-image: url("../assets/images/slider-right-dec.jpg");
   background-size: cover;
-}
-main .container {
-  padding: 5% 0;
-}
-main .card {
-  margin-left: 10%;
-  margin-top: 2%;
-  width: 550px;
-  border-radius: 1rem;
-  padding: 2%;
-}
-main .card .title {
-  font-size: 2.5rem;
-}
-main .card-content .field {
-  padding-bottom: 3%;
-  font-size: 1.2rem;
-}
-main .card-content .field label {
-  font-size: 1.2rem;
-  font-weight: 500;
-}
-main .card-content .field input {
-  border-radius: 1rem;
-}
-main .card-content button {
-  font-size: 1.2rem;
-}
-#register main {
-  display: flex;
-  flex-direction: column;
-}
-#register .container .app-title {
-  font-family: fantasy;
-  font-size: 5rem;
-  font-weight: 700;
-}
-#register main .card {
-  margin-left: 0;
-  width: 750px;
-}
-#register main .card input {
-  width: 300px;
-}
-#register main .card .confirm input {
-  width: 100%;
+  
+  main {
+    .container {
+      padding: 5% 0;
+      .app-title {
+        font-family: fantasy;
+        font-size: 5rem;
+        font-weight: 700;
+      }
+    }
+    .card {
+      margin-left: 0;
+      width: 750px;
+      margin-top: 2%;
+      border-radius: 1rem;
+      padding: 2%;
+      .title {
+        font-size: 2.5rem;
+      }
+      input {
+        width: 300px;
+      }
+      .confirm input {
+        width: 100%;
+      }
+      .card-content {
+        .field {
+          padding-bottom: 3%;
+          font-size: 1.2rem;
+        }
+        .field label {
+          font-size: 1.2rem;
+          font-weight: 500;
+        }
+        .field input {
+          border-radius: 1rem;
+        }
+        button {
+          font-size: 1.2rem;
+        }
+      }
+    }
+    display: flex;
+    flex-direction: column;
+  }
 }
 @media screen and (max-width: 800px) {
-  main .card {
-    margin-left: 6%;
-    margin-right: 3%;
-    width: 200px;
-    border-radius: 1rem;
-    padding: 0;
-    margin-top: 5%;
-  }
-  main .card .title {
-    font-size: 1.3rem;
-    margin-bottom: -3%;
-  }
-  main .card-content .field label {
-    font-size: 10px;
-  }
-  main .card-content .field input,
-  .icon {
-    border-radius: 1rem;
-    font-size: 10px;
-  }
-  main .card-content .field button {
-    font-size: 10px;
-  }
-  main .card .bottom-content {
-    font-size: 10px;
-    margin-top: -5%;
-    padding-bottom: 5%;
-  }
-  hr {
-    margin-top: -5%;
+  main {
+    .card {
+      margin-left: 0;
+      width: 300px;
+      margin-right: 3%;
+      border-radius: 1rem;
+      padding: 0;
+      margin-top: 5%;
+      .title {
+        font-size: 1.3rem;
+        margin-bottom: -3%;
+      }
+      .first, .email {
+        width: 300px;
+      }
+      .confirm input {
+        width: 100%;
+      }
+      .card-content {
+        .field label {
+          font-size: 10px;
+        }
+        .field input,
+        .icon {
+          border-radius: 1rem;
+          font-size: 10px;
+        }
+        .field button {
+          font-size: 10px;
+        }
+      }
+      .bottom-content {
+        font-size: 10px;
+        margin-top: -5%;
+        padding-bottom: 5%;
+      }
+    }
+    hr {
+      margin-top: -5%;
+    }
   }
   #register .container .app-title {
     font-family: fantasy;
     font-size: 3rem;
-  }
-  #register main .card {
-    margin-left: 0;
-    width: 300px;
-  }
-  #register main .card .first,
-  #register main .card .email {
-    width: 300px;
-  }
-  #register main .card .confirm input {
-    width: 100%;
   }
 }
 </style>

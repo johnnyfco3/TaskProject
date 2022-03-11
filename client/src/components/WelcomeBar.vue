@@ -47,30 +47,34 @@ import { RouterLink } from 'vue-router'
 </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 header {
   box-shadow: 0px 3px 5px rgb(226, 223, 223);
 }
-#welcome-bar h1 {
-  font-family: fantasy;
-  margin-top: 10%;
-}
-#welcome-bar .navbar-item {
-  font-size: 1.2rem;
-  margin: 0 5%;
-}
-#welcome-bar .navbar-end .navbar-item:hover {
-  background-color: white;
-  color: red;
-  transition: 0.3s ease;
-}
-#welcome-bar .navbar-end a {
-  font-size: 1.2rem;
-  color: black;
-}
-#welcome-bar .navbar-end a:hover {
-  color: red;
-  transition: 0.3s ease;
+#welcome-bar {
+  h1 {
+    font-family: fantasy;
+    margin-top: 10%;
+  }
+  .navbar-item {
+    font-size: 1.2rem;
+    margin: 0 5%;
+  }
+  .navbar-end {
+    .navbar-item:hover {
+      background-color: white;
+      color: red;
+      transition: 0.3s ease;
+    }
+    a {
+      font-size: 1.2rem;
+      color: black;
+    }
+    a:hover {
+      color: red;
+      transition: 0.3s ease;
+    }
+  }
 }
 @media screen and (max-width: 800px) {
   #welcome-bar .title {

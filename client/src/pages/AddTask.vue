@@ -23,7 +23,7 @@ if(props.assign === "true"){
             date: "",
             time: "",
             important: false,
-            assignTo: null
+            assignTo: props.assign === "true" ? user.email : null
   })
 
   function getUser(email:String){
@@ -143,45 +143,49 @@ if(props.assign === "true"){
 </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 #add-task {
   background-image: url("../assets/images/slider-right-dec.jpg");
   background-size: cover;
   height: 100vh;
-}
-.container .title{
-  font-size: 2.5rem;
-  font-family: fantasy;
-}
-main form {
-  text-align: center;
-  margin: 0 2%;
-}
-main form .task-title {
-  margin: 0 20%;
-  margin-bottom: 2%;
-}
-main .center button {
-  border-radius: 4rem;
-  font-size: 1.4rem;
+  .container .title{
+    font-size: 2.5rem;
+    font-family: fantasy;
+  }
+  main {
+    form {
+      text-align: center;
+      margin: 0 2%;
+      .task-title {
+        margin: 0 20%;
+        margin-bottom: 2%;
+      }
+    }
+    .center button {
+      border-radius: 4rem;
+      font-size: 1.4rem;
+    }
+  }
 }
 @media screen and (max-width: 800px) {
-  main form {
-    text-align: center;
-    margin: 0 10%;
-  }
-  main form .task-title {
-    margin: 0 5%;
-  }
-  main .center button {
-    border-radius: 4rem;
-    font-size: 1rem;
-  }
-  main .control label {
-    font-size: 1rem;
-  }
-  main .field-label {
-    padding-top: 5%;
+  main {
+    form {
+      text-align: center;
+      margin: 0 10%;
+      .task-title {
+        margin: 0 5%;
+      }
+    }
+    .center button {
+      border-radius: 4rem;
+      font-size: 1rem;
+    }
+    .control label {
+      font-size: 1rem;
+    }
+    .field-label {
+      padding-top: 5%;
+    }
   }
 }
 </style>

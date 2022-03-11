@@ -3,7 +3,6 @@ import { reactive } from 'vue';
 import { RouterLink } from 'vue-router';
 import FriendsList from "../components/FriendsList.vue";
 import Homebar from '../components/Homebar.vue';
-
 </script>
 
 <template>
@@ -25,52 +24,55 @@ import Homebar from '../components/Homebar.vue';
 </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 #friends {
   background-image: url("../assets/images/slider-right-dec.jpg");
   background-size: cover;
   height: 100vh;
-}
-.center {
-  display: flex;
-  justify-content: center;
-  padding-bottom: 5%;
-}
-.center button {
-  border-radius: 4rem;
-  font-size: 1.4rem;
-}
-@media screen and (max-width: 800px) {
-  header .level-left .fa-long-arrow-alt-left {
-    position: absolute;
-    top: 30px;
-    left: 15px;
-  }
-  header .level-right {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-  }
-  header .level-center .title {
-    font-size: 1.4rem;
-  }
-  header .level-center .subtitle {
-    font-size: 1rem;
-  }
-  main .center {
+  .center {
     display: flex;
     justify-content: center;
     padding-bottom: 5%;
+    button {
+      border-radius: 4rem;
+      font-size: 1.4rem;
+    }
   }
-  main .level-item {
-    padding: 0 2%;
+}
+@media screen and (max-width: 800px) {
+  header {
+    .level-left .fa-long-arrow-alt-left {
+      position: absolute;
+      top: 30px;
+      left: 15px;
+    }
+    .level-right {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+    }
+    .level-center{
+      .title {
+        font-size: 1.4rem;
+      }
+      .subtitle {
+        font-size: 1rem;
+      }
+    }
   }
-  main .level-item .date {
-    margin-bottom: 16px;
-  }
-  .center button {
-    border-radius: 4rem;
-    font-size: 1rem;
+  main {
+    .center {
+      display: flex;
+      justify-content: center;
+      padding-bottom: 5%;
+      button {
+        border-radius: 4rem;
+        font-size: 1rem;
+      }
+    }
+    .level-item {
+      padding: 0 2%;
+    }
   }
 }
 </style>

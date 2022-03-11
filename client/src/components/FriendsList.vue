@@ -44,55 +44,67 @@ function assignTo(email:string){
 </div>
 </template>
 
-<style scoped>
-#friends .list .card {
-  margin: 2% 10%;
-  width: 80%;
-}
-#friends main .content .left {
-  width: 40%;
-  align-items: center;
-  font-size: 2rem;
-}
-#friends main .content .left p {
-  font-size: 1.2rem;
-  font-weight: 400;
-}
-#friends main .content .icons {
-  padding: 0 5%;
-}
-#friends main .content .icons a {
-  padding: 0 40%;
-  font-size: 1.3rem;
-  color: black;
-}
-#friends main .content .icons a:hover {
-  font-size: 1.5rem;
-  color: red;
-  transition: 0.3s;
+<style scoped lang="scss">
+#friends {
+  .list .card {
+    margin: 2% 10%;
+    width: 80%;
+  }
+  main {
+    .content {
+      .left {
+        width: 40%;
+        align-items: center;
+        font-size: 2rem;
+        p {
+          font-size: 1.2rem;
+          font-weight: 400;
+        }
+      }
+      .icons {
+        padding: 0 5%;
+        a {
+          padding: 0 40%;
+          font-size: 1.3rem;
+          color: black;
+        }
+        a:hover {
+          font-size: 1.5rem;
+          color: red;
+          transition: 0.3s;
+        }
+      }
+    }
+  }
 }
 @media screen and (max-width: 800px) {
-  #friends .list .card {
-    margin: 2% 5%;
-    width: 90%;
-  }
-  #friends main .content .left {
-    width: 100%;
-    align-items: center;
-    font-size: 1rem;
-  }
-  #friends main .content .left p {
-    font-size: 1rem;
-  }
-  #friends main .content .icons {
-    padding: 0 10%;
-  }
-  #friends main .content .icons a {
-    padding: 0 40%;
-    font-size: 1rem;
-  }
-  #friends main .content .icons a:hover {
-    font-size: 1.2rem;
+  #friends {
+    .list .card {
+      margin: 2% 5%;
+      width: 90%;
+    }
+    main {
+      .content {
+        .left {
+          width: 100%;
+          align-items: center;
+          font-size: 1rem;
+          p {
+            font-size: 1rem;
+          }
+        }
+        .icons {
+          padding: 0 10%;
+          a {
+            padding: 0 40%;
+            font-size: 1rem;
+          }
+          a:hover {
+            font-size: 1.2rem;
+          }
+        }
+      }
+    }
   }
 }
 </style>

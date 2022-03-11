@@ -170,35 +170,43 @@ import session from '../models/session';
 </div>
 </template>
 
-<style scoped>
-.list .card {
-  margin: 2% 5%;
-}
-.list .top-content p {
-  font-size: 1.4rem;
-}
-.list .top-content p i {
-  font-size: 2rem;
-  color: rgb(129, 212, 129);
-}
-.list .top-content p i:hover {
-  cursor: pointer;
-}
-.list .card .header .subtitle {
-  margin-left: 8.5%;
-  margin-top: -0.5%;
-  font-size: 1.1rem;
-  font-weight: 500;
-}
-.list .card-content .content .subtitle {
-  margin-left: 7%;
-  font-size: 1.2rem;
-  font-weight: 100;
-}
-.list .card-content .content .time {
-  margin-right: 5%;
-}
-.card-footer-item {
-  font-size: 1.3rem;
+<style scoped lang="scss">
+.list {
+    .card {
+        margin: 2% 5%;
+        .header .subtitle {
+            margin-left: 8.5%;
+            margin-top: -0.5%;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        .card-content {
+            .content {
+                .subtitle {
+                    margin-left: 7%;
+                    font-size: 1.2rem;
+                    font-weight: 100;
+                }
+                .time {
+                    margin-right: 5%;
+                }
+            }
+            .card-footer-item {
+                font-size: 1.3rem;
+            }
+        }
+    }
+    .top-content {
+        p {
+            font-size: 1.4rem;
+            i {
+                font-size: 2rem;
+                color: rgb(129, 212, 129);
+            }
+            i:hover {
+                cursor: pointer;
+            }
+        }
+    }
 }
 </style>
