@@ -1,4 +1,9 @@
 const express = require('express')
+
+const usersController = require("./controllers/users")
+const tasksController = require("./controllers/tasks")
+const categoriesController = require("./controllers/categories")
+
 const app = express()
 const port = 3000
 
@@ -6,17 +11,9 @@ app
   .get('/', (req, res) => {
     res.send('You are on the homepage')
   })
-  .get('/about', (req, res) => {
-    res.send('You are on the about')
-  })
-  .get('/contact', (req, res) => {
-    res.send({
-      email: 'tejadaj6@newpaltz,edu',
-      phone: '123-456-7890',
-      twitter: '@johnnyfco',
-      instagram: '@johnnyfco'
-    });
-  })
+  .use('/users', usersController)
+  .use('/tasks', tasksController)
+  .use('/categories', categoriesController)
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
