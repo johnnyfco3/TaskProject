@@ -2,15 +2,11 @@
 import { reactive } from 'vue';
 import { RouterLink } from 'vue-router';
 import FriendsList from "../components/FriendsList.vue";
-import Homebar from '../components/Homebar.vue';
+
 </script>
 
 <template>
 <div id="friends">
-    <header>
-        <Homebar />
-    </header>
-
     <main class="container">
         <div class="list pt-6">
             <FriendsList />
@@ -26,8 +22,6 @@ import Homebar from '../components/Homebar.vue';
 
 <style scoped lang="scss">
 #friends {
-  background-image: url("../assets/images/slider-right-dec.jpg");
-  background-size: cover;
   height: 100vh;
   .center {
     display: flex;

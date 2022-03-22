@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { reactive, defineProps } from 'vue';
 import { tList } from '../models/tasks';
-import Homebar from '../components/Homebar.vue';
 import session from '../models/session';
 import router from '../router';
 
@@ -42,13 +41,10 @@ import router from '../router';
 
 <template>
 <div id="edit-task">
-    <header>
-        <Homebar />
-    </header>
     <main>
         <div class="container">
             <div class="center">
-              <h1 class="title has-text-centered pt-6">Edit Task</h1>
+              <h1 class="title heading1 has-text-centered pt-6">Edit Task</h1>
                 <form @submit.prevent="handleSubmit">
                     <label class="label pt-4">Select Category</label>
                     <div class="control">
@@ -133,12 +129,6 @@ import router from '../router';
 
 <style scoped lang="scss">
 #edit-task {
-  background-image: url("../assets/images/slider-right-dec.jpg");
-  background-size: cover;
-  .container .title{
-    font-size: 2.5rem;
-    font-family: fantasy;
-  }
   main {
     form {
       text-align: center;

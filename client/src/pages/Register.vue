@@ -2,7 +2,6 @@
 import { reactive } from 'vue';
 import { list } from '../models/users'
 import router from '../router';
-import WelcomeBar from '../components/WelcomeBar.vue';
 import Footer from '../components/Footer.vue';
 
   const newUser = reactive({
@@ -44,9 +43,6 @@ import Footer from '../components/Footer.vue';
 
 <template>
 <div id="register">
-  <header>
-    <WelcomeBar />
-  </header>
    <main>
         <div class="container">
             <h1 class="app-title has-text-centered">Task it!</h1>
@@ -124,9 +120,6 @@ import Footer from '../components/Footer.vue';
 
 <style scoped lang="scss">
 #register {
-  background-image: url("../assets/images/slider-right-dec.jpg");
-  background-size: cover;
-  
   main {
     .container {
       padding: 5% 0;

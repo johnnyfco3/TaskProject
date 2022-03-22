@@ -4,7 +4,6 @@ import { RouterLink } from 'vue-router';
 import { cList } from '../models/categories';
 import { tList } from '../models/tasks';
 import session from '../models/session';
-import Homebar from '../components/Homebar.vue';
 import Categories from '../components/Categories.vue';
 
   const today = ref(new Date().toLocaleDateString('en-us', { weekday:"long", month:"long", day:"numeric"}));
@@ -27,9 +26,6 @@ import Categories from '../components/Categories.vue';
 
 <template>
 <div id="overview">
-    <header>
-        <Homebar />
-    </header>
     <main>
         <div class="container mb-6">
             <div class="top-content has-text-centered pt-6 pb-6">
@@ -68,8 +64,6 @@ import Categories from '../components/Categories.vue';
 
 <style scoped lang="scss">
 #overview {
-  background-image: url("../assets/images/slider-right-dec.jpg");
-  background-size: cover;
   .top-content {
     .title {
       font-size: 3.3rem;

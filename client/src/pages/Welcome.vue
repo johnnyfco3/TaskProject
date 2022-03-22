@@ -2,7 +2,6 @@
 import { RouterLink } from 'vue-router';
 import { reactive } from 'vue';
 import { Login } from '../models/session';
-import WelcomeBar from '../components/WelcomeBar.vue';
 import About from '../components/About.vue';
 import Footer from '../components/Footer.vue';
       
@@ -23,9 +22,6 @@ import Footer from '../components/Footer.vue';
 
 <template>
 <div id="welcome">
-  <header>
-    <WelcomeBar />
-  </header>
     <main>
         <div class="container is-flex">
             <div class="left-side is-flex-direction-column has-text-centered pt-6" id="main">
@@ -80,9 +76,6 @@ import Footer from '../components/Footer.vue';
 </template>
 
 <style scoped lang="scss">
-#welcome {
-  background-image: url("../assets/images/slider-right-dec.jpg");
-}
 main {
   .container{
     padding: 5% 0;
@@ -129,29 +122,6 @@ main {
       button {
         font-size: 1.2rem;
       }
-    }
-  }
-}
-
-#register main {
-  display: flex;
-  flex-direction: column;
-}
-#register .container .app-title {
-  font-family: fantasy;
-  font-size: 5rem;
-  font-weight: 700;
-}
-#register main {
-  .card {
-    margin-left: 0;
-    width: 700px;
-  
-    input {
-      width: 300px;
-    }
-    .confirm input {
-      width: 100%;
     }
   }
 }
@@ -209,23 +179,6 @@ main {
   }
   hr {
     margin-top: -5%;
-  }
-  #register{
-    .container .app-title {
-      font-family: fantasy;
-      font-size: 3rem;
-    }
-
-    main .card{
-      margin-left: 0;
-      width: 300px;
-      .first, .email {
-        width: 300px;
-      }
-      .confirm input {
-        width: 100%;
-      }
-    }
   }
 }
 </style>

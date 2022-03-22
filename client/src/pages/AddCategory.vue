@@ -3,7 +3,6 @@ import { reactive } from 'vue';
 import { cList } from '../models/categories';
 import session from '../models/session';
 import router from '../router';
-import Homebar from '../components/Homebar.vue';
   
   const newCategory = reactive({
       name: ""
@@ -27,13 +26,10 @@ import Homebar from '../components/Homebar.vue';
 
 <template>
 <div id="add-category">
-    <header>
-        <Homebar />
-    </header>
     <main>
         <div class="container">
             <div class="center">
-              <h1 class="title has-text-centered pt-6">Add New Category</h1>
+              <h1 class="title heading1 has-text-centered pt-6">Add New Category</h1>
                 <form @submit.prevent="handleSubmit">
                     <label class="label pt-4">Name of Category</label>
                     <div class="control has-icons-left task-title">
@@ -55,13 +51,7 @@ import Homebar from '../components/Homebar.vue';
 
 <style scoped lang="scss">
 #add-category {
-  background-image: url("../assets/images/slider-right-dec.jpg");
-  background-size: cover;
   height: 100vh;
-  .container .title{
-    font-size: 2.5rem;
-    font-family: fantasy;
-  }
   main {
     form {
       text-align: center;

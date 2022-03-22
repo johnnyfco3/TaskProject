@@ -4,7 +4,6 @@ import { tList } from '../models/tasks';
 import { list } from '../models/users';
 import router from '../router';
 import session from '../models/session';
-import Homebar from '../components/Homebar.vue';
 
 const props = defineProps({
   assign: String,
@@ -60,13 +59,10 @@ if(props.assign === "true"){
 
 <template>
 <div id="add-task">
-    <header>
-        <Homebar />
-    </header>
     <main>
         <div class="container">
             <div class="center">
-              <h1 class="title has-text-centered pt-6">Add New Task</h1>
+              <h1 class="title heading1 has-text-centered pt-6">Add New Task</h1>
                 <form @submit.prevent="handleSubmit">
                     <label class="label pt-4">Select Category</label>
                     <div class="control">
@@ -145,13 +141,7 @@ if(props.assign === "true"){
 
 <style scoped lang="scss">
 #add-task {
-  background-image: url("../assets/images/slider-right-dec.jpg");
-  background-size: cover;
   height: 100vh;
-  .container .title{
-    font-size: 2.5rem;
-    font-family: fantasy;
-  }
   main {
     form {
       text-align: center;

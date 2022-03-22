@@ -3,7 +3,6 @@ import { ref, defineProps } from "vue";
 import { tList } from "../models/tasks";
 import { RouterLink } from "vue-router";
 import TaskList from "../components/TaskList.vue";
-import Homebar from "../components/Homebar.vue";
 
   const currentTab = ref('All')
   const today = ref(new Date().toLocaleDateString('en-us', { weekday:"long", month:"long", day:"numeric"}));
@@ -35,9 +34,6 @@ import Homebar from "../components/Homebar.vue";
 
 <template>
 <div id="tasks">
-    <header>
-        <Homebar />
-    </header>
 
     <main class="container pt-6">
         <nav class="level pt-2">
@@ -73,8 +69,6 @@ import Homebar from "../components/Homebar.vue";
 
 <style scoped lang="scss">
 #tasks {
-  background-image: url("../assets/images/slider-right-dec.jpg");
-  background-size: cover;
   main {
     .level-item {
       p:hover {
