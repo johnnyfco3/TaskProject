@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { reactive, defineProps } from 'vue';
+import { reactive, defineProps, ref } from 'vue';
 import { tList } from '../models/tasks';
 import { list } from '../models/users';
+import { cList } from '../models/categories';
 import router from '../router';
 import session from '../models/session';
 
@@ -68,11 +69,9 @@ if(props.assign === "true"){
                     <div class="control">
                         <div class="select is-info select-section is-normal">
                             <select required v-model="newTask.category">
-                            <option>Schedule Plan</option>
-                            <option>Personal Errands</option>
-                            <option>Work Projects</option>
-                            <option>Grocery List</option>
-                            <option>School</option>
+                              <option v-for="(category,i) in cList" :key="i">
+                                {{category.userID === null || category.userID === session.user?.id ? category.name : null}}
+                              </option>
                             </select>
                         </div>
                     </div>
