@@ -18,7 +18,7 @@ const info = {
 function assignTo(email:string){
   info.uEmail = email
   info.assign = true
-  router.push(`/add-tasks/${info.assign}/${info.uEmail}`)
+  router.push(`/add-tasks/${info.assign}/${info.uEmail}/null`)
 }
 
 </script>

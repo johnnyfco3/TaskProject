@@ -33,7 +33,7 @@ import session from '../models/session';
                     Home
                     </router-link>
                     
-                    <router-link to="/add-tasks/false/null" class="navbar-item">
+                    <router-link to="/add-tasks/false/null/null" class="navbar-item">
                     New Task
                     </router-link>
             

@@ -61,7 +61,7 @@ import TaskList from "../components/TaskList.vue";
             <TaskList :currentTab="currentTab" @toggleCompleted="toggleCompleted" @toggle-important="toggleImportant" :type="props.category"/>
         </div>
         <div class="center pt-6">
-            <router-link to="/add-tasks/false/null" href="AddTask.html"><button class="button is-danger pr-6 pl-6 pt-3 pb-3"><i class="fas fa-plus-circle" aria-hidden="true"></i>Add New Task</button></router-link>
+            <router-link :to="`/add-tasks/false/null/${props.category}`"><button class="button is-danger pr-6 pl-6 pt-3 pb-3"><i class="fas fa-plus-circle" aria-hidden="true"></i>Add New Task</button></router-link>
         </div>
     </main>
 </div>

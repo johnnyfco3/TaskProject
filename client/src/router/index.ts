@@ -16,10 +16,10 @@ const routes: RouteRecordRaw[] = [
     { path: '/overview', component: Overview },
     { path: '/tasks/:category', component: Tasks, props: true },
     { path: '/friends', component: Friends },
-    { path: '/add-tasks/:assign/:email', component: AddTask, props: true },
+    { path: '/add-tasks/:assign/:email/:category', component: AddTask, props: true },
     { path: '/add-friends', component: AddFriends },
     { path: '/add-category', component: AddCategory },
-    { path: '/edit-task/:id', component: EditTasks, props: true }
+    { path: '/edit-task/:name', component: EditTasks, props: true }
 ];
 
 const router = createRouter({
@@ -28,7 +28,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to,from) =>{
-    if(['/overview', '/tasks', '/friends', '/add-tasks', '/add-friends', '/add-category'].includes(to.path)){
+    if(['/overview', '/tasks/:category', '/friends', '/add-tasks/:assign/:email/:category', '/add-friends', '/add-category', '/edit-task/:name'].includes(to.path)){
         if(!session.user){
             return '/'
         }
