@@ -37,6 +37,26 @@ if(props.assign === "true"){
     }
   }
 
+  function convertTime(time:string){
+    let hour = time.substring(0,2)
+    let min = time.substring(3,5)
+    let revisedTime = parseInt(hour)
+    if(revisedTime > 12 && revisedTime < 24){
+      revisedTime -= 12
+      hour = revisedTime.toString()
+      time = `${hour}:${min}pm`
+    }
+    else if(revisedTime === 24){
+      revisedTime -= 12
+      hour = revisedTime.toString()
+      time = `${hour}:${min}am`
+    }
+    else{
+      time = `${hour}:${min}am`
+    }
+    return time
+  }
+
   function handleSubmit(){
       if(newTask){
           tList.push(
@@ -45,7 +65,7 @@ if(props.assign === "true"){
                 name: newTask.name,
                 category: newTask.category,
                 date: newTask.date,
-                time: newTask.time,
+                time: convertTime(newTask.time),
                 completed: false,
                 important: newTask.important,
                 assignedBy: newTask.assignTo === null ? null : session.user?.id,
