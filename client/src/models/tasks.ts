@@ -1,5 +1,6 @@
 export interface Task {
     name: string,
+    details: string
     category: string,
     date: string,
     time: string,
@@ -13,6 +14,7 @@ export interface Task {
 export const tList: Task[] = [
     {
         name: "Call Supervisor",
+        details: "",
         category: "Work Projects",
         date: "2022-03-12",
         time: "10:30am",
@@ -24,6 +26,7 @@ export const tList: Task[] = [
     },
     {
         name: "Meeting with team",
+        details: "",
         category: "Work Projects",
         date: "2022-01-09",
         time: "1:00pm",
@@ -34,7 +37,8 @@ export const tList: Task[] = [
         id: 2
     },
     {
-        name: "List: Bakery and Bread. Meat and Seafood. Pasta and Rice. Oils, Sauces, Salad Dressings, and Condiments. Cereals and Breakfast Foods.",
+        name: "List",
+        details: "Bakery and Bread. Meat and Seafood. Pasta and Rice. Oils, Sauces, Salad Dressings, and Condiments. Cereals and Breakfast Foods.",
         category: "Grocery List",
         date: "2022-03-09",
         time: "6:30pm",
@@ -46,6 +50,7 @@ export const tList: Task[] = [
     },
     {
         name: "Study for midterm",
+        details: "",
         category: "Schedule Plan",
         date: "2022-03-11",
         time: "2:30pm",
@@ -57,6 +62,7 @@ export const tList: Task[] = [
     },
     {
         name: "Complete Homework 4 for Calculus",
+        details: "",
         category: "School",
         date: "2022-03-16",
         time: "9:00am",

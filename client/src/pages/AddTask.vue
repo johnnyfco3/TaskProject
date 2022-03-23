@@ -8,7 +8,8 @@ import session from '../models/session';
 
 const props = defineProps({
   assign: String,
-  email: String
+  email: String,
+  category: String,
 })
 
 let user:any;
@@ -19,6 +20,7 @@ if(props.assign === "true"){
   
   const newTask = reactive({
             name: "",
+            details: "",
             category: "",
             date: "",
             time: "",
@@ -34,6 +36,17 @@ if(props.assign === "true"){
     }
     else{
       throw {message: 'Could not find user in getUser'}
+    }
+  }
+
+  function confirmAddition(name:string){
+    let id = props.assign === "true" ? user.id : session.user?.id
+    const check = tList.find(t => t.name === name && t.userID === id)
+    if(check){
+      if(!check.completed){
+        return false
+      }
+      return true
     }
   }
 
@@ -59,10 +72,15 @@ if(props.assign === "true"){
 
   function handleSubmit(){
       if(newTask){
-          tList.push(
+          if(!confirmAddition(newTask.name)){
+            throw { message: "There's an existing Task with the same Task name that has not yet been completed." }
+          }
+          else{
+            tList.push(
               {
                 id: tList.length + 1,
                 name: newTask.name,
+                details: newTask.details,
                 category: newTask.category,
                 date: newTask.date,
                 time: convertTime(newTask.time),
@@ -71,8 +89,9 @@ if(props.assign === "true"){
                 assignedBy: newTask.assignTo === null ? null : session.user?.id,
                 userID: newTask.assignTo === null ? session.user?.id : getUser(newTask.assignTo)
               }
-          )
-          router.push('/overview')
+            )
+            router.push('/overview')
+        }
       }
   }
 
@@ -89,8 +108,9 @@ if(props.assign === "true"){
                     <div class="control">
                         <div class="select is-info select-section is-normal">
                             <select required v-model="newTask.category">
+                              <option selected>{{props.category}}</option>
                               <option v-for="(category,i) in cList" :key="i">
-                                {{category.userID === null || category.userID === session.user?.id ? category.name : null}}
+                                {{category.name !== props.category && (category.userID === null || category.userID === session.user?.id) ? category.name : props.category}}
                               </option>
                             </select>
                         </div>
@@ -103,6 +123,9 @@ if(props.assign === "true"){
                             <i class="fa-solid fa-pen"></i>
                         </span>
                     </div>
+
+                    <label class="label mt-2">Details</label>
+                    <textarea class="textarea is-info mx-6" v-model="newTask.details"></textarea>
                 
                     <div class="field is-horizontal mt-6">
                         <div class="field-label is-normal">
@@ -139,12 +162,12 @@ if(props.assign === "true"){
                         <div class="control is-expanded">
                             <div class="select is-info select-section is-normal">
                               <select disabled v-model="newTask.assignTo" v-if="props.assign === 'true'">
-                                  <option>{{user.email}}</option>
-                                </select>
-                                <select required v-model="newTask.assignTo" v-else>
-                                  <option v-for="(friend,i) in session.user?.friends" :key="i">{{friend}}</option>
-                                  <option :value="null">No one</option>
-                                </select>
+                                <option>{{user.email}}</option>
+                              </select>
+                              <select required v-model="newTask.assignTo" v-else>
+                                <option v-for="(friend,i) in session.user?.friends" :key="i">{{friend}}</option>
+                                <option :value="null">No one</option>
+                              </select>
                             </div>
                         </div>
                 
