@@ -71,7 +71,7 @@ import session from '../models/session';
             </div>
             </div>
             <footer class="card-footer">
-            <a href="#" class="card-footer-item"><router-link :to="`/edit-task/${task.id}`"><i class="fas fa-pencil-alt"></i></router-link></a>
+            <a href="#" class="card-footer-item"><router-link :to="`/edit-task/${task.name}`"><i class="fas fa-pencil-alt"></i></router-link></a>
             <a href="#" class="card-footer-item"><i 
                                                     :class="task.important ? 'fa-solid fa-star' : 'far fa-star'"
                                                     @click="$emit('toggleImportant', task.id)"
@@ -104,7 +104,7 @@ import session from '../models/session';
             </div>
             </div>
             <footer class="card-footer">
-            <a href="#" class="card-footer-item"><router-link :to="`/edit-task/${task.id}`"><i class="fas fa-pencil-alt"></i></router-link></a>
+            <a href="#" class="card-footer-item"><router-link :to="`/edit-task/${task.name}`"><i class="fas fa-pencil-alt"></i></router-link></a>
             <a href="#" class="card-footer-item"><i 
                                                     :class="task.important ? 'fa-solid fa-star' : 'far fa-star'"
                                                     @click="$emit('toggleImportant', task.id)"
@@ -134,7 +134,7 @@ import session from '../models/session';
             </div>
             </div>
             <footer class="card-footer">
-            <a href="#" class="card-footer-item"><router-link :to="`/edit-task/${task.id}`"><i class="fas fa-pencil-alt"></i></router-link></a>
+            <a href="#" class="card-footer-item"><router-link :to="`/edit-task/${task.name}`"><i class="fas fa-pencil-alt"></i></router-link></a>
             <a href="#" class="card-footer-item"><i 
                                                     :class="task.important ? 'fa-solid fa-star' : 'far fa-star'"
                                                     @click="$emit('toggleImportant', task.id)"
@@ -168,7 +168,7 @@ import session from '../models/session';
             </div>
             </div>
             <footer class="card-footer">
-            <a href="#" class="card-footer-item"><router-link :to="`/edit-task/${task.id}`"><i class="fas fa-pencil-alt"></i></router-link></a>
+            <a href="#" class="card-footer-item"><router-link :to="`/edit-task/${task.name}`"><i class="fas fa-pencil-alt"></i></router-link></a>
             <a href="#" class="card-footer-item"><i 
                                                     :class="task.important ? 'fa-solid fa-star' : 'far fa-star'"
                                                     @click="$emit('toggleImportant', task.id)"
@@ -206,7 +206,7 @@ import session from '../models/session';
             </div>
             </div>
             <footer class="card-footer">
-            <a href="#" class="card-footer-item"><router-link :to="`/edit-task/${task.id}`"><i class="fas fa-pencil-alt"></i></router-link></a>
+            <a href="#" class="card-footer-item"><router-link :to="`/edit-task/${task.name}`"><i class="fas fa-pencil-alt"></i></router-link></a>
             <a href="#" class="card-footer-item"><i 
                                                     :class="task.important ? 'fa-solid fa-star' : 'far fa-star'"
                                                     @click="$emit('toggleImportant', task.id)"

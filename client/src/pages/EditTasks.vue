@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import { reactive, defineProps } from 'vue';
 import { tList } from '../models/tasks';
+import { cList } from '../models/categories';
 import session from '../models/session';
 import router from '../router';
 
   const props = defineProps({
-      id: Number
+      name: String
   })
 
-  const task = tList.find(t => t.id == props.id)
+  const task = tList.find(t => t.name == props.name)
 
   if(!task){
     throw {message: 'No task acquired for edit'}
@@ -51,11 +52,9 @@ import router from '../router';
                         <div class="select is-info select-section is-normal">
                             <select v-model="editTask.category">
                             <option disabled>{{task.category}}</option>
-                            <option>Schedule Plan</option>
-                            <option>Personal Errands</option>
-                            <option>Work Projects</option>
-                            <option>Grocery List</option>
-                            <option>School</option>
+                            <option v-for="(category,i) in cList" :key="i">
+                                {{category.userID === null || category.userID === session.user?.id ? category.name : null}}
+                              </option>
                             </select>
                         </div>
                     </div>
