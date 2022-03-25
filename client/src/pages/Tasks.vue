@@ -11,25 +11,6 @@ import TaskList from "../components/TaskList.vue";
     category: String
   })
 
-  function toggleCompleted(id:number){
-        const task = tList.find(t => t.id === id)
-        
-        if(!task){
-          throw {message: 'No task correspondence'}
-        }
-
-        return task.completed = !task.completed
-    }
-  function toggleImportant(id:number){
-        const task = tList.find(t => t.id === id)
-        
-        if(!task){
-          throw {message: 'No task correspondence'}
-        }
-
-        return task.important = !task.important
-    }
-
 </script>
 
 <template>
@@ -58,7 +39,9 @@ import TaskList from "../components/TaskList.vue";
         <hr>
 
         <div class="list pt-6">
-            <TaskList :currentTab="currentTab" @toggleCompleted="toggleCompleted" @toggle-important="toggleImportant" :type="props.category"/>
+          <div v-for="(task,i) in tList" :key="i">
+            <TaskList :currentTab="currentTab" :type="props.category" :task="task" :i="i"/>
+          </div>
         </div>
         <div class="center pt-6">
             <router-link :to="`/add-tasks/false/null/${props.category}`"><button class="button is-danger pr-6 pl-6 pt-3 pb-3"><i class="fas fa-plus-circle" aria-hidden="true"></i>Add New Task</button></router-link>
