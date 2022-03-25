@@ -101,6 +101,10 @@ import session from '../models/session';
                     <p class="subtitle"><i class="far fa-calendar-alt"></i> {{task.date}}</p>
                     <p class="subtitle time">{{task.time}}</p>
             </div>
+            <div class="content">
+                <p class="subtitle">Details</p>
+                <p class="subtitle">{{task.details}}</p>
+            </div>
             </div>
             <footer class="card-footer">
             <a href="#" class="card-footer-item"><router-link :to="`/edit-task/${task.name}`"><i class="fas fa-pencil-alt"></i></router-link></a>
@@ -134,6 +138,10 @@ import session from '../models/session';
                     <p class="subtitle"><i class="far fa-calendar-alt"></i> {{task.date}}</p>
                     <p class="subtitle time">{{task.time}}</p>
             </div>
+            <div class="content">
+                <p class="subtitle">Details</p>
+                <p class="subtitle">{{task.details}}</p>
+            </div>
             </div>
             <footer class="card-footer">
             <a href="#" class="card-footer-item"><router-link :to="`/edit-task/${task.name}`"><i class="fas fa-pencil-alt"></i></router-link></a>
@@ -163,6 +171,10 @@ import session from '../models/session';
             <div class="content is-flex is-justify-content-space-between">
                     <p class="subtitle"><i class="far fa-calendar-alt"></i> {{task.date}}</p>
                     <p class="subtitle time">{{task.time}}</p>
+            </div>
+            <div class="content">
+                <p class="subtitle">Details</p>
+                <p class="subtitle">{{task.details}}</p>
             </div>
             </div>
             <footer class="card-footer">
@@ -197,6 +209,10 @@ import session from '../models/session';
             <div class="content is-flex is-justify-content-space-between">
                     <p class="subtitle"><i class="far fa-calendar-alt"></i> {{task.date}}</p>
                     <p class="subtitle time">{{task.time}}</p>
+            </div>
+            <div class="content">
+                <p class="subtitle">Details</p>
+                <p class="subtitle">{{task.details}}</p>
             </div>
             </div>
             <footer class="card-footer">
@@ -234,6 +250,10 @@ import session from '../models/session';
             <div class="content is-flex is-justify-content-space-between">
                     <p class="subtitle"><i class="far fa-calendar-alt"></i> {{task.date}}</p>
                     <p class="subtitle time">{{task.time}}</p>
+            </div>
+            <div class="content">
+                <p class="subtitle">Details</p>
+                <p class="subtitle">{{task.details}}</p>
             </div>
             </div>
             <footer class="card-footer">
