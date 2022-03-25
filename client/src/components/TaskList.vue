@@ -14,15 +14,17 @@ import session from '../models/session';
             type: String
         }, 
         task: {
-            type: Object
+            type: Object,
+            required: true,
         },
         i: {
-            type: Number
+            type: Number,
+            required: true,
         }
     })
 
-    const completed = ref(props.task?.completed);
-    const important = ref(props.task?.important);
+    const completed = ref(props.task.completed);
+    const important = ref(props.task.important);
 
     function remove(index:number){
         tList.splice(index, 1)
@@ -76,14 +78,14 @@ import session from '../models/session';
 
 <template>
 <div class="list">
-    <div v-if="task?.category === props.type && task?.userID === session.user?.id">
-        <div class="card" v-if="props.currentTab == 'Completed' && task?.completed">
+    <div v-if="task.category === props.type && task.userID === session.user?.id">
+        <div class="card" v-if="props.currentTab == 'Completed' && task.completed">
             <div class="header">
                 <div class="top-content">
                     <p class="card-header-title ml-4">
                         <i :class="
                             completed ? 'fas fa-check-circle pr-6' : 'far fa-circle pr-6'
-                        " @click="toggleCompleted(task?.id)"></i>
+                        " @click="toggleCompleted(task.id)"></i>
                         {{task.name}}
                     </p>
                 </div>
@@ -104,19 +106,19 @@ import session from '../models/session';
             <a href="#" class="card-footer-item"><router-link :to="`/edit-task/${task.name}`"><i class="fas fa-pencil-alt"></i></router-link></a>
             <a href="#" class="card-footer-item"><i 
                                                     :class="important ? 'fa-solid fa-star' : 'far fa-star'"
-                                                    @click="toggleImportant(task?.id)"
+                                                    @click="toggleImportant(task.id)"
                                                 ></i></a>
             <a href="#" class="card-footer-item"><i class="fas fa-minus-circle" @click="remove(i)"></i></a>
             </footer>
         </div>
 
-        <div class="card" v-else-if="props.currentTab == 'Important' && task?.important">
+        <div class="card" v-else-if="props.currentTab == 'Important' && task.important">
             <div class="header">
                 <div class="top-content">
                     <p class="card-header-title ml-4">
                         <i :class="
                             completed ? 'fas fa-check-circle pr-6' : 'far fa-circle pr-6'
-                        " @click="toggleCompleted(task?.id)"></i>
+                        " @click="toggleCompleted(task.id)"></i>
                         {{task.name}}
                     </p>
                 </div>
@@ -137,37 +139,37 @@ import session from '../models/session';
             <a href="#" class="card-footer-item"><router-link :to="`/edit-task/${task.name}`"><i class="fas fa-pencil-alt"></i></router-link></a>
             <a href="#" class="card-footer-item"><i 
                                                     :class="important ? 'fa-solid fa-star' : 'far fa-star'"
-                                                    @click="toggleImportant(task?.id)"
+                                                    @click="toggleImportant(task.id)"
                                                 ></i></a>
             <a href="#" class="card-footer-item"><i class="fas fa-minus-circle" @click="remove(i)"></i></a>
             </footer>
         </div>
 
-        <div class="card" v-else-if="props.currentTab == 'Assigned' && task?.assignedBy !== null">
+        <div class="card" v-else-if="props.currentTab == 'Assigned' && task.assignedBy !== null">
             <div class="header">
                 <div class="top-content">
                     <p class="card-header-title ml-4">
                         <i :class="
                             completed ? 'fas fa-check-circle pr-6' : 'far fa-circle pr-6'
-                        " @click="toggleCompleted(task?.id)"></i>
-                        {{task?.name}}
+                        " @click="toggleCompleted(task.id)"></i>
+                        {{task.name}}
                     </p>
                 </div>
                 <p class="subtitle">
-                    {{task?.category}} - Assigned by {{getUser(task?.assignedBy)}}
+                    {{task.category}} - Assigned by {{getUser(task.assignedBy)}}
                 </p>
             </div>
             <div class="card-content">
             <div class="content is-flex is-justify-content-space-between">
-                    <p class="subtitle"><i class="far fa-calendar-alt"></i> {{task?.date}}</p>
-                    <p class="subtitle time">{{task?.time}}</p>
+                    <p class="subtitle"><i class="far fa-calendar-alt"></i> {{task.date}}</p>
+                    <p class="subtitle time">{{task.time}}</p>
             </div>
             </div>
             <footer class="card-footer">
-            <a href="#" class="card-footer-item"><router-link :to="`/edit-task/${task?.name}`"><i class="fas fa-pencil-alt"></i></router-link></a>
+            <a href="#" class="card-footer-item"><router-link :to="`/edit-task/${task.name}`"><i class="fas fa-pencil-alt"></i></router-link></a>
             <a href="#" class="card-footer-item"><i 
                                                     :class="important ? 'fa-solid fa-star' : 'far fa-star'"
-                                                    @click="toggleImportant(task?.id)"
+                                                    @click="toggleImportant(task.id)"
                                                 ></i></a>
             <a href="#" class="card-footer-item"><i class="fas fa-minus-circle" @click="remove(i)"></i></a>
             </footer>
@@ -179,13 +181,13 @@ import session from '../models/session';
                     <p class="card-header-title ml-4">
                         <i 
                         :class="completed ? 'fas fa-check-circle pr-6' : 'far fa-circle pr-6'" 
-                        @click="toggleCompleted(task?.id)">
+                        @click="toggleCompleted(task.id)">
                         </i>
-                        {{task?.name}}
+                        {{task.name}}
                     </p>
                 </div>
-                <p class="subtitle" v-if="task?.assignedBy !== null">
-                    {{task?.category}} - Assigned by {{getUser(task?.assignedBy)}}
+                <p class="subtitle" v-if="task.assignedBy !== null">
+                    {{task.category}} - Assigned by {{getUser(task.assignedBy)}}
                 </p>
                 <p class="subtitle" v-else>
                     {{task.category}}
@@ -193,15 +195,15 @@ import session from '../models/session';
             </div>
             <div class="card-content">
             <div class="content is-flex is-justify-content-space-between">
-                    <p class="subtitle"><i class="far fa-calendar-alt"></i> {{task?.date}}</p>
-                    <p class="subtitle time">{{task?.time}}</p>
+                    <p class="subtitle"><i class="far fa-calendar-alt"></i> {{task.date}}</p>
+                    <p class="subtitle time">{{task.time}}</p>
             </div>
             </div>
             <footer class="card-footer">
-            <a href="#" class="card-footer-item"><router-link :to="`/edit-task/${task?.name}`"><i class="fas fa-pencil-alt"></i></router-link></a>
+            <a href="#" class="card-footer-item"><router-link :to="`/edit-task/${task.name}`"><i class="fas fa-pencil-alt"></i></router-link></a>
             <a href="#" class="card-footer-item"><i 
                                                     :class="important ? 'fa-solid fa-star' : 'far fa-star'"
-                                                    @click="toggleImportant(task?.id)"
+                                                    @click="toggleImportant(task.id)"
                                                 ></i></a>
             <a href="#" class="card-footer-item"><i class="fas fa-minus-circle" @click="remove(i)"></i></a>
             </footer>

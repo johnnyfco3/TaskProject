@@ -1,7 +1,12 @@
 <script setup lang="ts">
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import FriendsList from "../components/FriendsList.vue";
+import session from '../models/session';
+import { list } from '../models/users';
+
+const user = list.find(u => u.id === session.user?.id)
+const friendsList = ref(user?.friends ?? [])
 
 </script>
 
@@ -9,7 +14,9 @@ import FriendsList from "../components/FriendsList.vue";
 <div id="friends">
     <main class="container">
         <div class="list pt-6">
-            <FriendsList />
+          <div v-for="(friend,i) in friendsList" :key="i">
+            <FriendsList :friend="friend" :i="i" />
+          </div>
         </div>
 
         <div class="center pt-6">

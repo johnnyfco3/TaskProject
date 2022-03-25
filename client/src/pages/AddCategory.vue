@@ -13,7 +13,6 @@ import router from '../router';
           cList.push(
               {
                   name: newCategory.name,
-                  total: 0,
                   userID: session.user?.id,
                   id: cList.length + 1
               }
