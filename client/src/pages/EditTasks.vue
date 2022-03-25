@@ -18,6 +18,7 @@ import router from '../router';
   const editTask = reactive({
             name: "",
             category: "",
+            details: "",
             date: "",
             time: "",
             completed: false,
@@ -66,6 +67,9 @@ import router from '../router';
                             <i class="fa-solid fa-pen"></i>
                         </span>
                     </div>
+
+                    <label class="label mt-2">Details</label>
+                    <textarea class="textarea is-info mx-6" v-model="editTask.details" :placeholder="task.details"></textarea>
                 
                     <div class="field is-horizontal mt-6">
                         <div class="field-label is-normal">
