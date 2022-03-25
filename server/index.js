@@ -8,12 +8,16 @@ const app = express()
 const port = 3000
 
 app
+  .use('/', express.static(__dirname + '/public'))
+
+  .use(express.json())
+
   .get('/', (req, res) => {
     res.send('You are on the homepage')
   })
-  .use('/users', usersController)
-  .use('/tasks', tasksController)
-  .use('/categories', categoriesController)
+  .use('/api/users', usersController)
+  .use('/api/tasks', tasksController)
+  .use('/api/categories', categoriesController)
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)

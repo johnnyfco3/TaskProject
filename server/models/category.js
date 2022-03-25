@@ -1,3 +1,5 @@
+let highestId = 5;
+
 const cList = [
     {
         name: "Schedule Plan",
@@ -31,4 +33,17 @@ const cList = [
     }
 ]
 
+function get(id) {
+    return cList.find(c => c.id == id)
+}
+
+module.exports = {
+    create(category){
+        category.id = ++highestId
+        category.total = 0
+        cList.push(category)
+    }
+}
+
 module.exports.cList = cList
+module.exports.get = get

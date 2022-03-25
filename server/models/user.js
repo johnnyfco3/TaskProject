@@ -1,3 +1,5 @@
+let highestId = 3;
+
 const list = [
     {
         firstName: 'Johnny',
@@ -25,4 +27,17 @@ const list = [
     }
 ]
 
+function get(id) {
+    return list.find(user => user.id === id);
+}
+
+module.exports = {
+    create(user){
+        user.id = ++highestId
+        list.push(user)
+        return user
+    }
+}
+
 module.exports.list = list
+module.exports.get = get

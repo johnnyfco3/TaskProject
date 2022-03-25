@@ -1,3 +1,5 @@
+let highestId = 5;
+
 const tList = [
     {
         name: "Call Supervisor",
@@ -56,4 +58,18 @@ const tList = [
     }
 ]
 
+function get(id) {
+    return tList.find(task => task.id === id)
+}
+
+module.exports = {
+    create(task){
+        task.id = ++highestId
+        task.completed = false
+        tList.push(task)
+        return task
+    }
+}
+
 module.exports.tList = tList
+module.exports.get = get

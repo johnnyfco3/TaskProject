@@ -1,0 +1,45 @@
+http://localhost:3000
+
+###
+GET http://localhost:3000/api/users
+
+###
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+    "firstName": "Mike",
+    "lastName": "Tyson",
+    "password": "boxing",
+    "email": "mtyson@gmail.com",
+    "friends": ["kamila@whitehouse.org"]
+}
+
+###
+GET http://localhost:3000/api/tasks
+
+###
+POST http://localhost:3000/api/tasks
+Content-Type: application/json
+
+{
+    "name": "Take out the trash",
+    "category": "Personal Errands",
+    "date": "2017-01-01",
+    "time": "12:00pm",
+    "important": true,
+    "assignedBy": null,
+    "userID": 1
+}
+
+###
+GET http://localhost:3000/api/categories
+
+###
+POST http://localhost:3000/api/categories
+Content-Type: application/json
+
+{
+    "name": "Reminders",
+    "userID": null
+}
