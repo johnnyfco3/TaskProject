@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue';
+import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import { cList } from '../models/categories';
 import { tList } from '../models/tasks';
@@ -12,7 +12,7 @@ import Categories from '../components/Categories.vue';
     createdTasks: 0,
     completedTasks: 0
   }
-  tList.map(t => {
+  tList.forEach(t => {
     if(t.userID === session.user?.id){
       total.createdTasks++
     }
@@ -21,6 +21,8 @@ import Categories from '../components/Categories.vue';
     }
     return total
   })
+
+  const list = ref(cList);
 
 </script>
 
@@ -51,7 +53,9 @@ import Categories from '../components/Categories.vue';
             <hr>
             <div class="columns is-multiline pt-6">
                 <div class="column">
-                  <Categories />
+                  <div v-for="(category, i) in list" :key="i">
+                    <Categories :category="category" :i="i"/>
+                  </div>
                 </div>
             </div>
             <div class="center pt-6">
