@@ -24,6 +24,7 @@ Content-Type: application/json
 
 {
     "name": "Take out the trash",
+    "details": "",
     "category": "Personal Errands",
     "date": "2017-01-01",
     "time": "12:00pm",

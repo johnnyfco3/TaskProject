@@ -3,6 +3,7 @@ let highestId = 5;
 const tList = [
     {
         name: "Call Supervisor",
+        details: "",
         category: "Work Projects",
         date: "2022-03-12",
         time: "10:30am",
@@ -14,6 +15,7 @@ const tList = [
     },
     {
         name: "Meeting with team",
+        details: "",
         category: "Work Projects",
         date: "2022-01-09",
         time: "1:00pm",
@@ -24,7 +26,8 @@ const tList = [
         id: 2
     },
     {
-        name: "List: Bakery and Bread. Meat and Seafood. Pasta and Rice. Oils, Sauces, Salad Dressings, and Condiments. Cereals and Breakfast Foods.",
+        name: "List",
+        details: "Bakery and Bread. Meat and Seafood. Pasta and Rice. Oils, Sauces, Salad Dressings, and Condiments. Cereals and Breakfast Foods.",
         category: "Grocery List",
         date: "2022-03-09",
         time: "6:30pm",
@@ -36,6 +39,7 @@ const tList = [
     },
     {
         name: "Study for midterm",
+        details: "",
         category: "Schedule Plan",
         date: "2022-03-11",
         time: "2:30pm",
@@ -47,6 +51,7 @@ const tList = [
     },
     {
         name: "Complete Homework 4 for Calculus",
+        details: "",
         category: "School",
         date: "2022-03-16",
         time: "9:00am",
