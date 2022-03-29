@@ -16,5 +16,13 @@ app
         const task = taskModel.create(req.body)
         res.status(CREATED_STATUS).send(task)
     })
+    .delete('/:id', (req,res) =>{
+        const task = taskModel.remove(req.params.id)
+        res.send({success: true, errors: [], data: task})
+    })
+    .patch('/:id', (req,res) =>{
+        const task = taskModel.update(req.params.id, req.body)
+        res.send(task)
+    })
 
 module.exports = app

@@ -29,14 +29,32 @@ const cList = [
 ]
 
 function get(id) {
-    return cList.find(c => c.id == id)
+    return { ...cList.find(c => c.id == id) }
+}
+
+function remove(id){
+    const index = cList.findIndex(c => c.id == id)
+    const category = cList.splice(index, 1)
+
+    return { ...category[0] }
+}
+
+function update(id, newCategory){
+    const index = cList.findIndex(c => c.id == id)
+    const oldCategory = cList[index]
+
+    newCategory = cList[index] = { ...oldCategory, ...newCategory }
+
+    return { ...newCategory }
 }
 
 module.exports = {
     create(category){
         category.id = ++highestId
         cList.push(category)
-    }
+    },
+    remove,
+    update
 }
 
 module.exports.cList = cList

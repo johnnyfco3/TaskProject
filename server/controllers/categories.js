@@ -15,6 +15,14 @@ app
         const category = categoryModel.create(req.body)
         res.status(CREATED_STATUS).send(category)
     })
+    .delete('/:id', (req, res) =>{
+        const category = categoryModel.remove(req.params.id)
+        res.send({ success: true, errors: [], data: category })
+    })
+    .patch('/:id', (req, res) =>{
+        const category = categoryModel.update(req.params.id, req.body)
+        res.send(category)
+    })
 
 
 module.exports = app
