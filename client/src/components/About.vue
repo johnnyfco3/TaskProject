@@ -34,4 +34,18 @@
     width: 90%;
   }
 }
+@media screen and (max-width: 800px) {
+  .section {
+    .title {
+      font-size: 3rem;
+    }
+    p {
+      font-size: 1.2rem;
+    }
+    img{
+      width: 90%;
+      height: auto;
+    }
+  }
+}
 </style>

@@ -166,50 +166,15 @@ import Footer from '../components/Footer.vue';
   }
 }
 @media screen and (max-width: 800px) {
-  main {
-    .card {
-      margin-left: 0;
-      width: 300px;
-      margin-right: 3%;
-      border-radius: 1rem;
-      padding: 0;
-      margin-top: 5%;
-      .title {
-        font-size: 1.3rem;
-        margin-bottom: -3%;
-      }
-      .first, .email {
-        width: 300px;
-      }
-      .confirm input {
+  #register {
+    main {
+      .card {
         width: 100%;
       }
-      .card-content {
-        .field label {
-          font-size: 10px;
-        }
-        .field input,
-        .icon {
-          border-radius: 1rem;
-          font-size: 10px;
-        }
-        .field button {
-          font-size: 10px;
-        }
-      }
-      .bottom-content {
-        font-size: 10px;
-        margin-top: -5%;
-        padding-bottom: 5%;
+      .app-title{
+        font-size: 3rem;
       }
     }
-    hr {
-      margin-top: -5%;
-    }
-  }
-  #register .container .app-title {
-    font-family: fantasy;
-    font-size: 3rem;
   }
 }
 </style>

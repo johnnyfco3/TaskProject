@@ -142,7 +142,7 @@ main {
     }
 
     .card {
-      margin-left: 6%;
+      margin-left: 15%;
       margin-right: 3%;
       width: 200px;
       border-radius: 1rem;

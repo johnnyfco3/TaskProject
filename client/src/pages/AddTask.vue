@@ -125,7 +125,7 @@ if(props.assign === "true"){
                     </div>
 
                     <label class="label mt-2">Details</label>
-                    <textarea class="textarea is-info mx-6" v-model="newTask.details"></textarea>
+                    <textarea class="textarea is-info" v-model="newTask.details"></textarea>
                 
                     <div class="field is-horizontal mt-6">
                         <div class="field-label is-normal">
@@ -206,6 +206,9 @@ if(props.assign === "true"){
       margin: 0 10%;
       .task-title {
         margin: 0 5%;
+      }
+      textarea {
+        width: 100%;
       }
     }
     .center button {

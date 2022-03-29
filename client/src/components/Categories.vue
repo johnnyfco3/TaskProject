@@ -30,7 +30,7 @@ import session from '../models/session';
     <div class="column">
       <div v-if="category.userID === null || category.userID === session.user?.id">
             <div class="card has-text-centered">
-              <i class="fa-solid fa-xmark remove" @click="remove(i)"></i>
+              <a href="#"><i class="fa-solid fa-xmark remove" @click="remove(i)"></i></a>
               <router-link :to="`/tasks/${category.name}`" >
                 <div class="card-content">
                     <h1 class="title"><i class="fa-solid fa-list icons" aria-hidden="true"></i> {{category.name}}</h1>
@@ -58,6 +58,7 @@ import session from '../models/session';
       top: 15%;
       right: 2%;
       cursor: pointer;
+      color: black
     }
     p {
       font-size: 1.2rem;
@@ -79,6 +80,9 @@ import session from '../models/session';
   .column {
     .card {
       margin: 0 5%;
+      .remove{
+        font-size: 1rem;
+      }
       .title {
         font-size: 1.5rem;
       }
