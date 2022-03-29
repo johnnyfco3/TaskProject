@@ -1,3 +1,5 @@
+const userModel = require("./user")
+
 let highestId = 5;
 
 const tList = [
@@ -64,7 +66,23 @@ const tList = [
 ]
 
 function get(id) {
-    return tList.find(task => task.id === id)
+    return { ...tList.find(task => task.id === parseInt(id)) }
+}
+
+function remove(id){
+    const index = tList.findIndex(task => task.id === parseInt(id))
+    const task = tList.splice(index, 1)
+
+    return { ...task[0] }
+}
+
+function update(id, newTask){
+    const index = tList.findIndex(task => task.id === parseInt(id))
+    const oldTask = tList[index]
+
+    newTask = tList[index] = { ...oldTask, ...newTask }
+
+    return { ...newTask }
 }
 
 module.exports = {
@@ -73,7 +91,9 @@ module.exports = {
         task.completed = false
         tList.push(task)
         return task
-    }
+    },
+    remove,
+    update
 }
 
 module.exports.tList = tList
