@@ -28,11 +28,15 @@ const router = createRouter({
 });
 
 router.beforeEach((to,from) =>{
-    if(['/overview', '/tasks/:category', '/friends', '/add-tasks/:assign/:email/:category', '/add-friends', '/add-category', '/edit-task/:name'].includes(to.path)){
+    if(session.destinationURL == null && to.path !== '/'){
+        session.destinationURL = to.path
+      }
+      const protectedURLs = ['/overview', '/tasks/:category', '/friends', '/add-tasks/:assign/:email/:category', '/add-friends', '/add-category', '/edit-task/:name']
+      if(protectedURLs.includes(to.path)){
         if(!session.user){
-            return '/'
+          return '/';
         }
-    }
+      }
 })
 
 export default router;

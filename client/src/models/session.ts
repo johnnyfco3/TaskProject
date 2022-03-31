@@ -3,7 +3,8 @@ import * as users from "../models/users";
 import { reactive } from "vue";
 
 const session = reactive({
-    user: null as users.User | null
+    user: null as users.User | null,
+    destinationURL: null as string | null
 });
 
 export async function Login(email: String, password: String) {
@@ -18,7 +19,7 @@ export async function Login(email: String, password: String) {
     }
 
     session.user = user
-    router.push('/overview')
+    router.push(session.destinationURL ?? '/overview')
 }
 
 export function Logout(){
