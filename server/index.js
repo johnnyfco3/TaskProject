@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require('express')
 
 const usersController = require("./controllers/users")
@@ -5,10 +6,10 @@ const tasksController = require("./controllers/tasks")
 const categoriesController = require("./controllers/categories")
 
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000
 
 app
-  .use('/', express.static(__dirname + '/public'))
+  .use('/', express.static(__dirname + '/public/'))
 
   .use(express.json())
 
