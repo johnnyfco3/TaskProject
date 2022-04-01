@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 let highestId = 3;
 
 const list = [
@@ -38,16 +39,24 @@ function remove(id){
     return { ...user[0], password: undefined };
 }
 
-function update(id, newUser){
+async function update(id, newUser){
     const index = list.findIndex(user => user.id === parseInt(id));
     const oldUser = list[index];
+
+    if(newUser.password){
+        newUser.password = await bcrypt.hash(newUser.password, +process.env.SALT_ROUNDS);
+    }
+
     newUser = list[index] = {...oldUser, ...newUser};
     return { ...newUser, password: undefined };
 }
 
 module.exports = {
-    create(user){
+    async create(user){
         user.id = ++highestId
+
+        user.password = await bcrypt.hash(user.password, +process.env.SALT_ROUNDS);
+
         list.push(user)
         return user
     },
