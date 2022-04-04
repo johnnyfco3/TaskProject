@@ -2,12 +2,15 @@ http://localhost:3001
 
 ###
 GET http://localhost:3001/api/users/
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJNaWtlIiwibGFzdE5hbWUiOiJUeXNvbiIsImVtYWlsIjoibXR5c29uQGdtYWlsLmNvbSIsImZyaWVuZHMiOlsia2FtaWxhQHdoaXRlaG91c2Uub3JnIl0sImlkIjo0LCJpYXQiOjE2NDkxMTQ1NDV9.BJSY5ZPN1agJg-E35mfpLyR6uRh6YX8ITCTn6FEwEak
 
 ###
 GET http://localhost:3001/api/users/1
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJNaWtlIiwibGFzdE5hbWUiOiJUeXNvbiIsImVtYWlsIjoibXR5c29uQGdtYWlsLmNvbSIsImZyaWVuZHMiOlsia2FtaWxhQHdoaXRlaG91c2Uub3JnIl0sImlkIjo0LCJpYXQiOjE2NDkxMTQ1NDV9.BJSY5ZPN1agJg-E35mfpLyR6uRh6YX8ITCTn6FEwEak
 
 ###
-DELETE  http://localhost:3001/api/users/2
+DELETE  http://localhost:3001/api/users/4
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJNaWtlIiwibGFzdE5hbWUiOiJUeXNvbiIsImVtYWlsIjoibXR5c29uQGdtYWlsLmNvbSIsImZyaWVuZHMiOlsia2FtaWxhQHdoaXRlaG91c2Uub3JnIl0sImlkIjo0LCJpYXQiOjE2NDkxMTQ1NDV9.BJSY5ZPN1agJg-E35mfpLyR6uRh6YX8ITCTn6FEwEak
 
 ###
 POST http://localhost:3001/api/users/
@@ -24,25 +27,40 @@ Content-Type: application/json
 ###
 PATCH  http://localhost:3001/api/users/4
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJNaWtlIiwibGFzdE5hbWUiOiJUeXNvbiIsImVtYWlsIjoibXR5c29uQGdtYWlsLmNvbSIsImZyaWVuZHMiOlsia2FtaWxhQHdoaXRlaG91c2Uub3JnIl0sImlkIjo0LCJpYXQiOjE2NDkxMTQ1NDV9.BJSY5ZPN1agJg-E35mfpLyR6uRh6YX8ITCTn6FEwEak
 
 {
-    "lastName": "Jackson"
+    "lastName": "Jackson",
+    "password": "testing"
+}
+
+###
+POST http://localhost:3001/api/users/login
+Content-Type: application/json
+
+{
+    "email": "mtyson@gmail.com",
+    "password": "boxing"
 }
 
 
 
 ###
 GET http://localhost:3001/api/tasks/
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJNaWtlIiwibGFzdE5hbWUiOiJUeXNvbiIsImVtYWlsIjoibXR5c29uQGdtYWlsLmNvbSIsImZyaWVuZHMiOlsia2FtaWxhQHdoaXRlaG91c2Uub3JnIl0sImlkIjo0LCJpYXQiOjE2NDkxMTQ1NDV9.BJSY5ZPN1agJg-E35mfpLyR6uRh6YX8ITCTn6FEwEak
 
 ###
-GET http://localhost:3001/api/tasks/1
+GET http://localhost:3001/api/tasks/6
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJNaWtlIiwibGFzdE5hbWUiOiJUeXNvbiIsImVtYWlsIjoibXR5c29uQGdtYWlsLmNvbSIsImZyaWVuZHMiOlsia2FtaWxhQHdoaXRlaG91c2Uub3JnIl0sImlkIjo0LCJpYXQiOjE2NDkxMTQ1NDV9.BJSY5ZPN1agJg-E35mfpLyR6uRh6YX8ITCTn6FEwEak
 
 ###
 DELETE  http://localhost:3001/api/tasks/2
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJNaWtlIiwibGFzdE5hbWUiOiJUeXNvbiIsImVtYWlsIjoibXR5c29uQGdtYWlsLmNvbSIsImZyaWVuZHMiOlsia2FtaWxhQHdoaXRlaG91c2Uub3JnIl0sImlkIjo0LCJpYXQiOjE2NDkxMTQ1NDV9.BJSY5ZPN1agJg-E35mfpLyR6uRh6YX8ITCTn6FEwEak
 
 ###
 POST http://localhost:3001/api/tasks/
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJNaWtlIiwibGFzdE5hbWUiOiJUeXNvbiIsImVtYWlsIjoibXR5c29uQGdtYWlsLmNvbSIsImZyaWVuZHMiOlsia2FtaWxhQHdoaXRlaG91c2Uub3JnIl0sImlkIjo0LCJpYXQiOjE2NDkxMTQ1NDV9.BJSY5ZPN1agJg-E35mfpLyR6uRh6YX8ITCTn6FEwEak
 
 {
     "name": "Take out the trash",
@@ -58,6 +76,7 @@ Content-Type: application/json
 ###
 PATCH http://localhost:3001/api/tasks/1
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJNaWtlIiwibGFzdE5hbWUiOiJUeXNvbiIsImVtYWlsIjoibXR5c29uQGdtYWlsLmNvbSIsImZyaWVuZHMiOlsia2FtaWxhQHdoaXRlaG91c2Uub3JnIl0sImlkIjo0LCJpYXQiOjE2NDkxMTQ1NDV9.BJSY5ZPN1agJg-E35mfpLyR6uRh6YX8ITCTn6FEwEak
 
 {
     "completed": true,
@@ -68,25 +87,35 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3001/api/categories/
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJNaWtlIiwibGFzdE5hbWUiOiJUeXNvbiIsImVtYWlsIjoibXR5c29uQGdtYWlsLmNvbSIsImZyaWVuZHMiOlsia2FtaWxhQHdoaXRlaG91c2Uub3JnIl0sImlkIjo0LCJpYXQiOjE2NDkxMTQ1NDV9.BJSY5ZPN1agJg-E35mfpLyR6uRh6YX8ITCTn6FEwEak
 
 ###
 GET http://localhost:3001/api/categories/1
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJNaWtlIiwibGFzdE5hbWUiOiJUeXNvbiIsImVtYWlsIjoibXR5c29uQGdtYWlsLmNvbSIsImZyaWVuZHMiOlsia2FtaWxhQHdoaXRlaG91c2Uub3JnIl0sImlkIjo0LCJpYXQiOjE2NDkxMTQ1NDV9.BJSY5ZPN1agJg-E35mfpLyR6uRh6YX8ITCTn6FEwEak
+
+###
+GET http://localhost:3001/api/categories/user/example@gmail.com
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJNaWtlIiwibGFzdE5hbWUiOiJUeXNvbiIsImVtYWlsIjoibXR5c29uQGdtYWlsLmNvbSIsImZyaWVuZHMiOlsia2FtaWxhQHdoaXRlaG91c2Uub3JnIl0sImlkIjo0LCJpYXQiOjE2NDkxMTQ1NDV9.BJSY5ZPN1agJg-E35mfpLyR6uRh6YX8ITCTn6FEwEak
+
 
 ###
 DELETE  http://localhost:3001/api/categories/6
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJNaWtlIiwibGFzdE5hbWUiOiJUeXNvbiIsImVtYWlsIjoibXR5c29uQGdtYWlsLmNvbSIsImZyaWVuZHMiOlsia2FtaWxhQHdoaXRlaG91c2Uub3JnIl0sImlkIjo0LCJpYXQiOjE2NDkxMTQ1NDV9.BJSY5ZPN1agJg-E35mfpLyR6uRh6YX8ITCTn6FEwEak
 
 ###
 POST http://localhost:3001/api/categories/
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJNaWtlIiwibGFzdE5hbWUiOiJUeXNvbiIsImVtYWlsIjoibXR5c29uQGdtYWlsLmNvbSIsImZyaWVuZHMiOlsia2FtaWxhQHdoaXRlaG91c2Uub3JnIl0sImlkIjo0LCJpYXQiOjE2NDkxMTQ1NDV9.BJSY5ZPN1agJg-E35mfpLyR6uRh6YX8ITCTn6FEwEak
 
 {
     "name": "Reminders",
-    "userID": null
+    "user": "example@gmail.com"
 }
 
 ###
 PATCH  http://localhost:3001/api/categories/1
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJNaWtlIiwibGFzdE5hbWUiOiJUeXNvbiIsImVtYWlsIjoibXR5c29uQGdtYWlsLmNvbSIsImZyaWVuZHMiOlsia2FtaWxhQHdoaXRlaG91c2Uub3JnIl0sImlkIjo0LCJpYXQiOjE2NDkxMTQ1NDV9.BJSY5ZPN1agJg-E35mfpLyR6uRh6YX8ITCTn6FEwEak
 
 {
     "name": "Schedule Events"
