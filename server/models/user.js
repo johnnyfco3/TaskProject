@@ -1,4 +1,6 @@
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
 let highestId = 3;
 
 const list = [
@@ -32,11 +34,29 @@ function get(id) {
     return { ...list.find(user => user.id === parseInt(id)), password: undefined };
 }
 
+function getByEmail(email){
+    return { ...list.find(user => user.email === email), password: undefined };
+}
+
 function remove(id){
     const index = list.findIndex(user => user.id === parseInt(id));
     const user = list.splice(index, 1);
     
     return { ...user[0], password: undefined };
+}
+
+function removeFriends(id, friends){
+    const index = list.findIndex(user => user.id === parseInt(id));
+    const user = list[index];
+    user.friends = user.friends.filter(friend => !friends.includes(friend));
+    return { ...user[0], password: undefined };
+}
+
+function addFriends(id, friend){
+    const index = list.findIndex(user => user.id === parseInt(id));
+    const user = list[index];
+    user.friends.push(friend);
+    return { ...user };
 }
 
 async function update(id, newUser){
@@ -51,6 +71,31 @@ async function update(id, newUser){
     return { ...newUser, password: undefined };
 }
 
+async function login(email, password){
+    const user = list.find(user => user.email === email);
+    if(!user){
+        throw { statusCode: 404, message: 'User not Found' };
+    }
+    if(!await bcrypt.compare(password, user.password)){
+        throw { statusCode: 401, message: 'Invalid Password' };
+    }
+
+    const data = { ...user, password: undefined };
+    const token = jwt.sign(data, process.env.JWT_SECRET);
+    return { ...data, token };
+}
+
+function fromToken(token){
+    return new Promise((resolve, reject) => {
+        jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+            if(err){
+                reject(err);
+            }
+            resolve(decoded);
+        });
+    })
+}
+
 module.exports = {
     async create(user){
         user.id = ++highestId
@@ -62,6 +107,11 @@ module.exports = {
     },
     remove, 
     update,
+    login,
+    fromToken,
+    removeFriends,
+    addFriends,
+    getByEmail,
     get list(){
         return list.map(user => ({...user, password: undefined}))
     }

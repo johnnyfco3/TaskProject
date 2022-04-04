@@ -65,15 +65,21 @@ const tList = [
     }
 ]
 
+const includeUser = task => ({ ...task, user: userModel.get(task.userID) })
+
 function get(id) {
-    return { ...tList.find(task => task.id === parseInt(id)) }
+    const task = tList.find(task => task.id === parseInt(id)) 
+    if(!task){
+        throw { statusCode: 404, message: 'Task not Found' };
+    }
+    return includeUser(task)
 }
 
 function remove(id){
     const index = tList.findIndex(task => task.id === parseInt(id))
     const task = tList.splice(index, 1)
 
-    return { ...task[0] }
+    return includeUser(task[0])
 }
 
 function update(id, newTask){
@@ -82,7 +88,7 @@ function update(id, newTask){
 
     newTask = tList[index] = { ...oldTask, ...newTask }
 
-    return { ...newTask }
+    return includeUser(newTask)
 }
 
 module.exports = {
@@ -93,8 +99,10 @@ module.exports = {
         return task
     },
     remove,
-    update
+    update,
+    get list(){
+        return tList.map(t => includeUser(t))
+    }
 }
 
-module.exports.tList = tList
 module.exports.get = get
