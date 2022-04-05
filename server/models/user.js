@@ -31,11 +31,19 @@ const list = [
 ]
 
 function get(id) {
-    return { ...list.find(user => user.id === parseInt(id)), password: undefined };
+    const user = list.find(user => user.id === parseInt(id))
+    if(!user){
+        throw { statusCode: 404, message: 'User not Found' };
+    }
+    return { ...user, password: undefined };
 }
 
 function getByEmail(email){
-    return { ...list.find(user => user.email === email), password: undefined };
+    const user = list.find(user => user.email === email);
+    if(!user){
+        throw { statusCode: 404, message: 'User not Found' };
+    }
+    return { ...user, password: undefined };
 }
 
 function remove(id){
