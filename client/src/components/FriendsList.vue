@@ -92,7 +92,7 @@ function assignTo(email:string){
     }
   }
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 750px) {
   #friends {
     .list .card {
       margin: 2% 5%;

@@ -165,7 +165,7 @@ import Footer from '../components/Footer.vue';
     flex-direction: column;
   }
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 750px) {
   #register {
     main {
       .card {

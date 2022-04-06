@@ -69,7 +69,7 @@ import session from '../models/session';
     box-shadow: 8px 6px 6px lightgray;
   }
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 750px) {
   header .title {
     font-size: 1.5rem;
     width: 100px;

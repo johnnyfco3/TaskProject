@@ -85,7 +85,7 @@ import Categories from '../components/Categories.vue';
     }
   }
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 750px) {
   .top-content .title {
     font-size: 2rem;
   }

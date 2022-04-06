@@ -40,7 +40,7 @@ const friendsList = ref(user?.friends ?? [])
     }
   }
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 750px) {
   header {
     .level-left .fa-long-arrow-alt-left {
       position: absolute;

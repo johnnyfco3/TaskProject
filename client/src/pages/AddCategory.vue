@@ -66,7 +66,7 @@ import router from '../router';
     }
   }
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 750px) {
  form {
     text-align: center;
     margin: 0 10%;

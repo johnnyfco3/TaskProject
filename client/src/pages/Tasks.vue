@@ -79,7 +79,7 @@ import TaskList from "../components/TaskList.vue";
     }
   }
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 750px) {
   main {
     .center {
       display: flex;

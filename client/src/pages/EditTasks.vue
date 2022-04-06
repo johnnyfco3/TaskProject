@@ -78,7 +78,7 @@ import router from '../router';
                         <div class="field-body">
                             <div class="field">
                                 <p class="control is-expanded">
-                                <input class="input is-info" type="date" v-model="editTask.date">
+                                <input class="input is-info" type="text" v-model="editTask.date" :placeholder="task.date">
                                 </p>
                             </div>
                         </div>
@@ -88,7 +88,7 @@ import router from '../router';
                         <div class="field-body">
                             <div class="field">
                               <p class="control is-expanded">
-                                <input class="input is-info" type="time" v-model="editTask.time">
+                                <input class="input is-info" type="text" v-model="editTask.time" :placeholder="task.time">
                               </p>
                             </div>
                         </div>
@@ -147,7 +147,7 @@ import router from '../router';
     }
   }
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 750px) {
   main {
     form {
       text-align: center;

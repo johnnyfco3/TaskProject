@@ -99,7 +99,7 @@ header {
     }
   }
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 750px) {
   header .title {
     font-size: 1.5rem;
     width: 100px;

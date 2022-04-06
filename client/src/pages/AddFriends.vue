@@ -68,7 +68,7 @@ import router from '../router';
     }
   }
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 750px) {
   main {
     form .task-title {
       margin: 0 5%;

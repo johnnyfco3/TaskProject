@@ -199,7 +199,7 @@ if(props.assign === "true"){
     }
   }
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 750px) {
   main {
     form {
       text-align: center;

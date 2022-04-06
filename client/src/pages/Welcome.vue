@@ -125,7 +125,7 @@ main {
     }
   }
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 750px) {
   main {
     .left-side{
         h1 {
