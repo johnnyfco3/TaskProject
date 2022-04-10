@@ -13,7 +13,7 @@ import router from '../router';
           cList.push(
               {
                   name: newCategory.name,
-                  userID: session.user?.id,
+                  user: session.user?.email,
                   id: cList.length + 1
               }
           )

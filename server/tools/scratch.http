@@ -43,6 +43,9 @@ Content-Type: application/json
     "password": "boxing"
 }
 
+###
+POST http://localhost:3001/api/users/seed
+
 
 
 ###
@@ -82,6 +85,9 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJNa
     "completed": true,
 }
 
+###
+POST http://localhost:3001/api/tasks/seed
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJNaWtlIiwibGFzdE5hbWUiOiJUeXNvbiIsImVtYWlsIjoibXR5c29uQGdtYWlsLmNvbSIsImZyaWVuZHMiOlsia2FtaWxhQHdoaXRlaG91c2Uub3JnIl0sImlkIjo0LCJpYXQiOjE2NDkxMTQ1NDV9.BJSY5ZPN1agJg-E35mfpLyR6uRh6YX8ITCTn6FEwEak
 
 
 
@@ -120,3 +126,7 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJNa
 {
     "name": "Schedule Events"
 }
+
+###
+POST http://localhost:3001/api/categories/seed
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJNaWtlIiwibGFzdE5hbWUiOiJUeXNvbiIsImVtYWlsIjoibXR5c29uQGdtYWlsLmNvbSIsImZyaWVuZHMiOlsia2FtaWxhQHdoaXRlaG91c2Uub3JnIl0sImlkIjo0LCJpYXQiOjE2NDkxMTQ1NDV9.BJSY5ZPN1agJg-E35mfpLyR6uRh6YX8ITCTn6FEwEak

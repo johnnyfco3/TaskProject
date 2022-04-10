@@ -9,34 +9,53 @@ const CREATED_STATUS = 201
 
 app
     // GET
-    .get('/', requireAuth, (req, res) =>{
-        res.send(categoryModel.cList)
+    .get('/', requireAuth, (req, res, next) =>{
+        categoryModel.getList()
+        .then(categories => {
+            res.send(categories)
+        }).catch(next)
     })
-    .get('/:id', requireAuth, (req, res) =>{
-        const category = categoryModel.get(req.params.id)
-        res.send(category)
+    .get('/:id', requireAuth, (req, res, next) =>{
+        categoryModel.get(req.params.id)
+        .then(category => {
+            res.send(category)
+        }).catch(next)
     })
-    .get('/user/:email', requireAuth, (req, res) =>{
-        const category = categoryModel.getByUser(req.params.email)
-        res.send(category)
+    .get('/user/:email', requireAuth, (req, res, next) =>{
+        categoryModel.getByUser(req.params.email)
+        .then(categories => {
+            res.send(categories)
+        }).catch(next)
     })
 
     // POST
-    .post('/', requireAuth, (req, res) =>{
-        const category = categoryModel.create(req.body)
-        res.status(CREATED_STATUS).send(category)
+    .post('/', requireAuth, (req, res, next) =>{
+        categoryModel.create(req.body)
+        .then(category => {
+            res.status(CREATED_STATUS).send(category)
+        }).catch(next)
+    })
+    .post('/seed', requireAuth, (req, res, next) =>{
+        categoryModel.seed()
+        .then(x => {
+            res.send({ success: true, errors: [], data: x.insertedIds })
+        }).catch(next)
     })
 
     // DELETE
-    .delete('/:id', requireAuth, (req, res) =>{
-        const category = categoryModel.remove(req.params.id)
-        res.send({ success: true, errors: [], data: category })
+    .delete('/:id', requireAuth, (req, res, next) =>{
+        categoryModel.remove(req.params.id)
+        .then(category => {
+            res.send({ success: true, errors: [], data: category })
+        }).catch(next)
     })
 
     // PATCH
-    .patch('/:id', requireAuth, (req, res) =>{
-        const category = categoryModel.update(req.params.id, req.body)
-        res.send(category)
+    .patch('/:id', requireAuth, (req, res, next) =>{
+        categoryModel.update(req.params.id, req.body)
+        .then(category => {
+            res.send({ success: true, errors: [], data: category })
+        }).catch(next)
     })
 
 

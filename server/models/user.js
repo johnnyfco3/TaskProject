@@ -1,5 +1,8 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { db, isConnected, ObjectId } = require('./mongo');
+
+const collection = db.db('taskApp').collection('users');
 
 let highestId = 3;
 
@@ -10,7 +13,6 @@ const list = [
         email: 'example@gmail.com',
         password: 'password',
         friends: ['john@doe.com', 'kamila@whitehouse.org'],
-        id: 1
     },
     {
         firstName: 'Vladimir',
@@ -18,7 +20,6 @@ const list = [
         password: 'long table',
         email: 'john@doe.com',
         friends: ['example@gmail.com', 'kamila@whitehouse.org'],
-        id: 2
     },
     {
         firstName: 'Kamala',
@@ -26,57 +27,54 @@ const list = [
         password: 'password',
         email: 'kamila@whitehouse.org',
         friends: ['example@gmail.com', 'john@doe.com'],
-        id: 3
     }
 ]
 
-function get(id) {
-    const user = list.find(user => user.id === parseInt(id))
+async function get(id) {
+    const user = await collection.findOne({ _id: new ObjectId(id) });
     if(!user){
         throw { statusCode: 404, message: 'User not Found' };
     }
     return { ...user, password: undefined };
 }
 
-function getByEmail(email){
-    const user = list.find(user => user.email === email);
+async function getByEmail(email){
+    const user = await collection.findOne({email: email});
     if(!user){
         throw { statusCode: 404, message: 'User not Found' };
     }
     return { ...user, password: undefined };
 }
 
-function remove(id){
-    const index = list.findIndex(user => user.id === parseInt(id));
-    const user = list.splice(index, 1);
-    
-    return { ...user[0], password: undefined };
+async function remove(id){
+    const user = await collection.findOneAndDelete({ _id: new ObjectId(id) });
+
+    return { ...user.value, password: undefined };
 }
 
-function removeFriends(id, friends){
-    const index = list.findIndex(user => user.id === parseInt(id));
-    const user = list[index];
-    user.friends = user.friends.filter(friend => !friends.includes(friend));
-    return { ...user[0], password: undefined };
+async function removeFriends(id, friends){
+    const result = await collection.updateOne(
+        { _id: new ObjectId(id) },
+        { $pull: { friends: { $in: friends } } }
+    )
+    return { ...result.value, password: undefined };
 }
 
-function addFriends(id, friend){
-    const index = list.findIndex(user => user.id === parseInt(id));
-    const user = list[index];
-    user.friends.push(friend);
-    return { ...user };
+async function addFriends(id, friend){
+    const result = await collection.updateOne(
+        { _id: new ObjectId(id) },
+        { $addToSet: { friends: friend } }
+    )
+    return { ...result.value, password: undefined };
 }
 
 async function update(id, newUser){
-    const index = list.findIndex(user => user.id === parseInt(id));
-    const oldUser = list[index];
-
-    if(newUser.password){
-        newUser.password = await bcrypt.hash(newUser.password, +process.env.SALT_ROUNDS);
-    }
-
-    newUser = list[index] = {...oldUser, ...newUser};
-    return { ...newUser, password: undefined };
+    const result = await collection.findOneAndUpdate(
+        { _id: new ObjectId(id) },
+        { $set: newUser },
+        { returnDocument: 'after' }
+    )
+    return { ...result.value, password: undefined };
 }
 
 async function login(email, password){
@@ -104,6 +102,10 @@ function fromToken(token){
     })
 }
 
+function seed(){
+    return collection.insertMany(list);
+}
+
 module.exports = {
     async create(user){
         user.id = ++highestId
@@ -120,8 +122,9 @@ module.exports = {
     removeFriends,
     addFriends,
     getByEmail,
-    get list(){
-        return list.map(user => ({...user, password: undefined}))
+    seed,
+    async getList(){
+        return (await collection.find().toArray()).map(user => ({ ...user, password: undefined }));
     }
 }
 
