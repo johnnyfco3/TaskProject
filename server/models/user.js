@@ -60,10 +60,10 @@ async function removeFriends(id, friend){
     return { ...result.value, password: undefined };
 }
 
-async function addFriends(id, friend){
+async function addFriends(id, newFriend){
     const result = await collection.updateOne(
         { _id: new ObjectId(id) },
-        { $addToSet: { friends: friend } }
+        { $addToSet: { friends: newFriend } }
     )
     return { ...result.value, password: undefined };
 }

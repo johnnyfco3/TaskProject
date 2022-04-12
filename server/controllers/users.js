@@ -21,6 +21,12 @@ app
             res.send(user)
         }).catch(next)
     })
+    .get('/email/:email', requireAuth, (req,res,next)=>{
+        userModel.getByEmail(req.params.email)
+        .then(user => {
+            res.send(user)
+        }).catch(next)
+    })
 
     // POST
     .post('/', (req,res, next)=>{
@@ -29,8 +35,8 @@ app
             res.status(CREATED_STATUS).send(user)
         }).catch(next)
     })
-    .post('/:id/:friend', requireAuth, (req,res, next)=>{
-        userModel.addFriends(req.params.id, req.params.friend)
+    .post('/addFriend/:id', requireAuth, (req,res, next)=>{
+        userModel.addFriends(req.params.id, req.body.friend)
         .then(user => {
             res.send({ success: true, errors: [], data: user })
         }).catch(next)
@@ -55,8 +61,8 @@ app
             res.send({success: true, errors: [], data: user})
         }).catch(next)
     })
-    .delete('/:id/:friend', requireAuth, (req,res,next)=>{
-        userModel.removeFriends(req.params.id, req.params.friend)
+    .delete('/friend/:id', requireAuth, (req,res,next)=>{
+        userModel.removeFriends(req.params.id, req.body.friend)
         .then(user => {
             res.send({success: true, errors: [], data: user})
         }).catch(next)

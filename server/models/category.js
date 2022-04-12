@@ -55,7 +55,8 @@ async function remove(id){
 async function update(id, newCategory){
     const category = await collection.findOneAndUpdate(
         { _id: new ObjectId(id) },
-        { $set: newCategory }
+        { $set: newCategory },
+        { returnDocument: 'after' }
     );
 
     return includeUser(category)
