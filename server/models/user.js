@@ -39,7 +39,7 @@ async function get(id) {
 }
 
 async function getByEmail(email){
-    const user = await collection.findOne({email: email});
+    const user = await collection.findOne({email});
     if(!user){
         throw { statusCode: 404, message: 'User not Found' };
     }
@@ -52,10 +52,10 @@ async function remove(id){
     return { ...user.value, password: undefined };
 }
 
-async function removeFriends(id, friends){
+async function removeFriends(id, friend){
     const result = await collection.updateOne(
         { _id: new ObjectId(id) },
-        { $pull: { friends: { $in: friends } } }
+        { $pull: { friends: { $in: friend } } }
     )
     return { ...result.value, password: undefined };
 }
@@ -74,11 +74,12 @@ async function update(id, newUser){
         { $set: newUser },
         { returnDocument: 'after' }
     )
-    return { ...result.value, password: undefined };
+    return { ...result, password: undefined };
 }
 
 async function login(email, password){
-    const user = list.find(user => user.email === email);
+    const user = collection.findOne({ email });
+
     if(!user){
         throw { statusCode: 404, message: 'User not Found' };
     }
@@ -88,6 +89,7 @@ async function login(email, password){
 
     const data = { ...user, password: undefined };
     const token = jwt.sign(data, process.env.JWT_SECRET);
+
     return { ...data, token };
 }
 
@@ -107,13 +109,16 @@ function seed(){
 }
 
 module.exports = {
+    collection,
     async create(user){
         user.id = ++highestId
 
         user.password = await bcrypt.hash(user.password, +process.env.SALT_ROUNDS);
 
-        list.push(user)
-        return user
+        const result = await collection.insertOne(user);
+        user = await get(result.insertedId);
+
+        return {...user, password: undefined};
     },
     remove, 
     update,

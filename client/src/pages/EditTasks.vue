@@ -54,7 +54,7 @@ import router from '../router';
                             <select v-model="editTask.category">
                             <option disabled>{{task.category}}</option>
                             <option v-for="(category,i) in cList" :key="i">
-                                {{category.userID === null || category.userID === session.user?.id ? category.name : null}}
+                                {{category.user === null || category.user === session.user?.email ? category.name : null}}
                               </option>
                             </select>
                         </div>

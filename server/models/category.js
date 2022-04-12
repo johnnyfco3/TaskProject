@@ -28,7 +28,7 @@ const cList = [
     }
 ]
 
-const includeUser = (category) => ({ ...category, user: userModel.getByEmail(category.user) })
+const includeUser = async category => ({ ...category, user: await userModel.getByEmail(category.user) })
 
 async function get(id) {
     const category = await collection.findOne({ _id: new ObjectId(id) });
@@ -58,7 +58,7 @@ async function update(id, newCategory){
         { $set: newCategory }
     );
 
-    return includeUser(category.value)
+    return includeUser(category)
 }
 
 function seed(){
@@ -66,9 +66,13 @@ function seed(){
 }
 
 module.exports = {
-    create(category){
+    collection,
+    async create(category){
         category.id = ++highestId
-        cList.push(category)
+        
+        const result = await collection.insertOne(category);
+        category = await get(result.insertedId);
+
         return category
     },
     remove,
@@ -76,7 +80,8 @@ module.exports = {
     getByUser,
     seed,
     async getList(){
-        return (await collection.find().toArray()).map(c => includeUser(c))
+        const category = await collection.find().toArray();
+        return Promise.all( category.map(c => includeUser(c)) )
     }
 }
 

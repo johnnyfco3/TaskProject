@@ -15,7 +15,7 @@ const tList = [
         completed: false,
         important: true,
         assignedBy: null,
-        userID: '625311884ac5628667138ad9',
+        userID: 1,
     },
     {
         name: "Meeting with team",
@@ -26,7 +26,7 @@ const tList = [
         completed: true,
         important: true,
         assignedBy: 2,
-        userID: '625311884ac5628667138ad9',
+        userID: 1,
     },
     {
         name: "List",
@@ -37,7 +37,7 @@ const tList = [
         completed: false,
         important: false,
         assignedBy: null,
-        userID: '625311884ac5628667138ada',
+        userID: 2,
     },
     {
         name: "Study for midterm",
@@ -48,7 +48,7 @@ const tList = [
         completed: false,
         important: true,
         assignedBy: 3,
-        userID: '625311884ac5628667138ada',
+        userID: 2,
     },
     {
         name: "Complete Homework 4 for Calculus",
@@ -59,11 +59,11 @@ const tList = [
         completed: false,
         important: true,
         assignedBy: null,
-        userID: '625311884ac5628667138ad9',
+        userID: 3,
     }
 ]
 
-const includeUser = task => ({ ...task, user: userModel.get(task.userID) })
+const includeUser = async task => ({ ...task, user: await userModel.get(task.userID) })
 
 async function get(id) {
     const task = await collection.findOne({ _id: new ObjectId(id) });
@@ -74,7 +74,7 @@ async function get(id) {
 }
 
 async function getByUser(userID) {
-    const task = await collection.find({ userID: userID }).toArray();
+    const task = await collection.find({ userID }).toArray();
     if(!task){
         throw { statusCode: 404, message: 'Task not Found' };
     }
@@ -93,7 +93,7 @@ async function update(id, newTask){
         { $set: newTask },
         { returnDocument: 'after' }
     )
-    return includeUser(task.value)
+    return includeUser(task)
 }
 
 function seed(){
@@ -101,10 +101,14 @@ function seed(){
 }
 
 module.exports = {
-    create(task){
+    collection,
+    async create(task){
         task.id = ++highestId
         task.completed = false
-        tList.push(task)
+        
+        const result = await collection.insertOne(task);
+        task = await get(result.insertedId);
+
         return task
     },
     remove,
@@ -112,7 +116,8 @@ module.exports = {
     getByUser,
     seed,
     async getList(){
-        return (await collection.find().toArray()).map(t => includeUser(t))
+        const tasks = await collection.find().toArray();
+        return Promise.all(tasks.map(t => includeUser(t)))
     }
 }
 

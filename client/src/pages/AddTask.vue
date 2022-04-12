@@ -110,7 +110,7 @@ if(props.assign === "true"){
                             <select required v-model="newTask.category">
                               <option selected>{{props.category !== 'null' ? props.category : ""}}</option>
                               <option v-for="(category,i) in cList" :key="i">
-                                {{category.name !== props.category && (category.userID === null || category.userID === session.user?.id) ? category.name : props.category}}
+                                {{category.name !== props.category && (category.user === null || category.user === session.user?.email) ? category.name : props.category}}
                               </option>
                             </select>
                         </div>
