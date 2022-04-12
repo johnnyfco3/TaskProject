@@ -55,7 +55,8 @@ async function remove(id){
 async function removeFriends(id, friend){
     const result = await collection.updateOne(
         { _id: new ObjectId(id) },
-        { $pull: { friends: { $in: friend } } }
+        { $pull: { friends: { $in: friend } } },
+        { returnDocument: 'after' }
     )
     return { ...result.value, password: undefined };
 }
@@ -63,7 +64,8 @@ async function removeFriends(id, friend){
 async function addFriends(id, newFriend){
     const result = await collection.updateOne(
         { _id: new ObjectId(id) },
-        { $addToSet: { friends: newFriend } }
+        { $addToSet: { friends: newFriend } },
+        { returnDocument: 'after' }
     )
     return { ...result.value, password: undefined };
 }
@@ -112,6 +114,10 @@ module.exports = {
     collection,
     async create(user){
         user.id = ++highestId
+
+        if(!user.email){
+            throw { statusCode: 400, message: 'Email is required' };
+        }        
 
         user.password = await bcrypt.hash(user.password, +process.env.SALT_ROUNDS);
 
