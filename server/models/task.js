@@ -1,4 +1,7 @@
 const userModel = require("./user")
+const { db, isConnected, ObjectId } = require('./mongo');
+
+const collection = db.db('taskApp').collection('tasks');
 
 let highestId = 5;
 
@@ -13,7 +16,6 @@ const tList = [
         important: true,
         assignedBy: null,
         userID: 1,
-        id: 1
     },
     {
         name: "Meeting with team",
@@ -25,7 +27,6 @@ const tList = [
         important: true,
         assignedBy: 2,
         userID: 1,
-        id: 2
     },
     {
         name: "List",
@@ -37,7 +38,6 @@ const tList = [
         important: false,
         assignedBy: null,
         userID: 2,
-        id: 3
     },
     {
         name: "Study for midterm",
@@ -49,7 +49,6 @@ const tList = [
         important: true,
         assignedBy: 3,
         userID: 2,
-        id: 4
     },
     {
         name: "Complete Homework 4 for Calculus",
@@ -60,48 +59,65 @@ const tList = [
         completed: false,
         important: true,
         assignedBy: null,
-        userID: 1,
-        id: 5
+        userID: 3,
     }
 ]
 
-const includeUser = task => ({ ...task, user: userModel.get(task.userID) })
+const includeUser = async task => ({ ...task, user: await userModel.get(task.userID) })
 
-function get(id) {
-    const task = tList.find(task => task.id === parseInt(id)) 
+async function get(id) {
+    const task = await collection.findOne({ _id: new ObjectId(id) });
     if(!task){
         throw { statusCode: 404, message: 'Task not Found' };
     }
     return includeUser(task)
 }
 
-function remove(id){
-    const index = tList.findIndex(task => task.id === parseInt(id))
-    const task = tList.splice(index, 1)
-
-    return includeUser(task[0])
+async function getByUser(userID) {
+    const task = await collection.find({ userID }).toArray();
+    if(!task){
+        throw { statusCode: 404, message: 'Task not Found' };
+    }
+    return task.map(includeUser)
 }
 
-function update(id, newTask){
-    const index = tList.findIndex(task => task.id === parseInt(id))
-    const oldTask = tList[index]
+async function remove(id){
+    const task = await collection.findOneAndDelete({ _id: new ObjectId(id) });
 
-    newTask = tList[index] = { ...oldTask, ...newTask }
+    return includeUser(task.value)
+}
 
-    return includeUser(newTask)
+async function update(id, newTask){
+    const task = await collection.findOneAndUpdate(
+        { _id: new ObjectId(id) },
+        { $set: newTask },
+        { returnDocument: 'after' }
+    )
+    return includeUser(task)
+}
+
+function seed(){
+    return collection.insertMany(tList);
 }
 
 module.exports = {
-    create(task){
+    collection,
+    async create(task){
         task.id = ++highestId
         task.completed = false
-        tList.push(task)
+        
+        const result = await collection.insertOne(task);
+        task = await get(result.insertedId);
+
         return task
     },
     remove,
     update,
-    get list(){
-        return tList.map(t => includeUser(t))
+    getByUser,
+    seed,
+    async getList(){
+        const tasks = await collection.find().toArray();
+        return Promise.all(tasks.map(t => includeUser(t)))
     }
 }
 

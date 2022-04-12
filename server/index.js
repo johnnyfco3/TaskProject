@@ -30,7 +30,7 @@ app
     }
   })
 
-  .get('/', (req, res) => {
+  .get('/api/', (req, res) => {
     res.send('You are on the homepage')
   })
   .use('/api/users', usersController)
