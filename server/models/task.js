@@ -15,7 +15,7 @@ const tList = [
         completed: false,
         important: true,
         assignedBy: null,
-        userID: 1,
+        user: 'example@gmail.com',
     },
     {
         name: "Meeting with team",
@@ -25,8 +25,8 @@ const tList = [
         time: "1:00pm",
         completed: true,
         important: true,
-        assignedBy: 2,
-        userID: 1,
+        assignedBy: 'john@doe.com',
+        user: 'example@gmail.com',
     },
     {
         name: "List",
@@ -37,7 +37,7 @@ const tList = [
         completed: false,
         important: false,
         assignedBy: null,
-        userID: 2,
+        user: 'john@doe.com',
     },
     {
         name: "Study for midterm",
@@ -47,8 +47,8 @@ const tList = [
         time: "2:30pm",
         completed: false,
         important: true,
-        assignedBy: 3,
-        userID: 2,
+        assignedBy: 'kamila@whitehouse.org',
+        user: 'john@doe.com',
     },
     {
         name: "Complete Homework 4 for Calculus",
@@ -59,11 +59,11 @@ const tList = [
         completed: false,
         important: true,
         assignedBy: null,
-        userID: 3,
+        user: 'kamila@whitehouse.org',
     }
 ]
 
-const includeUser = async task => ({ ...task, user: await userModel.get(task.userID) })
+const includeUser = async task => ({ ...task, user: await userModel.getByEmail(task.user) })
 
 async function get(id) {
     const task = await collection.findOne({ _id: new ObjectId(id) });
