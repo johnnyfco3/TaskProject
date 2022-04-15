@@ -1,35 +1,55 @@
+import { defineStore } from "pinia"
+import { api } from "./myFetch"
+
+export const useUsers = defineStore('users', {
+    state: () => ({
+        list: [] as User[],
+    }),
+    actions: {
+        async fetchUsers(){
+            const users = await api('users');
+            this.list = users.data;
+        },
+        async getByID(id: string){
+            const user = await api(`users/${id}`);
+            return user.data;
+        },
+        async getByEmail(email: string){
+            const user = await api(`users/email/${email}`);
+            return user.data;
+        },
+        async createUser(user: User){
+            const newUser = await api('users', user, 'POST');
+            return newUser.data;
+        },
+        async addFriends(userID: string, friend: string){
+            const newUser = await api(`users/addFriend/${userID}`, friend, 'POST');
+            return newUser.data;
+        },
+        async login(email: string, password: string){
+            const user = await api(`users/login`, {email, password}, 'POST');
+            return user.data;
+        },
+        async remove(id: string){
+            const user = await api(`users/${id}`, null, 'DELETE');
+            return user.data;
+        },
+        async removeFriend(userID: string, friend: string){
+            const user = await api(`users/friend/${userID}`, friend, 'DELETE');
+            return user.data;
+        },
+        async update(id: string, user: User){
+            const updatedUser = await api(`users/${id}`, user, 'PATCH');
+            return updatedUser.data;
+        }
+    }
+})
+
 export interface User {
+    _id: string;
     firstName: string,
     lastName: string,
     email: string,
     password: string,
-    friends: any,
-    id: number
+    friends: string[]
 }
-
-export const list: User[] = [
-    {
-        firstName: 'Johnny',
-        lastName: 'Tejada',
-        email: 'example@gmail.com',
-        password: 'password',
-        friends: ['john@doe.com', 'kamila@whitehouse.org'],
-        id: 1
-    },
-    {
-        firstName: 'Vladimir',
-        lastName: 'Putin',
-        password: 'long table',
-        email: 'john@doe.com',
-        friends: ['example@gmail.com', 'kamila@whitehouse.org'],
-        id: 2
-    },
-    {
-        firstName: 'Kamala',
-        lastName: 'Harris',
-        password: 'password',
-        email: 'kamila@whitehouse.org',
-        friends: ['example@gmail.com', 'john@doe.com'],
-        id: 3
-    }
-]

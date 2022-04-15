@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, defineProps } from "vue";
-import { tList } from "../models/tasks";
+import { useTasks } from "../models/tasks";
 import { RouterLink } from "vue-router";
 import TaskList from "../components/TaskList.vue";
 
@@ -10,6 +10,9 @@ import TaskList from "../components/TaskList.vue";
   const props = defineProps({
     category: String
   })
+
+  const tasks = useTasks()
+  tasks.fetchTasks()
 
 </script>
 
@@ -39,7 +42,7 @@ import TaskList from "../components/TaskList.vue";
         <hr>
 
         <div class="list pt-6">
-          <div v-for="(task,i) in tList" :key="i">
+          <div v-for="(task,i) in tasks.list" :key="i">
             <TaskList :currentTab="currentTab" :type="props.category" :task="task" :i="i"/>
           </div>
         </div>

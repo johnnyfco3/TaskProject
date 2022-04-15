@@ -1,9 +1,14 @@
 <script setup lang="ts">
 import { defineProps, ref } from 'vue';
 import { RouterLink } from 'vue-router';
-import { list } from '../models/users';
-import { tList } from '../models/tasks';
 import session from '../models/session';
+import { Task, useTasks } from '../models/tasks';
+import { useUsers } from '../models/users';
+    
+    const users = useUsers()
+    const tasks = useTasks()
+
+    const { task } = defineProps<{ task: Task }>();
 
     const props = defineProps({
         currentTab: {
@@ -11,10 +16,6 @@ import session from '../models/session';
         },
         type: {
             type: String
-        }, 
-        task: {
-            type: Object,
-            required: true,
         },
         i: {
             type: Number,
@@ -25,44 +26,32 @@ import session from '../models/session';
     const completed = ref(props.task.completed);
     const important = ref(props.task.important);
 
-    function remove(index:number){
-        tList.splice(index, 1)
+    function remove(id: string){
+        tasks.remove(id)
     }
 
-    function getUser(userID:number | undefined){
-        const user = list.find(u => u.id === userID)
+    function getUser(user:string){
+        const currentUser = users.getByEmail(user)
 
-        if(!user){
-            throw {message: 'No user correspondence'}
-        }
-
-        return `${user.firstName} ${user.lastName}`
+        return `${currentUser.firstName} ${currentUser.lastName}`
     }
 
-    const copy = tList.filter(t => t.category === props.type && t.userID === session.user?.id).sort((a:any,b:any) => {
+    const copy = tasks.list.filter(t => t.category === props.type && t.user === session.user).sort((a:any,b:any) => {
         let first:any = new Date(a.date)
         let second:any = new Date(b.date)
         return first - second
     })
 
-    function toggleCompleted(id:number){
-        const task = tList.find(t => t.id === id)
-        
-        if(!task){
-          throw {message: 'No task correspondence'}
-        }
+    function toggleCompleted(id:string){
+        const task = tasks.getByID(id)
 
         completed.value = !completed.value
 
         return task.completed = !task.completed
     }
     
-    function toggleImportant(id:number){
-        const task = tList.find(t => t.id === id)
-        
-        if(!task){
-          throw {message: 'No task correspondence'}
-        }
+    function toggleImportant(id:string){
+        const task = tasks.getByID(id)
 
         important.value = !important.value
 
@@ -73,14 +62,14 @@ import session from '../models/session';
 
 <template>
 <div class="list">
-    <div v-if="task.category === props.type && task.userID === session.user?.id">
+    <div v-if="task.category === props.type && task.user === session.user">
         <div class="card" v-if="props.currentTab == 'Completed' && task.completed">
             <div class="header">
                 <div class="top-content">
                     <p class="card-header-title ml-4">
                         <i :class="
                             completed ? 'fas fa-check-circle pr-6' : 'far fa-circle pr-6'
-                        " @click="toggleCompleted(task.id)"></i>
+                        " @click="toggleCompleted(task._id)"></i>
                         {{task.name}}
                     </p>
                 </div>
@@ -105,9 +94,9 @@ import session from '../models/session';
             <a href="#" class="card-footer-item"><router-link :to="`/edit-task/${task.name}`"><i class="fas fa-pencil-alt"></i></router-link></a>
             <a href="#" class="card-footer-item"><i 
                                                     :class="important ? 'fa-solid fa-star' : 'far fa-star'"
-                                                    @click="toggleImportant(task.id)"
+                                                    @click="toggleImportant(task._id)"
                                                 ></i></a>
-            <a href="#" class="card-footer-item"><i class="fas fa-minus-circle" @click="remove(i)"></i></a>
+            <a href="#" class="card-footer-item"><i class="fas fa-minus-circle" @click="remove(task._id)"></i></a>
             </footer>
         </div>
 
@@ -117,7 +106,7 @@ import session from '../models/session';
                     <p class="card-header-title ml-4">
                         <i :class="
                             completed ? 'fas fa-check-circle pr-6' : 'far fa-circle pr-6'
-                        " @click="toggleCompleted(task.id)"></i>
+                        " @click="toggleCompleted(task._id)"></i>
                         {{task.name}}
                     </p>
                 </div>
@@ -142,9 +131,9 @@ import session from '../models/session';
             <a href="#" class="card-footer-item"><router-link :to="`/edit-task/${task.name}`"><i class="fas fa-pencil-alt"></i></router-link></a>
             <a href="#" class="card-footer-item"><i 
                                                     :class="important ? 'fa-solid fa-star' : 'far fa-star'"
-                                                    @click="toggleImportant(task.id)"
+                                                    @click="toggleImportant(task._id)"
                                                 ></i></a>
-            <a href="#" class="card-footer-item"><i class="fas fa-minus-circle" @click="remove(i)"></i></a>
+            <a href="#" class="card-footer-item"><i class="fas fa-minus-circle" @click="remove(task._id)"></i></a>
             </footer>
         </div>
 
@@ -154,7 +143,7 @@ import session from '../models/session';
                     <p class="card-header-title ml-4">
                         <i :class="
                             completed ? 'fas fa-check-circle pr-6' : 'far fa-circle pr-6'
-                        " @click="toggleCompleted(task.id)"></i>
+                        " @click="toggleCompleted(task._id)"></i>
                         {{task.name}}
                     </p>
                 </div>
@@ -176,9 +165,9 @@ import session from '../models/session';
             <a href="#" class="card-footer-item"><router-link :to="`/edit-task/${task.name}`"><i class="fas fa-pencil-alt"></i></router-link></a>
             <a href="#" class="card-footer-item"><i 
                                                     :class="important ? 'fa-solid fa-star' : 'far fa-star'"
-                                                    @click="toggleImportant(task.id)"
+                                                    @click="toggleImportant(task._id)"
                                                 ></i></a>
-            <a href="#" class="card-footer-item"><i class="fas fa-minus-circle" @click="remove(i)"></i></a>
+            <a href="#" class="card-footer-item"><i class="fas fa-minus-circle" @click="remove(task._id)"></i></a>
             </footer>
         </div>
 
@@ -188,7 +177,7 @@ import session from '../models/session';
                     <p class="card-header-title ml-4">
                         <i 
                         :class="completed ? 'fas fa-check-circle pr-6' : 'far fa-circle pr-6'" 
-                        @click="toggleCompleted(task.id)">
+                        @click="toggleCompleted(task._id)">
                         </i>
                         {{task.name}}
                     </p>
@@ -214,9 +203,9 @@ import session from '../models/session';
             <a href="#" class="card-footer-item"><router-link :to="`/edit-task/${task.name}`"><i class="fas fa-pencil-alt"></i></router-link></a>
             <a href="#" class="card-footer-item"><i 
                                                     :class="important ? 'fa-solid fa-star' : 'far fa-star'"
-                                                    @click="toggleImportant(task.id)"
+                                                    @click="toggleImportant(task._id)"
                                                 ></i></a>
-            <a href="#" class="card-footer-item"><i class="fas fa-minus-circle" @click="remove(i)"></i></a>
+            <a href="#" class="card-footer-item"><i class="fas fa-minus-circle" @click="remove(task._id)"></i></a>
             </footer>
         </div>
 
@@ -227,7 +216,7 @@ import session from '../models/session';
                         <p class="card-header-title ml-4">
                             <i :class="
                                 completed ? 'fas fa-check-circle pr-6' : 'far fa-circle pr-6'"
-                            @click="toggleCompleted(task.id)"></i>
+                            @click="toggleCompleted(task._id)"></i>
                             {{task.name}}
                         </p>
                     </div>
@@ -252,9 +241,9 @@ import session from '../models/session';
                 <a href="#" class="card-footer-item"><router-link :to="`/edit-task/${task.name}`"><i class="fas fa-pencil-alt"></i></router-link></a>
                 <a href="#" class="card-footer-item"><i 
                                                         :class="important ? 'fa-solid fa-star' : 'far fa-star'"
-                                                        @click="toggleImportant(task.id)"
+                                                        @click="toggleImportant(task._id)"
                                                     ></i></a>
-                <a href="#" class="card-footer-item"><i class="fas fa-minus-circle" @click="remove(i)"></i></a>
+                <a href="#" class="card-footer-item"><i class="fas fa-minus-circle" @click="remove(task._id)"></i></a>
                 </footer>
             </div>
         </div>

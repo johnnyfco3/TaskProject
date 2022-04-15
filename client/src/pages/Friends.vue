@@ -3,10 +3,11 @@ import { reactive, ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import FriendsList from "../components/FriendsList.vue";
 import session from '../models/session';
-import { list } from '../models/users';
+import { useUsers } from '../models/users';
 
-const user = list.find(u => u.id === session.user?.id)
-const friendsList = ref(user?.friends ?? [])
+const users = useUsers();
+const user = users.getByEmail(session.user?.email)
+const friendsList = ref(user?.friends)
 
 </script>
 

@@ -1,42 +1,43 @@
 <script setup lang="ts">
 import { reactive, defineProps } from 'vue';
-import { tList } from '../models/tasks';
-import { cList } from '../models/categories';
+import { useCategories } from '../models/categories';
 import session from '../models/session';
+import { useTasks } from '../models/tasks';
 import router from '../router';
 
   const props = defineProps({
-      name: String
+    name: String
   })
 
-  const task = tList.find(t => t.name == props.name)
+  const categories = useCategories()
+  categories.fetchCategories()
+
+  const tasks = useTasks()
+  tasks.fetchTasks()
+  const task = tasks.list.find(t => t.name == props.name)
 
   if(!task){
     throw {message: 'No task acquired for edit'}
   }
   
   const editTask = reactive({
-            name: "",
-            category: "",
-            details: "",
-            date: "",
-            time: "",
-            completed: false,
-            important: false,
+    _id: task._id,
+    name: task.name,
+    category: task.category,
+    details: task.details,
+    date: task.date,
+    time: task.time,
+    completed: task.completed,
+    important: task.important,
+    assignedBy: task.assignedBy,
+    user: session.user
   })
 
   function handleSubmit(){
-      // if(editTask){
-      //       task.name = editTask.name,
-      //       task.category = editTask.category,
-      //       task.date = editTask.date,
-      //       task.time = editTask.time,
-      //       task.completed = false,
-      //       task.important = editTask.important,
-      //       task.userID = session.user?.id,
-      //       task.id = tList.length + 1
-      //     }
-          router.push('/overview')
+    if(editTask){
+      tasks.update(task._id, editTask)
+      router.push('/overview')
+    }
   }
 
 </script>
@@ -53,7 +54,7 @@ import router from '../router';
                         <div class="select is-info select-section is-normal">
                             <select v-model="editTask.category">
                             <option disabled>{{task.category}}</option>
-                            <option v-for="(category,i) in cList" :key="i">
+                            <option v-for="(category,i) in categories.list" :key="i">
                                 {{category.user === null || category.user === session.user?.email ? category.name : null}}
                               </option>
                             </select>

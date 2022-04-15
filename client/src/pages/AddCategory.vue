@@ -1,24 +1,21 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
-import { cList } from '../models/categories';
+import { useCategories } from '../models/categories';
 import session from '../models/session';
 import router from '../router';
+
+  const categories = useCategories()
   
   const newCategory = reactive({
-      name: ""
+    name: "",
+    user: session.user?.email
   })
   
   function handleSubmit(){
-      if(newCategory.name){
-          cList.push(
-              {
-                  name: newCategory.name,
-                  user: session.user?.email,
-                  id: cList.length + 1
-              }
-          )
-          router.push('/overview')
-      }
+    if(newCategory.name){
+      categories.createCategory(newCategory)
+        router.push('/overview')
+    }
   }
 
 </script>

@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
-import { list } from '../models/users'
 import router from '../router';
 import session from '../models/session';
-import { ref } from 'vue';
+import { useUsers } from '../models/users';
+
+const users = useUsers()
 
 const props = defineProps({
   friend: {
@@ -16,13 +17,8 @@ const props = defineProps({
   }
 })
 
-const user = list.find(u => u.id === session.user?.id)
-
-const friendsList = ref(user?.friends ?? [])
-
-function remove(index:number){
-  user?.friends.splice(index, 1)
-  friendsList.value.splice(index, 1)
+function remove(email:string){
+  users.removeFriend(session.user?._id, email)
 }
 
 const info = {
@@ -50,7 +46,7 @@ function assignTo(email:string){
                 </div>
                 <div class="icons is-flex">
                     <a href="#"><i class="fa-solid fa-plus" @click="assignTo(friend)"></i></a>
-                    <a href="#"><i class="fa-solid fa-trash-can" @click="remove(i)"></i></a>
+                    <a href="#"><i class="fa-solid fa-trash-can" @click="remove(friend)"></i></a>
                 </div>
         </div>
         </div>

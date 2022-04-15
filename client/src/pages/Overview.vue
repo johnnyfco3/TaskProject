@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
-import { cList } from '../models/categories';
-import { tList } from '../models/tasks';
+import { useCategories } from '../models/categories';
+import { useTasks } from '../models/tasks';
 import session from '../models/session';
 import Categories from '../components/Categories.vue';
 
@@ -12,17 +12,22 @@ import Categories from '../components/Categories.vue';
     createdTasks: 0,
     completedTasks: 0
   }
-  tList.forEach(t => {
-    if(t.userID === session.user?.id){
+
+  const tasks = useTasks()
+  tasks.fetchTasks()
+
+  tasks.list.forEach(t => {
+    if(t.user.email === session.user?.email){
       total.createdTasks++
     }
-    if(t.userID === session.user?.id && t.completed){
+    if(t.user.email === session.user?.email && t.completed){
       total.completedTasks++
     }
     return total
   })
 
-  const list = ref(cList);
+  const categories = useCategories()
+  categories.fetchCategories()
 
 </script>
 
@@ -53,7 +58,7 @@ import Categories from '../components/Categories.vue';
             <hr>
             <div class="columns is-multiline pt-6">
                 <div class="column">
-                  <div v-for="(category, i) in list" :key="i">
+                  <div v-for="(category, i) in categories.list" :key="i">
                     <Categories :category="category" :i="i"/>
                   </div>
                 </div>

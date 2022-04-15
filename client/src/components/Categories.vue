@@ -1,26 +1,22 @@
 <script setup lang="ts">
 import { ref, defineProps } from 'vue';
 import { RouterLink } from 'vue-router';
-import { cList } from '../models/categories';
+import { Category, useCategories } from '../models/categories';
 import session from '../models/session';
 
+  const { category } = defineProps<{ category: Category }>();
+  const categories = useCategories()
+  categories.fetchCategories()
+
   const props = defineProps({
-    category: {
-      type: Object,
-      required: true
-    },
     i: {
       type: Number,
       required: true
     }
   })
 
-  const list = ref(cList);
-
-  function remove(index:number){
-        cList.splice(index, 1)
-        list.value.splice(index, 1)
-        console.log("removed")
+  function remove(id:string){
+        categories.remove(id)
     }
     
 </script>
@@ -28,9 +24,9 @@ import session from '../models/session';
 <template>
 <div id="categories">
     <div class="column">
-      <div v-if="category.userID === null || category.userID === session.user?.id">
+      <div v-if="category.user === null || category.user === session.user">
             <div class="card has-text-centered">
-              <a href="#"><i class="fa-solid fa-xmark remove" @click="remove(i)"></i></a>
+              <a href="#"><i class="fa-solid fa-xmark remove" @click="remove(category._id)"></i></a>
               <router-link :to="`/tasks/${category.name}`" >
                 <div class="card-content">
                     <h1 class="title"><i class="fa-solid fa-list icons" aria-hidden="true"></i> {{category.name}}</h1>

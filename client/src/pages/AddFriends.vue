@@ -1,25 +1,28 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
-import { list } from '../models/users';
 import session from '../models/session';
+import { useUsers } from '../models/users';
 import router from '../router';
   
   const newFriend = reactive({
           email: ""
   })
 
-  const user = list.find(u => u.id === session.user?.id)
+  const users = useUsers()
   
+  const user = users.getByID(session.user?._id) 
+  users.fetchUsers()
+
   function handleSubmit(){
       if(newFriend){
-        const checkUser = list.find(u => u.email === newFriend.email)
+        const checkUser = users.getByEmail(newFriend.email)
 
         if(checkUser){
-          user?.friends.push(newFriend.email)
+          users.addFriends(user._id, newFriend.email)
           router.push('/friends')
         }
         else{
-          throw {message: 'No user found'}
+          throw { message: 'No user found' }
         }
       }
   }

@@ -1,43 +1,37 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
-import { list } from '../models/users'
 import router from '../router';
 import Footer from '../components/Footer.vue';
+import { useUsers } from '../models/users';
+
+  const users = useUsers()
 
   const newUser = reactive({
       firstName: "",
       lastName: "",
       email: "",
       password: "",
-      confirm: ""
+      confirm: "",
+      friends: []
   })
   
   function handleSubmit(){
-      if(newUser){
-          if(newUser.password !== newUser.confirm){
-              alert("Passwords do not match!");
-          }
-          else{
-              list.push(
-              {
-                  firstName: newUser.firstName,
-                  lastName: newUser.lastName,
-                  email: newUser.email,
-                  password: newUser.password,
-                  friends: [],
-                  id: list.length + 1
-              }
-          )
-          newUser.firstName = "";
-          newUser.lastName = "";
-          newUser.email = "";
-          newUser.password = "";
-          newUser.confirm = "";
-          }
-          
-          router.push("/")
+    if(newUser){
+      if(newUser.password !== newUser.confirm){
+        alert("Passwords do not match!");
       }
+      else{
+        users.createUser(newUser)
+        router.push("/")
+      }
+      newUser.firstName = "";
+      newUser.lastName = "";
+      newUser.email = "";
+      newUser.password = "";
+      newUser.confirm = "";
+    }    
   }
+  
 
 </script>
 

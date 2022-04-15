@@ -1,4 +1,41 @@
+import { defineStore } from "pinia"
+import { api } from "./myFetch"
+import { User } from "./users";
+
+export const useTasks = defineStore('tasks', {
+    state: () => ({
+        list: [] as Task[],
+    }),
+    actions: {
+        async fetchTasks(){
+            const tasks = await api('tasks');
+            this.list = tasks.data;
+        },
+        async getByID(id: string){
+            const task = await api(`tasks/${id}`);
+            return task.data;
+        },
+        async getByUser(user: User){
+            const task = await api(`tasks/user/${user.email}`);
+            return task.data;
+        },
+        async createTask(task: Task){
+            const newTask = await api('tasks', task, 'POST');
+            return newTask.data;
+        },
+        async remove(id: string){
+            const task = await api(`tasks/${id}`, null, 'DELETE');
+            return task.data;
+        },
+        async update(id: string, task: Task){
+            const updatedTask = await api(`tasks/${id}`, task, 'PATCH');
+            return updatedTask.data;
+        }
+    }
+})
+
 export interface Task {
+    _id: string,
     name: string,
     details: string
     category: string,
@@ -6,70 +43,6 @@ export interface Task {
     time: string,
     completed: boolean,
     important: boolean,
-    assignedBy: number | undefined | null,
-    userID: number | undefined,
-    id: number
+    assignedBy: string | null | undefined,
+    user: User
 }
-
-export const tList: Task[] = [
-    {
-        name: "Call Supervisor",
-        details: "",
-        category: "Work Projects",
-        date: "2022-03-12",
-        time: "10:30am",
-        completed: false,
-        important: true,
-        assignedBy: null,
-        userID: 1,
-        id: 1
-    },
-    {
-        name: "Meeting with team",
-        details: "",
-        category: "Work Projects",
-        date: "2022-01-09",
-        time: "1:00pm",
-        completed: true,
-        important: true,
-        assignedBy: 2,
-        userID: 1,
-        id: 2
-    },
-    {
-        name: "List",
-        details: "Bakery and Bread. Meat and Seafood. Pasta and Rice. Oils, Sauces, Salad Dressings, and Condiments. Cereals and Breakfast Foods.",
-        category: "Grocery List",
-        date: "2022-03-09",
-        time: "6:30pm",
-        completed: false,
-        important: false,
-        assignedBy: null,
-        userID: 2,
-        id: 3
-    },
-    {
-        name: "Study for midterm",
-        details: "",
-        category: "Schedule Plan",
-        date: "2022-03-11",
-        time: "2:30pm",
-        completed: false,
-        important: true,
-        assignedBy: 3,
-        userID: 2,
-        id: 4
-    },
-    {
-        name: "Complete Homework 4 for Calculus",
-        details: "",
-        category: "School",
-        date: "2022-03-16",
-        time: "9:00am",
-        completed: false,
-        important: true,
-        assignedBy: null,
-        userID: 1,
-        id: 5
-    }
-]
