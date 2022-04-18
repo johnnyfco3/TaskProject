@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
-import session from '../models/session';
+import { useSession } from '../models/session';
 import { useUsers } from '../models/users';
 import router from '../router';
   
+  const session = useSession();
   const newFriend = reactive({
           email: ""
   })

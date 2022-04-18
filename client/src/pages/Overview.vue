@@ -3,9 +3,10 @@ import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import { useCategories } from '../models/categories';
 import { useTasks } from '../models/tasks';
-import session from '../models/session';
+import { useSession } from '../models/session';
 import Categories from '../components/Categories.vue';
 
+  const session = useSession();
   const today = ref(new Date().toLocaleDateString('en-us', { weekday:"long", month:"long", day:"numeric"}));
 
   const total = {

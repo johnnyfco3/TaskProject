@@ -39,8 +39,8 @@ app
     res.send('You are on the homepage')
   })
   .use('/api/users', usersController)
-  .use('/api/tasks', requireAuth, tasksController)
-  .use('/api/categories', requireAuth, categoriesController)
+  .use('/api/tasks', /*requireAuth*/ tasksController)
+  .use('/api/categories', /*requireAuth*/  categoriesController)
 
   .use((err, req, res, next) => {
     console.error(err)

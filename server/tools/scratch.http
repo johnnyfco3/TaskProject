@@ -17,11 +17,33 @@ POST http://localhost:3001/api/users/
 Content-Type: application/json
 
 {
-    "firstName": "Mike",
-    "lastName": "Tyson",
-    "password": "boxing",
-    "email": "mtyson@gmail.com",
-    "friends": ["kamila@whitehouse.org"]
+    "firstName": "Johnny",
+    "lastName": "Tejada",
+    "email": "example@gmail.com",
+    "password": "password",
+    "friends": ["john@doe.com", "kamila@whitehouse.org"]
+}
+###
+POST http://localhost:3001/api/users/
+Content-Type: application/json
+
+{
+    "firstName": "Vladimir",
+    "lastName": "Putin",
+    "email": "john@doe.com",
+    "password": "long table",
+    "friends": ["example@gmail.com", "kamila@whitehouse.org"]
+}
+###
+POST http://localhost:3001/api/users/
+Content-Type: application/json
+
+{
+    "firstName": "Kamala",
+    "lastName": "Harris",
+    "email": "kamila@whitehouse.org",
+    "password": "password",
+    "friends": ["example@gmail.com", "john@doe.com"]
 }
 
 ###
@@ -39,8 +61,8 @@ POST http://localhost:3001/api/users/login
 Content-Type: application/json
 
 {
-    "email": "mtyson@gmail.com",
-    "password": "boxing"
+    "email": "example@gmail.com",
+    "password": "password"
 }
 
 ###

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
-import { Logout } from '../models/session';
-import session from '../models/session';
+import { useSession } from '../models/session';
 
+  const session = useSession();
   const isOpen = ref(false)
 
 </script>
@@ -45,7 +45,7 @@ import session from '../models/session';
                     New Friend
                     </router-link>
                     
-                    <a @click="Logout()" class="navbar-item">
+                    <a @click="session.Logout()" class="navbar-item">
                       Log out
                     </a> 
                 </div>

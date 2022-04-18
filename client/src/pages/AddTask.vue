@@ -1,14 +1,18 @@
 <script setup lang="ts">
 import { reactive, defineProps, ref } from 'vue';
 import router from '../router';
-import session from '../models/session';
+import { useSession } from '../models/session';
 import { useUsers } from '../models/users';
 import { useTasks } from '../models/tasks';
 import { useCategories } from '../models/categories';
 
+  const session = useSession();
   const props = defineProps({
     assign: String,
-    email: String,
+    email: {
+      type: String,
+      required: true
+    },
     category: String,
   })
 

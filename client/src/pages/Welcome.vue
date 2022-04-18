@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
 import { reactive } from 'vue';
-import { Login } from '../models/session';
+import { useSession } from '../models/session';
 import About from '../components/About.vue';
 import Footer from '../components/Footer.vue';
+
+  const session = useSession();
+
+  const message = session.message.text
       
   const returningUser = reactive({
     email: "",
@@ -11,11 +15,9 @@ import Footer from '../components/Footer.vue';
   })
 
   function handleSubmit(){
-      if(returningUser){
-        Login(returningUser.email, returningUser.password)
-        returningUser.email = "";
-        returningUser.password = "";
-      }
+    session.Login(returningUser.email, returningUser.password)
+    returningUser.email = "";
+    returningUser.password = "";
   }
 
 </script>
@@ -31,6 +33,7 @@ import Footer from '../components/Footer.vue';
                 <div class="card">
                     <form @submit.prevent="handleSubmit">
                     <h1 class="title has-text-centered pt-4">Sign In</h1>
+                    <p>{{message ?? message}}</p>
                     <div class="card-content">
                     <div class="content">
                         <div class="field">

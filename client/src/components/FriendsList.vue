@@ -1,36 +1,37 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
 import router from '../router';
-import session from '../models/session';
+import { useSession } from '../models/session';
 import { useUsers } from '../models/users';
 
-const users = useUsers()
+  const session = useSession();
+  const users = useUsers()
 
-const props = defineProps({
-  friend: {
-    type: String,
-    required: true,
-  },
-  i: {
-    type: Number,
-    required: true,
+  const props = defineProps({
+    friend: {
+      type: String,
+      required: true,
+    },
+    i: {
+      type: Number,
+      required: true,
+    }
+  })
+
+  function remove(email:string){
+    users.removeFriend(session.user?._id, email)
   }
-})
 
-function remove(email:string){
-  users.removeFriend(session.user?._id, email)
-}
+  const info = {
+    uEmail: "",
+    assign: false
+  }
 
-const info = {
-  uEmail: "",
-  assign: false
-}
-
-function assignTo(email:string){
-  info.uEmail = email
-  info.assign = true
-  router.push(`/add-tasks/${info.assign}/${info.uEmail}/null`)
-}
+  function assignTo(email:string){
+    info.uEmail = email
+    info.assign = true
+    router.push(`/add-tasks/${info.assign}/${info.uEmail}/null`)
+  }
 
 </script>
 

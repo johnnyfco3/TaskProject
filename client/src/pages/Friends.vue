@@ -2,12 +2,13 @@
 import { reactive, ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import FriendsList from "../components/FriendsList.vue";
-import session from '../models/session';
+import { useSession } from '../models/session';
 import { useUsers } from '../models/users';
 
-const users = useUsers();
-const user = users.getByEmail(session.user?.email)
-const friendsList = ref(user?.friends)
+  const session = useSession();
+  const users = useUsers();
+  const user = users.getByEmail(session.user?.email)
+  const friendsList = ref(user?.friends)
 
 </script>
 

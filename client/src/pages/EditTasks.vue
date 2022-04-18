@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { reactive, defineProps } from 'vue';
 import { useCategories } from '../models/categories';
-import session from '../models/session';
+import { useSession } from '../models/session';
 import { useTasks } from '../models/tasks';
 import router from '../router';
 
+  const session = useSession();
   const props = defineProps({
     name: String
   })

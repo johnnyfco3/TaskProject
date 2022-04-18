@@ -1,30 +1,23 @@
 <script setup lang="ts">
 import { defineProps, ref } from 'vue';
 import { RouterLink } from 'vue-router';
-import session from '../models/session';
+import { useSession } from '../models/session';
 import { Task, useTasks } from '../models/tasks';
 import { useUsers } from '../models/users';
     
     const users = useUsers()
     const tasks = useTasks()
+    const session = useSession()
 
-    const { task } = defineProps<{ task: Task }>();
+    const { task, currentTab, type, i } = defineProps<{ 
+        task: Task, 
+        currentTab: string, 
+        type: string,
+        i: number  
+        }>();
 
-    const props = defineProps({
-        currentTab: {
-            type: String
-        },
-        type: {
-            type: String
-        },
-        i: {
-            type: Number,
-            required: true,
-        }
-    })
-
-    const completed = ref(props.task.completed);
-    const important = ref(props.task.important);
+    const completed = ref(task.completed);
+    const important = ref(task.important);
 
     function remove(id: string){
         tasks.remove(id)
@@ -36,7 +29,7 @@ import { useUsers } from '../models/users';
         return `${currentUser.firstName} ${currentUser.lastName}`
     }
 
-    const copy = tasks.list.filter(t => t.category === props.type && t.user === session.user).sort((a:any,b:any) => {
+    const copy = tasks.list.filter(t => t.category === type && t.user === session.user).sort((a:any,b:any) => {
         let first:any = new Date(a.date)
         let second:any = new Date(b.date)
         return first - second
@@ -62,8 +55,8 @@ import { useUsers } from '../models/users';
 
 <template>
 <div class="list">
-    <div v-if="task.category === props.type && task.user === session.user">
-        <div class="card" v-if="props.currentTab == 'Completed' && task.completed">
+    <div v-if="task.category === type && task.user === session.user">
+        <div class="card" v-if="currentTab == 'Completed' && task.completed">
             <div class="header">
                 <div class="top-content">
                     <p class="card-header-title ml-4">
@@ -100,7 +93,7 @@ import { useUsers } from '../models/users';
             </footer>
         </div>
 
-        <div class="card" v-else-if="props.currentTab == 'Important' && task.important">
+        <div class="card" v-else-if="currentTab == 'Important' && task.important">
             <div class="header">
                 <div class="top-content">
                     <p class="card-header-title ml-4">
@@ -137,7 +130,7 @@ import { useUsers } from '../models/users';
             </footer>
         </div>
 
-        <div class="card" v-else-if="props.currentTab == 'Assigned' && task.assignedBy !== null">
+        <div class="card" v-else-if="currentTab == 'Assigned' && task.assignedBy !== null">
             <div class="header">
                 <div class="top-content">
                     <p class="card-header-title ml-4">
@@ -171,7 +164,7 @@ import { useUsers } from '../models/users';
             </footer>
         </div>
 
-        <div class="card" v-else-if="props.currentTab == 'All'">
+        <div class="card" v-else-if="currentTab == 'All'">
             <div class="header">
                 <div class="top-content">
                     <p class="card-header-title ml-4">
@@ -209,7 +202,7 @@ import { useUsers } from '../models/users';
             </footer>
         </div>
 
-        <div v-else-if="props.currentTab == 'Date'">
+        <div v-else-if="currentTab == 'Date'">
             <div class="card" v-for="(task,i) in copy" :key="i">
                 <div class="header">
                     <div class="top-content">

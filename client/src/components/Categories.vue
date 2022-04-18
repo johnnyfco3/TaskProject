@@ -2,18 +2,16 @@
 import { ref, defineProps } from 'vue';
 import { RouterLink } from 'vue-router';
 import { Category, useCategories } from '../models/categories';
-import session from '../models/session';
+import { useSession } from '../models/session';
 
-  const { category } = defineProps<{ category: Category }>();
+  const session = useSession();
   const categories = useCategories()
   categories.fetchCategories()
 
-  const props = defineProps({
-    i: {
-      type: Number,
-      required: true
-    }
-  })
+  const { category } = defineProps<{ 
+    category: Category 
+    i: number 
+    }>();
 
   function remove(id:string){
         categories.remove(id)

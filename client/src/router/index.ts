@@ -8,7 +8,7 @@ import AddTask from '../pages/AddTask.vue'
 import AddFriends from '../pages/AddFriends.vue'
 import AddCategory from '../pages/AddCategory.vue'
 import EditTasks from '../pages/EditTasks.vue'
-import session from "../models/session";
+import { useSession } from "../models/session";
 
 const routes: RouteRecordRaw[] = [
     { path: '/', component: Welcome },
@@ -28,15 +28,16 @@ const router = createRouter({
 });
 
 router.beforeEach((to,from) =>{
-    if(session.destinationURL == null && to.path !== '/'){
-        session.destinationURL = to.path
+  const session = useSession();
+  if(session.destinationURL == null && to.path !== '/'){
+      session.destinationURL = to.path
+    }
+    const protectedURLs = ['/overview', '/tasks/:category', '/friends', '/add-tasks/:assign/:email/:category', '/add-friends', '/add-category', '/edit-task/:name']
+    if(protectedURLs.includes(to.path)){
+      if(!session.user){
+        return '/';
       }
-      const protectedURLs = ['/overview', '/tasks/:category', '/friends', '/add-tasks/:assign/:email/:category', '/add-friends', '/add-category', '/edit-task/:name']
-      if(protectedURLs.includes(to.path)){
-        if(!session.user){
-          return '/';
-        }
-      }
+    }
 })
 
 export default router;

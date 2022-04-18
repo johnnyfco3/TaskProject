@@ -4,8 +4,6 @@ const { db, isConnected, ObjectId } = require('./mongo');
 
 const collection = db.db('taskApp').collection('users');
 
-let highestId = 3;
-
 const list = [
     {
         firstName: 'Johnny',
@@ -113,7 +111,6 @@ function seed(){
 module.exports = {
     collection,
     async create(user){
-        user.id = ++highestId
 
         if(!user.email){
             throw { statusCode: 400, message: 'Email is required' };

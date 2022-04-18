@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
 import { useCategories } from '../models/categories';
-import session from '../models/session';
+import { useSession } from '../models/session';
 import router from '../router';
 
+  const session = useSession();
   const categories = useCategories()
   
   const newCategory = reactive({
