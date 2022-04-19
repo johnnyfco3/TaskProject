@@ -78,19 +78,19 @@ async function update(id, newUser){
 }
 
 async function login(email, password){
-    const user = collection.findOne({ email });
+    const user = await collection.findOne({email})
 
     if(!user){
-        throw { statusCode: 404, message: 'User not Found' };
+        throw { statusCode: 404, message: 'User not Found' }
     }
     if(!await bcrypt.compare(password, user.password)){
-        throw { statusCode: 401, message: 'Invalid Password' };
+        throw { statusCode: 401, message: 'Invalid Password' }
     }
 
-    const data = { ...user, password: undefined };
-    const token = jwt.sign(data, process.env.JWT_SECRET);
+    const data = { ...user, password: undefined }
+    const token = jwt.sign(data, process.env.JWT_SECRET)
 
-    return { ...data, token };
+    return { ...data, token }
 }
 
 function fromToken(token){

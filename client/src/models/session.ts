@@ -16,7 +16,7 @@ export const useSession = defineStore('session', {
         async Login(email: string, password: string) {
             // const users = useUsers()
             try {
-                const user = await this.api("/users/login", { email, password } )
+                const user = await this.api("users/login", { email, password } )
                 if(user){
                     this.message.type = "success";
                     this.message.text = "Successfully logged in";

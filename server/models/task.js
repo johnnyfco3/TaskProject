@@ -3,8 +3,6 @@ const { db, isConnected, ObjectId } = require('./mongo');
 
 const collection = db.db('taskApp').collection('tasks');
 
-let highestId = 5;
-
 const tList = [
     {
         name: "Call Supervisor",
@@ -103,7 +101,6 @@ function seed(){
 module.exports = {
     collection,
     async create(task){
-        task.id = ++highestId
         task.completed = false
         
         const result = await collection.insertOne(task);

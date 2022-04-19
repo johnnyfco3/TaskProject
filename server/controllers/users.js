@@ -9,19 +9,19 @@ const CREATED_STATUS = 201
 
 app
     // GET
-    .get('/', requireAuth, (req,res,next) =>{
+    .get('/', /*requireAuth,*/ (req,res,next) =>{
         userModel.getList()
         .then(users => {
             res.send({ success: true, errors: [], data: users })
         }).catch(next)
     })
-    .get('/:id', requireAuth, (req,res,next)=>{
+    .get('/:id', /*requireAuth,*/ (req,res,next)=>{
         userModel.get(req.params.id)
         .then(user => {
             res.send({ success: true, errors: [], data: user })
         }).catch(next)
     })
-    .get('/email/:email', requireAuth, (req,res,next)=>{
+    .get('/email/:email', /*requireAuth,*/ (req,res,next)=>{
         userModel.getByEmail(req.params.email)
         .then(user => {
             res.send({ success: true, errors: [], data: user })
@@ -35,7 +35,7 @@ app
             res.status(CREATED_STATUS).send({ success: true, errors: [], data: user })
         }).catch(next)
     })
-    .post('/addFriend/:id', requireAuth, (req,res, next)=>{
+    .post('/addFriend/:id', /*requireAuth,*/ (req,res, next)=>{
         userModel.addFriends(req.params.id, req.body.friend)
         .then(user => {
             res.send({ success: true, errors: [], data: user })
@@ -55,13 +55,13 @@ app
     })
 
     // DELETE
-    .delete('/:id', requireAuth, (req,res,next)=>{
+    .delete('/:id', /*requireAuth,*/ (req,res,next)=>{
         userModel.remove(req.params.id)
         .then(user => {
             res.send({success: true, errors: [], data: user})
         }).catch(next)
     })
-    .delete('/friend/:id', requireAuth, (req,res,next)=>{
+    .delete('/friend/:id', /*requireAuth,*/ (req,res,next)=>{
         userModel.removeFriends(req.params.id, req.body.friend)
         .then(user => {
             res.send({success: true, errors: [], data: user})
@@ -69,7 +69,7 @@ app
     })
 
     // PATCH
-    .patch('/:id', requireAuth, (req,res, next)=>{
+    .patch('/:id', /*requireAuth,*/ (req,res, next)=>{
         userModel.update(req.params.id, req.body)
         .then(user => {
             res.send({ success: true, errors: [], data: user })

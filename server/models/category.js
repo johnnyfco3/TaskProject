@@ -3,8 +3,6 @@ const { db, isConnected, ObjectId } = require('./mongo');
 
 const collection = db.db('taskApp').collection('categories');
 
-let highestId = 5;
-
 const cList = [
     {
         name: "Schedule Plan",
@@ -35,7 +33,8 @@ async function get(id) {
     if(!category){
         throw { statusCode: 404, message: 'Category not Found' };
     }
-    return includeUser(category)
+    
+    return category.user ? includeUser(category) : category;
 }
 
 async function getByUser(email){
@@ -69,7 +68,6 @@ function seed(){
 module.exports = {
     collection,
     async create(category){
-        category.id = ++highestId
         
         const result = await collection.insertOne(category);
         category = await get(result.insertedId);
@@ -82,7 +80,7 @@ module.exports = {
     seed,
     async getList(){
         const category = await collection.find().toArray();
-        return Promise.all( category.map(c => includeUser(c)) )
+        return Promise.all( category.map(c => c.user ? includeUser(c) : c) )
     }
 }
 

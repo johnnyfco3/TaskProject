@@ -9,41 +9,41 @@ const CREATED_STATUS = 201
 
 app
     // GET
-    .get('/', requireAuth, (req, res, next) =>{
+    .get('/', /*requireAuth,*/ (req, res, next) =>{
         categoryModel.getList()
         .then(categories => {
-            res.send(categories)
+            res.send({ success: true, errors: [], data: categories })
         }).catch(next)
     })
-    .get('/:id', requireAuth, (req, res, next) =>{
+    .get('/:id', /*requireAuth,*/ (req, res, next) =>{
         categoryModel.get(req.params.id)
         .then(category => {
-            res.send(category)
+            res.send({ success: true, errors: [], data: category })
         }).catch(next)
     })
-    .get('/user/:email', requireAuth, (req, res, next) =>{
+    .get('/user/:email', /*requireAuth,*/ (req, res, next) =>{
         categoryModel.getByUser(req.params.email)
         .then(categories => {
-            res.send(categories)
+            res.send({ success: true, errors: [], data: categories })
         }).catch(next)
     })
 
     // POST
-    .post('/', requireAuth, (req, res, next) =>{
+    .post('/', /*requireAuth,*/ (req, res, next) =>{
         categoryModel.create(req.body)
         .then(category => {
-            res.status(CREATED_STATUS).send(category)
+            res.status(CREATED_STATUS).send({ success: true, errors: [], data: category })
         }).catch(next)
     })
-    .post('/seed', requireAuth, (req, res, next) =>{
+    .post('/seed', (req, res, next) =>{
         categoryModel.seed()
-        .then(x => {
-            res.send({ success: true, errors: [], data: x.insertedIds })
+        .then(() => {
+            res.send({ success: true, errors: [], data: [] })
         }).catch(next)
     })
-
+    
     // DELETE
-    .delete('/:id', requireAuth, (req, res, next) =>{
+    .delete('/:id', /*requireAuth,*/ (req, res, next) =>{
         categoryModel.remove(req.params.id)
         .then(category => {
             res.send({ success: true, errors: [], data: category })
@@ -51,7 +51,7 @@ app
     })
 
     // PATCH
-    .patch('/:id', requireAuth, (req, res, next) =>{
+    .patch('/:id', /*requireAuth,*/ (req, res, next) =>{
         categoryModel.update(req.params.id, req.body)
         .then(category => {
             res.send({ success: true, errors: [], data: category })
