@@ -6,8 +6,6 @@ import About from '../components/About.vue';
 import Footer from '../components/Footer.vue';
 
   const session = useSession();
-
-  const message = session.message.text
       
   const returningUser = reactive({
     email: "",
@@ -33,7 +31,6 @@ import Footer from '../components/Footer.vue';
                 <div class="card">
                     <form @submit.prevent="handleSubmit">
                     <h1 class="title has-text-centered pt-4">Sign In</h1>
-                    <p>{{message ?? message}}</p>
                     <div class="card-content">
                     <div class="content">
                         <div class="field">

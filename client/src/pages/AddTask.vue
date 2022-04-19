@@ -45,16 +45,6 @@ import { useCategories } from '../models/categories';
   const categories = useCategories()
   categories.fetchCategories()
 
-  function confirmAddition(name:string){
-    const check = tasks.list.find(t => t.name === name && t.user.email === session.user?.email)
-    if(check){
-      if(!check.completed){
-        return false
-      }
-      return true
-    }
-  }
-
   function convertTime(time:string){
     let hour = time.substring(0,2)
     let min = time.substring(3,5)
@@ -76,10 +66,6 @@ import { useCategories } from '../models/categories';
   }
 
   async function handleSubmit(){
-    if(!confirmAddition(newTask.name)){
-      throw { message: "There's an existing Task with the same Task name that has not yet been completed." }
-    }
-    else{
       try{
         await tasks.createTask({
           name: newTask.name,
@@ -90,13 +76,12 @@ import { useCategories } from '../models/categories';
           completed: newTask.completed,
           important: newTask.important,
           assignedBy: newTask.assignBy === null ? null : session.user?.email,
-          user: newTask.assignBy === null ? session.user?.email : getUser(newTask.assignBy)
+          user: newTask.assignBy === null ? session.user?.email : props.email
         })
         router.push('/overview')
       }catch(e){
         console.log(e)
       }
-    }
   }
 
 </script>

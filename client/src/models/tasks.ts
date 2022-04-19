@@ -23,8 +23,8 @@ export const useTasks = defineStore('tasks', {
             const newTask = await api('tasks', task, 'POST');
             return newTask.data;
         },
-        async remove(id: string){
-            const task = await api(`tasks/${id}`, null, 'DELETE');
+        async removeTasks(id: string){
+            const task = await api(`tasks/${id}`, {}, 'DELETE');
             return task.data;
         },
         async update(id: string, task: Task){

@@ -2,7 +2,7 @@
 import { defineProps, ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import { useSession } from '../models/session';
-import { Task, useTasks } from '../models/tasks';
+import { Task, useTasks, removeTasks } from '../models/tasks';
 import { useUsers } from '../models/users';
     
     const users = useUsers()
@@ -18,11 +18,11 @@ import { useUsers } from '../models/users';
 
     const completed = ref(task.completed);
     const important = ref(task.important);
-    const assigned = ref("")
 
     async function remove(id: string){
         try{
-            await tasks.remove(id)
+            const res = await tasks.removeTasks(id)
+            return res
         }catch(e){
             console.log(e)
         }
@@ -37,7 +37,7 @@ import { useUsers } from '../models/users';
         }
     }
 
-    const copy = tasks.list.filter(t => t.category === type && t.user === session.user).sort((a:any,b:any) => {
+    const copy = tasks.list.filter(t => t.category === type && t.user.email === session.user?.email).sort((a:any,b:any) => {
         let first:any = new Date(a.date)
         let second:any = new Date(b.date)
         return first - second
