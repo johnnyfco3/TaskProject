@@ -16,13 +16,7 @@ import { useCategories } from '../models/categories';
     category: String,
   })
 
-  let user: any;
-
   const users = useUsers()
-
-  if(props.assign === "true"){
-    user = users.getByEmail(props.email)
-  }
   
   const newTask = reactive({
     name: "",
@@ -32,17 +26,16 @@ import { useCategories } from '../models/categories';
     time: "",
     completed: false,
     important: false,
-    assignBy: props.assign === "true" ? user.email : null
+    assignBy: props.assign === "true" ? props.email : null
   })
 
-  function getUser(email:string){
-    const getUser = users.getByEmail(email)
-
-    if(getUser){
-      return getUser
-    }
-    else{
-      throw {message: 'Could not find user in getUser'}
+  const assignTo = ref({})
+  async function getUser(email:string){
+    try{
+      const res = await users.getByEmail(email)
+      assignTo.value = res
+    }catch(e){
+      console.log(e)
     }
   }
 
@@ -53,7 +46,7 @@ import { useCategories } from '../models/categories';
   categories.fetchCategories()
 
   function confirmAddition(name:string){
-    const check = tasks.list.find(t => t.name === name && t.user === session.user)
+    const check = tasks.list.find(t => t.name === name && t.user.email === session.user?.email)
     if(check){
       if(!check.completed){
         return false
@@ -82,13 +75,13 @@ import { useCategories } from '../models/categories';
     return time
   }
 
-  function handleSubmit(){
-    if(newTask){
-      if(!confirmAddition(newTask.name)){
-        throw { message: "There's an existing Task with the same Task name that has not yet been completed." }
-      }
-      else{
-        tasks.createTask({
+  async function handleSubmit(){
+    if(!confirmAddition(newTask.name)){
+      throw { message: "There's an existing Task with the same Task name that has not yet been completed." }
+    }
+    else{
+      try{
+        await tasks.createTask({
           name: newTask.name,
           details: newTask.details,
           category: newTask.category,
@@ -97,9 +90,11 @@ import { useCategories } from '../models/categories';
           completed: newTask.completed,
           important: newTask.important,
           assignedBy: newTask.assignBy === null ? null : session.user?.email,
-          user: newTask.assignBy === null ? session.user : getUser(newTask.assignBy)
+          user: newTask.assignBy === null ? session.user?.email : getUser(newTask.assignBy)
         })
         router.push('/overview')
+      }catch(e){
+        console.log(e)
       }
     }
   }
@@ -171,7 +166,7 @@ import { useCategories } from '../models/categories';
                         <div class="control is-expanded">
                             <div class="select is-info select-section is-normal">
                               <select disabled v-model="newTask.assignBy" v-if="props.assign === 'true'">
-                                <option>{{user.email}}</option>
+                                <option>{{props.email}}</option>
                               </select>
                               <select required v-model="newTask.assignBy" v-else>
                                 <option v-for="(friend,i) in session.user?.friends" :key="i">{{friend}}</option>

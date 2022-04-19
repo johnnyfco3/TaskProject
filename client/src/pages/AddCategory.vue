@@ -12,10 +12,12 @@ import router from '../router';
     user: session.user?.email
   })
   
-  function handleSubmit(){
-    if(newCategory.name){
-      categories.createCategory(newCategory)
-        router.push('/overview')
+  async function handleSubmit(){
+    try{
+      await categories.createCategory(newCategory)
+      router.push('/overview')
+    }catch(e){
+      console.log(e)
     }
   }
 

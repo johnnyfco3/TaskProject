@@ -91,7 +91,8 @@ async function update(id, newTask){
         { $set: newTask },
         { returnDocument: 'after' }
     )
-    return includeUser(task)
+
+    return includeUser(task.value)
 }
 
 function seed(){

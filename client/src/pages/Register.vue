@@ -15,14 +15,18 @@ import { useUsers } from '../models/users';
       friends: []
   })
   
-  function handleSubmit(){
+  async function handleSubmit(){
     if(newUser){
       if(newUser.password !== newUser.confirm){
         alert("Passwords do not match!");
       }
       else{
-        users.createUser(newUser)
-        router.push("/")
+        try{
+          await users.createUser(newUser)
+          router.push("/")
+        }catch(e){
+          console.log(e)
+        }
       }
       newUser.firstName = "";
       newUser.lastName = "";

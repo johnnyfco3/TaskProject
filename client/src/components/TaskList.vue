@@ -18,15 +18,23 @@ import { useUsers } from '../models/users';
 
     const completed = ref(task.completed);
     const important = ref(task.important);
+    const assigned = ref("")
 
-    function remove(id: string){
-        tasks.remove(id)
+    async function remove(id: string){
+        try{
+            await tasks.remove(id)
+        }catch(e){
+            console.log(e)
+        }
     }
 
-    function getUser(user:string){
-        const currentUser = users.getByEmail(user)
-
-        return `${currentUser.firstName} ${currentUser.lastName}`
+    async function getUser(user:string){
+        try{
+            const currentUser = await users.getByEmail(user)
+            return `${currentUser.firstName} ${currentUser.lastName}`
+        }catch(e){
+            console.log(e)
+        }
     }
 
     const copy = tasks.list.filter(t => t.category === type && t.user === session.user).sort((a:any,b:any) => {
@@ -35,27 +43,31 @@ import { useUsers } from '../models/users';
         return first - second
     })
 
-    function toggleCompleted(id:string){
-        const task = tasks.getByID(id)
-
-        completed.value = !completed.value
-
-        return task.completed = !task.completed
+    async function toggleCompleted(id:string){
+        try{
+            await tasks.update(id, { completed: !completed.value })
+            completed.value = !completed.value
+        }
+        catch(e){
+            console.log(e)
+        }
     }
     
-    function toggleImportant(id:string){
-        const task = tasks.getByID(id)
-
-        important.value = !important.value
-
-        return task.important = !task.important
+    async function toggleImportant(id:string){
+        try{
+            await tasks.update(id, { important: !important.value })
+            important.value = !important.value
+        }
+        catch(e){
+            console.log(e)
+        }
     }
 
 </script>
 
 <template>
 <div class="list">
-    <div v-if="task.category === type && task.user === session.user">
+    <div v-if="task.category === type && task.user.email === session.user.email">
         <div class="card" v-if="currentTab == 'Completed' && task.completed">
             <div class="header">
                 <div class="top-content">
@@ -67,7 +79,7 @@ import { useUsers } from '../models/users';
                     </p>
                 </div>
                 <p class="subtitle" v-if="task.assignedBy !== null">
-                    {{task.category}} - Assigned by {{getUser(task.assignedBy)}}
+                    {{task.category}} - Assigned by {{getUser(task.assignedBy).then(res => res)}}
                 </p>
                 <p class="subtitle" v-else>
                     {{task.category}}
@@ -104,7 +116,7 @@ import { useUsers } from '../models/users';
                     </p>
                 </div>
                 <p class="subtitle" v-if="task.assignedBy !== null">
-                    {{task.category}} - Assigned by {{getUser(task.assignedBy)}}
+                    {{task.category}} - Assigned by {{getUser(task.assignedBy).then(res => res)}}
                 </p>
                 <p class="subtitle" v-else>
                     {{task.category}}
@@ -141,7 +153,7 @@ import { useUsers } from '../models/users';
                     </p>
                 </div>
                 <p class="subtitle">
-                    {{task.category}} - Assigned by {{getUser(task.assignedBy)}}
+                    {{task.category}} - Assigned by {{getUser(task.assignedBy).then(res => res)}}
                 </p>
             </div>
             <div class="card-content">
@@ -176,7 +188,7 @@ import { useUsers } from '../models/users';
                     </p>
                 </div>
                 <p class="subtitle" v-if="task.assignedBy !== null">
-                    {{task.category}} - Assigned by {{getUser(task.assignedBy)}}
+                    {{task.category}} - Assigned by {{getUser(task.assignedBy).then(res => res)}}
                 </p>
                 <p class="subtitle" v-else>
                     {{task.category}}
@@ -214,7 +226,7 @@ import { useUsers } from '../models/users';
                         </p>
                     </div>
                     <p class="subtitle" v-if="task.assignedBy !== null">
-                        {{task.category}} - Assigned by {{getUser(task.assignedBy)}}
+                        {{task.category}} - Assigned by {{getUser(task.assignedBy).then(res => res)}}
                     </p>
                     <p class="subtitle" v-else>
                         {{task.category}}

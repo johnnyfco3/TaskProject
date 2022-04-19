@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue';
+import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import FriendsList from "../components/FriendsList.vue";
 import { useSession } from '../models/session';
@@ -7,8 +7,17 @@ import { useUsers } from '../models/users';
 
   const session = useSession();
   const users = useUsers();
-  const user = users.getByEmail(session.user?.email)
-  const friendsList = ref(user?.friends)
+  const getUser = async () => {
+    try{
+      const u = await users.getByEmail(session.user?.email)
+      friendsList.value = u.friends
+    }catch(e){
+      console.log(e)
+    }
+  }
+  const friendsList = ref([]);
+  getUser()
+
 
 </script>
 

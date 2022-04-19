@@ -18,8 +18,12 @@ import { useUsers } from '../models/users';
     }
   })
 
-  function remove(email:string){
-    users.removeFriend(session.user?._id, email)
+  async function remove(email:string){
+    try{
+      await users.removeFriend(session.user?._id, email)
+    }catch(e){
+      console.log(e)
+    }
   }
 
   const info = {

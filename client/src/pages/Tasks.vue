@@ -8,7 +8,10 @@ import TaskList from "../components/TaskList.vue";
   const today = ref(new Date().toLocaleDateString('en-us', { weekday:"long", month:"long", day:"numeric"}));
 
   const props = defineProps({
-    category: String
+    category: {
+      type: String,
+      required: true
+    }
   })
 
   const tasks = useTasks()

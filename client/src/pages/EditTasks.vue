@@ -34,10 +34,12 @@ import router from '../router';
     user: session.user
   })
 
-  function handleSubmit(){
-    if(editTask){
-      tasks.update(task._id, editTask)
+  async function handleSubmit(){
+    try{
+      await tasks.update(task._id, editTask)
       router.push('/overview')
+    }catch(e){
+      console.log(e)
     }
   }
 

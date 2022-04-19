@@ -13,9 +13,13 @@ import { useSession } from '../models/session';
     i: number 
     }>();
 
-  function remove(id:string){
-        categories.remove(id)
+  async function remove(id:string){
+    try{
+      await categories.remove(id)
+    }catch(e){
+      console.log(e)
     }
+  }
     
 </script>
 

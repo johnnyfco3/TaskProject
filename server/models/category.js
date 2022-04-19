@@ -58,7 +58,7 @@ async function update(id, newCategory){
         { returnDocument: 'after' }
     );
 
-    return includeUser(category)
+    return category.user ? includeUser(category.value) : { ...category.value }; 
 }
 
 function seed(){
