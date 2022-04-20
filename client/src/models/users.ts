@@ -23,7 +23,8 @@ export const useUsers = defineStore('users', {
             return newUser.data;
         },
         async addFriends(userID: string, friend: string){
-            const newUser = await api(`users/addFriend/${userID}`, friend, 'POST');
+            const newUser = await api(`users/addFriend/${userID}`, {friend}, 'POST');
+            console.log(newUser)
             return newUser.data;
         },
         async login(email: string, password: string){
@@ -35,7 +36,7 @@ export const useUsers = defineStore('users', {
             return user.data;
         },
         async removeFriend(userID: string, friend: string){
-            const user = await api(`users/friend/${userID}`, friend, 'DELETE');
+            const user = await api(`users/friend/${userID}`, {friend}, 'DELETE');
             return user.data;
         },
         async update(id: string, user: User){

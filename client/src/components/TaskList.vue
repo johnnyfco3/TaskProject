@@ -2,7 +2,7 @@
 import { defineProps, ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import { useSession } from '../models/session';
-import { Task, useTasks, removeTasks } from '../models/tasks';
+import { Task, useTasks } from '../models/tasks';
 import { useUsers } from '../models/users';
     
     const users = useUsers()

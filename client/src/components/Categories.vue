@@ -15,7 +15,7 @@ import { useSession } from '../models/session';
 
   async function remove(id:string){
     try{
-      await categories.remove(id)
+      await categories.removeCategory(id)
     }catch(e){
       console.log(e)
     }
@@ -26,7 +26,7 @@ import { useSession } from '../models/session';
 <template>
 <div id="categories">
     <div class="column">
-      <div v-if="category.user === null || category.user === session.user">
+      <div v-if="category.user === null || category.user.email === session.user.email">
             <div class="card has-text-centered">
               <a href="#"><i class="fa-solid fa-xmark remove" @click="remove(category._id)"></i></a>
               <router-link :to="`/tasks/${category.name}`" >

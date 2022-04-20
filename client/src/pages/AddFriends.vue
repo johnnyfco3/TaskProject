@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue';
+import { reactive } from 'vue';
 import { useSession } from '../models/session';
 import { useUsers } from '../models/users';
 import router from '../router';
@@ -10,15 +10,13 @@ import router from '../router';
   })
 
   const users = useUsers()
-  users.fetchUsers()
   
   async function handleSubmit(){
       if(newFriend){
-        const checkUser = users.getByEmail(newFriend.email)
-
-        if(checkUser){
+        const checkUser = await users.getByEmail(newFriend.email)
+        if(Object.keys(checkUser).length !== 0){
           try{
-            await users.addFriends(session.user?._id, newFriend.email)
+            await users.addFriends(session.user?._id, checkUser.email)
             router.push('/friends')
           }catch(e){
             console.log(e)

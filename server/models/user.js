@@ -53,7 +53,7 @@ async function remove(id){
 async function removeFriends(id, friend){
     const result = await collection.updateOne(
         { _id: new ObjectId(id) },
-        { $pull: { friends: { $in: friend } } },
+        { $pull: { friends: friend } },
         { returnDocument: 'after' }
     )
     return { ...result.value, password: undefined };

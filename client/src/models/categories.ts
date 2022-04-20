@@ -23,8 +23,8 @@ export const useCategories = defineStore('categories', {
             const newCategory = await api('categories', category, 'POST');
             return newCategory.data;
         },
-        async remove(id: string){
-            const category = await api(`categories/${id}`, null, 'DELETE');
+        async removeCategory(id: string){
+            const category = await api(`categories/${id}`, {}, 'DELETE');
             return category.data;
         },
         async update(id: string, category: Category){
