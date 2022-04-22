@@ -2,7 +2,6 @@
 import { reactive, defineProps, ref } from 'vue';
 import router from '../router';
 import { useSession } from '../models/session';
-import { useUsers } from '../models/users';
 import { useTasks } from '../models/tasks';
 import { useCategories } from '../models/categories';
 
@@ -15,8 +14,6 @@ import { useCategories } from '../models/categories';
     },
     category: String,
   })
-
-  const users = useUsers()
   
   const newTask = reactive({
     name: "",
@@ -32,7 +29,7 @@ import { useCategories } from '../models/categories';
   const assignTo = ref({})
   async function getUser(email:string){
     try{
-      const res = await users.getByEmail(email)
+      const res = await session.api(`users/email/${email}`)
       assignTo.value = res
     }catch(e){
       console.log(e)
@@ -67,7 +64,7 @@ import { useCategories } from '../models/categories';
 
   async function handleSubmit(){
       try{
-        await tasks.createTask({
+        const input = {
           name: newTask.name,
           details: newTask.details,
           category: newTask.category,
@@ -77,7 +74,8 @@ import { useCategories } from '../models/categories';
           important: newTask.important,
           assignedBy: newTask.assignBy === null ? null : session.user?.email,
           user: newTask.assignBy === null ? session.user?.email : props.email
-        })
+        }
+        await session.api('tasks', input)
         router.push('/overview')
       }catch(e){
         console.log(e)

@@ -3,9 +3,7 @@ import { defineProps, ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import { useSession } from '../models/session';
 import { Task, useTasks } from '../models/tasks';
-import { useUsers } from '../models/users';
     
-    const users = useUsers()
     const tasks = useTasks()
     const session = useSession()
 
@@ -21,7 +19,7 @@ import { useUsers } from '../models/users';
 
     async function remove(id: string){
         try{
-            const res = await tasks.removeTasks(id)
+            const res = await session.api(`tasks/${id}`, {}, 'DELETE')
             return res
         }catch(e){
             console.log(e)
@@ -30,7 +28,7 @@ import { useUsers } from '../models/users';
 
     async function getUser(user:string){
         try{
-            const currentUser = await users.getByEmail(user)
+            const currentUser = await session.api(`users/email/${user}`)
             return `${currentUser.firstName} ${currentUser.lastName}`
         }catch(e){
             console.log(e)
@@ -45,7 +43,7 @@ import { useUsers } from '../models/users';
 
     async function toggleCompleted(id:string){
         try{
-            await tasks.update(id, { completed: !completed.value })
+            await session.api(`tasks/${id}`, { completed: !completed.value }, 'PATCH')
             completed.value = !completed.value
         }
         catch(e){
@@ -55,7 +53,7 @@ import { useUsers } from '../models/users';
     
     async function toggleImportant(id:string){
         try{
-            await tasks.update(id, { important: !important.value })
+            await session.api(`tasks/${id}`, { important: !important.value }, 'PATCH')
             important.value = !important.value
         }
         catch(e){

@@ -33,7 +33,7 @@ router.beforeEach((to,from) =>{
       session.destinationURL = to.path
     }
     const protectedURLs = ['/overview', '/tasks/:category', '/friends', '/add-tasks/:assign/:email/:category', '/add-friends', '/add-category', '/edit-task/:name']
-    if(protectedURLs.includes(to.path)){
+    if(protectedURLs.includes(to.path.toLowerCase())){
       if(!session.user){
         return '/';
       }

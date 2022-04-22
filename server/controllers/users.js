@@ -36,7 +36,7 @@ app
         }).catch(next)
     })
     .post('/addFriend/:id', /*requireAuth,*/ (req,res, next)=>{
-        userModel.addFriends(req.params.id, req.body.friend)
+        userModel.addFriends(req.params.id, req.body.email)
         .then(user => {
             res.send({ success: true, errors: [], data: user })
         }).catch(next)
@@ -62,7 +62,7 @@ app
         }).catch(next)
     })
     .delete('/friend/:id', /*requireAuth,*/ (req,res,next)=>{
-        userModel.removeFriends(req.params.id, req.body.friend)
+        userModel.removeFriends(req.params.id, req.body.email)
         .then(user => {
             res.send({success: true, errors: [], data: user})
         }).catch(next)

@@ -15,7 +15,7 @@ import { useSession } from '../models/session';
 
   async function remove(id:string){
     try{
-      await categories.removeCategory(id)
+      await session.api(`categories/${id}`, {}, 'DELETE')
     }catch(e){
       console.log(e)
     }

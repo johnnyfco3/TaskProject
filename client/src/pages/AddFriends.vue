@@ -1,22 +1,20 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
 import { useSession } from '../models/session';
-import { useUsers } from '../models/users';
 import router from '../router';
   
   const session = useSession();
   const newFriend = reactive({
           email: ""
   })
-
-  const users = useUsers()
   
   async function handleSubmit(){
       if(newFriend){
-        const checkUser = await users.getByEmail(newFriend.email)
+        const checkUser = await session.api(`users/email/${newFriend.email}`)
+        const email = checkUser.email
         if(Object.keys(checkUser).length !== 0){
           try{
-            await users.addFriends(session.user?._id, checkUser.email)
+            await session.api(`users/addFriend/${session.user?._id}`, {email})
             router.push('/friends')
           }catch(e){
             console.log(e)

@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
-import { useCategories } from '../models/categories';
 import { useSession } from '../models/session';
 import router from '../router';
 
   const session = useSession();
-  const categories = useCategories()
   
   const newCategory = reactive({
     name: "",
@@ -14,7 +12,7 @@ import router from '../router';
   
   async function handleSubmit(){
     try{
-      await categories.createCategory(newCategory)
+      await session.api('categories', newCategory)
       router.push('/overview')
     }catch(e){
       console.log(e)

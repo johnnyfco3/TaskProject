@@ -14,7 +14,6 @@ export const useSession = defineStore('session', {
     }),
     actions: {
         async Login(email: string, password: string) {
-            // const users = useUsers()
             try {
                 const user = await this.api("users/login", { email, password } )
                 if(user){
@@ -32,7 +31,12 @@ export const useSession = defineStore('session', {
             this.user = null
             router.push('/')
         },
-        async api(url: string, data?: any, method?: 'POST' | 'PUT' | 'DELETE' | 'GET', headers?: any) {
+        async api(url: string, data?: any, method?: 'POST' | 'PATCH' | 'DELETE' | 'GET', headers: any = {}) {
+            
+            if(this.user?.token){
+                headers.Authorization = `Bearer ${this.user.token}`
+            }
+
             try{
                 const response = await api(url, data, method, headers)
                 if(response.errors?.length){

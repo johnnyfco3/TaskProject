@@ -3,13 +3,11 @@ import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import FriendsList from "../components/FriendsList.vue";
 import { useSession } from '../models/session';
-import { useUsers } from '../models/users';
 
   const session = useSession();
-  const users = useUsers();
   const getUser = async () => {
     try{
-      const u = await users.getByEmail(session.user?.email)
+      const u = await session.api(`users/email/${session.user?.email}`)
       friendsList.value = u.friends
     }catch(e){
       console.log(e)

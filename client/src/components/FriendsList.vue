@@ -2,10 +2,8 @@
 import { RouterLink } from 'vue-router';
 import router from '../router';
 import { useSession } from '../models/session';
-import { useUsers } from '../models/users';
 
   const session = useSession();
-  const users = useUsers()
 
   const props = defineProps({
     friend: {
@@ -20,7 +18,7 @@ import { useUsers } from '../models/users';
 
   async function remove(email:string){
     try{
-      await users.removeFriend(session.user?._id, email)
+      await session.api(`users/friend/${session.user?._id}`, {email}, 'DELETE')
     }catch(e){
       console.log(e)
     }
