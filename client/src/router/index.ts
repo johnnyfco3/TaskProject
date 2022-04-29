@@ -8,6 +8,7 @@ import AddTask from '../pages/AddTask.vue'
 import AddFriends from '../pages/AddFriends.vue'
 import AddCategory from '../pages/AddCategory.vue'
 import EditTasks from '../pages/EditTasks.vue'
+import EditUser from '../pages/EditUser.vue'
 import { useSession } from "../models/session";
 
 const routes: RouteRecordRaw[] = [
@@ -19,7 +20,8 @@ const routes: RouteRecordRaw[] = [
     { path: '/add-tasks/:assign/:email/:category', component: AddTask, props: true },
     { path: '/add-friends', component: AddFriends },
     { path: '/add-category', component: AddCategory },
-    { path: '/edit-task/:name', component: EditTasks, props: true }
+    { path: '/edit-task/:name', component: EditTasks, props: true },
+    { path: '/edit-user', component: EditUser }
 ];
 
 const router = createRouter({

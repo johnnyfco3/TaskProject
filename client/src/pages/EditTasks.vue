@@ -36,7 +36,7 @@ import router from '../router';
 
   async function handleSubmit(){
     try{
-      await session.api(`tasks/${task._id}`, editTask, 'PATCH')
+      await session.api(`tasks/${editTask._id}`, editTask, 'PATCH')
       router.push('/overview')
     }catch(e){
       console.log(e)

@@ -44,6 +44,18 @@ import { useSession } from '../models/session';
                     <router-link to="/add-friends" class="navbar-item">
                     New Friend
                     </router-link>
+
+                    <div class="navbar-item has-dropdown is-hoverable">
+                      <a class="navbar-item">
+                        Settings
+                      </a>
+
+                      <div class="navbar-dropdown">
+                        <router-link to="/edit-user" class="navbar-item">
+                          Edit Account
+                        </router-link>
+                      </div>
+                    </div>
                     
                     <a @click="session.Logout()" class="navbar-item">
                       Log out
