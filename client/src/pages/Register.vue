@@ -2,9 +2,9 @@
 import { reactive } from 'vue';
 import router from '../router';
 import Footer from '../components/Footer.vue';
-import { useUsers } from '../models/users';
+import { useSession } from '../models/session';
 
-  const users = useUsers()
+  const session = useSession()
 
   const newUser = reactive({
       firstName: "",
@@ -16,25 +16,24 @@ import { useUsers } from '../models/users';
   })
   
   async function handleSubmit(){
-    if(newUser){
-      if(newUser.password !== newUser.confirm){
-        alert("Passwords do not match!");
+    if(newUser.password !== newUser.confirm){
+      alert("Passwords do not match!");
+    }
+    else{
+      try{
+        await session.api('users', newUser)
+        router.push("/")
+      }catch(e){
+        console.log(e)
       }
-      else{
-        try{
-          await users.createUser(newUser)
-          router.push("/")
-        }catch(e){
-          console.log(e)
-        }
-      }
-      newUser.firstName = "";
-      newUser.lastName = "";
-      newUser.email = "";
-      newUser.password = "";
-      newUser.confirm = "";
-    }    
-  }
+    }
+    newUser.firstName = "";
+    newUser.lastName = "";
+    newUser.email = "";
+    newUser.password = "";
+    newUser.confirm = "";
+  }    
+  
   
 
 </script>

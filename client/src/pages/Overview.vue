@@ -5,8 +5,10 @@ import { useCategories } from '../models/categories';
 import { useTasks } from '../models/tasks';
 import { useSession } from '../models/session';
 import Categories from '../components/Categories.vue';
+import { useMessage } from '../models/messages';
 
   const session = useSession();
+  const messages = useMessage();
   const today = ref(new Date().toLocaleDateString('en-us', { weekday:"long", month:"long", day:"numeric"}));
 
   const total = {
@@ -36,6 +38,10 @@ import Categories from '../components/Categories.vue';
 <div id="overview">
     <main>
         <div class="container mb-6">
+          <div v-for=" (x, i) in messages.notifications" :class="`notification is-light is-${x.type}`" :key="i">
+                <button class="delete" @click="messages.close(i)" ></button>
+                {{ x.message }}
+            </div>
             <div class="top-content has-text-centered pt-6 pb-6">
                 <h1 class="title"><span>Hello</span> {{session.user?.firstName}}</h1>
                 <h1 class="subtitle">{{today}}</h1>

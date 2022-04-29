@@ -4,8 +4,10 @@ import { reactive } from 'vue';
 import { useSession } from '../models/session';
 import About from '../components/About.vue';
 import Footer from '../components/Footer.vue';
+import { useMessage } from '../models/messages';
 
   const session = useSession();
+  const messages = useMessage();
       
   const returningUser = reactive({
     email: "",
@@ -31,6 +33,10 @@ import Footer from '../components/Footer.vue';
                 <div class="card">
                     <form @submit.prevent="handleSubmit">
                     <h1 class="title has-text-centered pt-4">Sign In</h1>
+                    <div v-for=" (x, i) in messages.notifications" :class="`notification is-light is-${x.type}`" :key="i">
+                      <button class="delete" @click="messages.close(i)" ></button>
+                      {{ x.message }}
+                  </div>
                     <div class="card-content">
                     <div class="content">
                         <div class="field">
