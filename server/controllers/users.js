@@ -5,8 +5,6 @@ const { requireAuth } = require("../models/auth")
 
 const userModel = require("../models/user")
 
-const CREATED_STATUS = 201
-
 app
     // GET
     .get('/', /*requireAuth,*/ (req,res,next) =>{
@@ -32,7 +30,7 @@ app
     .post('/', (req,res, next)=>{
         userModel.create(req.body)
         .then(user => {
-            res.status(CREATED_STATUS).send({ success: true, errors: [], data: user })
+            res.send({ success: true, errors: [], data: user })
         }).catch(next)
     })
     .post('/addFriend/:id', /*requireAuth,*/ (req,res, next)=>{

@@ -22,7 +22,7 @@ app
 
   .use(express.json())
   .use((req, res, next) => {
-    const auth = req.headers.authorization
+    const auth = req.headers.Authorization
     if (auth) {
       const token = auth.split(' ')[1]
       userModel.fromToken(token)
@@ -40,8 +40,8 @@ app
     res.send('You are on the homepage')
   })
   .use('/api/users', usersController)
-  .use('/api/tasks', /*requireAuth*/ tasksController)
-  .use('/api/categories', /*requireAuth*/  categoriesController)
+  .use('/api/tasks', /*requireAuth,*/ tasksController)
+  .use('/api/categories', /*requireAuth,*/  categoriesController)
 
   .use((err, req, res, next) => {
     console.error(err)

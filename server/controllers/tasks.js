@@ -1,27 +1,25 @@
 const express = require("express")
 const app = express.Router();
 
-const { requireAuth } = require("../models/auth")
-
 const taskModel = require("../models/task")
 
-const CREATED_STATUS = 201
+const { requireAuth } = require("../models/auth")
 
 app
     // GET
-    .get('/', /*requireAuth,*/ (req,res,next) =>{
+    .get('/', (req,res,next) =>{
         taskModel.getList()
         .then(tasks => {
             res.send({success: true, errors: [], data: tasks})
         }).catch(next)
     })
-    .get('/:id', /*requireAuth,*/ (req,res,next) =>{
+    .get('/:id', (req,res,next) =>{
         taskModel.get(req.params.id)
         .then(task => {
             res.send({success: true, errors: [], data: task})
         }).catch(next)
     })
-    .get('/user/:userID', /*requireAuth,*/ (req,res,next) =>{
+    .get('/user/:userID', (req,res,next) =>{
         taskModel.getByUser(req.params.userID)
         .then(tasks => {
             res.send({success: true, errors: [], data: tasks})
@@ -29,15 +27,15 @@ app
     })
 
     // POST
-    .post('/', /*requireAuth,*/ (req,res,next) =>{
+    .post('/', (req,res,next) =>{
         taskModel.create(req.body)
         .then(task => {
-            res.status(CREATED_STATUS).send({success: true, errors: [], data: task})
+            res.send({success: true, errors: [], data: task})
         }).catch(next)
     })
 
     // DELETE
-    .delete('/:id', /*requireAuth,*/ (req,res,next) =>{
+    .delete('/:id', (req,res,next) =>{
         taskModel.remove(req.params.id)
         .then(task => {
             res.send({success: true, errors: [], data: task})
@@ -45,7 +43,7 @@ app
     })
 
     // PATCH
-    .patch('/:id', /*requireAuth,*/ (req,res,next) =>{
+    .patch('/:id', (req,res,next) =>{
         taskModel.update(req.params.id, req.body)
         .then(task => {
             res.send({success: true, errors: [], data: task})
