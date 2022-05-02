@@ -23,6 +23,12 @@ export const useSession = defineStore('session', {
                     this.user = user
                     router.push(this.destinationURL ?? '/overview')
                 }
+                else{
+                    messages.notifications.push({
+                        type: "danger",
+                        message: "Invalid email or password"
+                    })
+                }
             } catch (error: any) {
                 messages.notifications.push({
                     type: "danger",

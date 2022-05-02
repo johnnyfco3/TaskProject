@@ -26,19 +26,23 @@ import { Task, useTasks } from '../models/tasks';
         }
     }
 
-    async function getUser(user:string){
-        try{
-            const currentUser = await session.api(`users/email/${user}`)
-            return `${currentUser.firstName} ${currentUser.lastName}`
-        }catch(e){
-            console.log(e)
+    const assigned = ref("")
+    async function getUser(user:string | null){
+        if(user){
+            try{
+                const currentUser = await session.api(`users/email/${user}`)
+                assigned.value = `${currentUser.firstName} ${currentUser.lastName}`
+            }catch(e){
+                console.log(e)
+            }
         }
     }
+    getUser(task.assignedBy)
 
     const copy = tasks.list.filter(t => t.category === type && t.user.email === session.user?.email).sort((a:any,b:any) => {
         let first:any = new Date(a.date)
         let second:any = new Date(b.date)
-        return first - second
+        return second - first
     })
 
     async function toggleCompleted(id:string){
@@ -77,7 +81,7 @@ import { Task, useTasks } from '../models/tasks';
                     </p>
                 </div>
                 <p class="subtitle" v-if="task.assignedBy !== null">
-                    {{task.category}} - Assigned by {{getUser(task.assignedBy).then(res => res)}}
+                    {{task.category}} - Assigned by {{assigned}}
                 </p>
                 <p class="subtitle" v-else>
                     {{task.category}}
@@ -114,7 +118,7 @@ import { Task, useTasks } from '../models/tasks';
                     </p>
                 </div>
                 <p class="subtitle" v-if="task.assignedBy !== null">
-                    {{task.category}} - Assigned by {{getUser(task.assignedBy).then(res => res)}}
+                    {{task.category}} - Assigned by {{assigned}}}
                 </p>
                 <p class="subtitle" v-else>
                     {{task.category}}
@@ -151,7 +155,7 @@ import { Task, useTasks } from '../models/tasks';
                     </p>
                 </div>
                 <p class="subtitle">
-                    {{task.category}} - Assigned by {{getUser(task.assignedBy).then(res => res)}}
+                    {{task.category}} - Assigned by {{assigned}}
                 </p>
             </div>
             <div class="card-content">
@@ -186,7 +190,7 @@ import { Task, useTasks } from '../models/tasks';
                     </p>
                 </div>
                 <p class="subtitle" v-if="task.assignedBy !== null">
-                    {{task.category}} - Assigned by {{getUser(task.assignedBy).then(res => res)}}
+                    {{task.category}} - Assigned by {{assigned}}
                 </p>
                 <p class="subtitle" v-else>
                     {{task.category}}
@@ -224,7 +228,7 @@ import { Task, useTasks } from '../models/tasks';
                         </p>
                     </div>
                     <p class="subtitle" v-if="task.assignedBy !== null">
-                        {{task.category}} - Assigned by {{getUser(task.assignedBy).then(res => res)}}
+                        {{task.category}} - Assigned by {{assigned}}
                     </p>
                     <p class="subtitle" v-else>
                         {{task.category}}
