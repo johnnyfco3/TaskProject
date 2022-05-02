@@ -15,7 +15,7 @@ const editUser = reactive({
 async function handleSubmit(){
     try{
         await session.api(`users/${session.user?._id}`, editUser, 'PATCH')
-        router.push('/overview')
+        session.Logout()
     }catch(e){
         console.log(e)
     }
@@ -25,6 +25,8 @@ async function handleDelete(){
     if(window.confirm('Are you sure you want to delete your account?')){
         try{
             await session.api(`users/${session.user?._id}`, {}, 'DELETE')
+            await session.api(`tasks/user/${session.user?.email}`, {}, 'DELETE')
+            await session.api(`categories/user/${session.user?.email}`, {}, 'DELETE')
             session.Logout()
         }catch(e){
             console.log(e)

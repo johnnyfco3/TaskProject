@@ -41,6 +41,12 @@ app
             res.send({success: true, errors: [], data: task})
         }).catch(next)
     })
+    .delete('/user/:user', (req,res,next) =>{
+        taskModel.removeByUser(req.params.user)
+        .then(task => {
+            res.send({success: true, errors: [], data: task})
+        }).catch(next)
+    })
 
     // PATCH
     .patch('/:id', (req,res,next) =>{

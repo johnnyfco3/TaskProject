@@ -45,7 +45,12 @@ app
             res.send({ success: true, errors: [], data: category })
         }).catch(next)
     })
-
+    .delete('/user/:user', (req, res, next) =>{
+        categoryModel.removeByUser(req.params.user)
+        .then(category => {
+            res.send({ success: true, errors: [], data: category })
+        }).catch(next)
+    })
     // PATCH
     .patch('/:id', (req, res, next) =>{
         categoryModel.update(req.params.id, req.body)

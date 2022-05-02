@@ -85,6 +85,10 @@ async function remove(id){
     return includeUser(task.value)
 }
 
+async function removeByUser(user){
+    return await collection.deleteMany({ user });
+}
+
 async function update(id, newTask){
     const task = await collection.findOneAndUpdate(
         { _id: new ObjectId(id) },
@@ -110,6 +114,7 @@ module.exports = {
         return task
     },
     remove,
+    removeByUser,
     update,
     getByUser,
     seed,

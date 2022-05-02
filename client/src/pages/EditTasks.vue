@@ -22,7 +22,6 @@ import router from '../router';
   }
   
   const editTask = reactive({
-    _id: task._id,
     name: task.name,
     category: task.category,
     details: task.details,
@@ -31,12 +30,12 @@ import router from '../router';
     completed: task.completed,
     important: task.important,
     assignedBy: task.assignedBy,
-    user: session.user
+    user: session.user?.email
   })
 
   async function handleSubmit(){
     try{
-      await session.api(`tasks/${editTask._id}`, editTask, 'PATCH')
+      await session.api(`tasks/${task?._id}`, editTask, 'PATCH')
       router.push('/overview')
     }catch(e){
       console.log(e)

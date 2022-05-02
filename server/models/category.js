@@ -51,6 +51,10 @@ async function remove(id){
     return { ...category.value }
 }
 
+async function removeByUser(user){
+    return await collection.deleteMany({ user });
+}
+
 async function update(id, newCategory){
     const category = await collection.findOneAndUpdate(
         { _id: new ObjectId(id) },
@@ -75,6 +79,7 @@ module.exports = {
         return category
     },
     remove,
+    removeByUser,
     update,
     getByUser,
     seed,
