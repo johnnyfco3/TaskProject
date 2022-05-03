@@ -27,7 +27,7 @@ import { Task, useTasks } from '../models/tasks';
     }
 
     const assigned = ref("")
-    async function getUser(user:string | null){
+    async function getUser(user:string | null | undefined){
         if(user){
             try{
                 const currentUser = await session.api(`users/email/${user}`)
@@ -39,11 +39,13 @@ import { Task, useTasks } from '../models/tasks';
     }
     getUser(task.assignedBy)
 
-    const copy = tasks.list.filter(t => t.category === type && t.user.email === session.user?.email).sort((a:any,b:any) => {
-        let first:any = new Date(a.date)
-        let second:any = new Date(b.date)
-        return second - first
-    })
+    const sortedArray = ref([])
+    async function getSortedArray(){
+        const res = await session.api('tasks/sort', {})
+        const array = res.filter((task:any) => task.category === type && task.user === session.user?.email)
+        sortedArray.value = array
+    }
+    getSortedArray()
 
     async function toggleCompleted(id:string){
         try{
@@ -217,13 +219,13 @@ import { Task, useTasks } from '../models/tasks';
         </div>
 
         <div v-else-if="currentTab == 'Date'">
-            <div class="card" v-for="(task,i) in copy" :key="i">
+            <div class="card" v-for="(task,i) in sortedArray" :key="i">
                 <div class="header">
                     <div class="top-content">
                         <p class="card-header-title ml-4">
                             <i :class="
-                                completed ? 'fas fa-check-circle pr-6' : 'far fa-circle pr-6'"
-                            @click="toggleCompleted(task._id)"></i>
+                                task.completed ? 'fas fa-check-circle pr-6' : 'far fa-circle pr-6'"
+                            ></i>
                             {{task.name}}
                         </p>
                     </div>
@@ -235,22 +237,21 @@ import { Task, useTasks } from '../models/tasks';
                     </p>
                 </div>
                 <div class="card-content">
-                <div class="content is-flex is-justify-content-space-between">
-                        <p class="subtitle"><i class="far fa-calendar-alt"></i> {{task.date}}</p>
-                        <p class="subtitle time">{{task.time}}</p>
-                </div>
-                <div class="content">
-                    <p class="subtitle">Details</p>
-                    <p class="subtitle">{{task.details}}</p>
-                </div>
+                    <div class="content is-flex is-justify-content-space-between">
+                            <p class="subtitle"><i class="far fa-calendar-alt"></i> {{task.date}}</p>
+                            <p class="subtitle time">{{task.time}}</p>
+                    </div>
+                    <div class="content">
+                        <p class="subtitle">Details</p>
+                        <p class="subtitle">{{task.details}}</p>
+                    </div>
                 </div>
                 <footer class="card-footer">
-                <a href="#" class="card-footer-item"><router-link :to="`/edit-task/${task.name}`"><i class="fas fa-pencil-alt"></i></router-link></a>
-                <a href="#" class="card-footer-item"><i 
-                                                        :class="important ? 'fa-solid fa-star' : 'far fa-star'"
-                                                        @click="toggleImportant(task._id)"
-                                                    ></i></a>
-                <a href="#" class="card-footer-item"><i class="fas fa-minus-circle" @click="remove(task._id)"></i></a>
+                    <a href="#" class="card-footer-item"><router-link :to="`/edit-task/${task.name}`"><i class="fas fa-pencil-alt"></i></router-link></a>
+                    <a href="#" class="card-footer-item"><i 
+                                                            :class="task.important ? 'fa-solid fa-star' : 'far fa-star'"
+                                                        ></i></a>
+                    <a href="#" class="card-footer-item"><i class="fas fa-minus-circle"></i></a>
                 </footer>
             </div>
         </div>

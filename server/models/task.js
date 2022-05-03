@@ -99,6 +99,11 @@ async function update(id, newTask){
     return includeUser(task.value)
 }
 
+async function sortByDate(){
+    const tasks = await collection.find().toArray();
+    return tasks.sort((a, b) => new Date(b.date) - new Date(a.date));
+}
+
 function seed(){
     return collection.insertMany(tList);
 }
@@ -117,6 +122,7 @@ module.exports = {
     removeByUser,
     update,
     getByUser,
+    sortByDate,
     seed,
     async getList(){
         const tasks = await collection.find().toArray();

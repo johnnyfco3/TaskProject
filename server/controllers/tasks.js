@@ -3,8 +3,6 @@ const app = express.Router();
 
 const taskModel = require("../models/task")
 
-const { requireAuth } = require("../models/auth")
-
 app
     // GET
     .get('/', (req,res,next) =>{
@@ -31,6 +29,12 @@ app
         taskModel.create(req.body)
         .then(task => {
             res.send({success: true, errors: [], data: task})
+        }).catch(next)
+    })
+    .post('/sort', (req,res,next) =>{
+        taskModel.sortByDate()
+        .then(tasks => {
+            res.send({success: true, errors: [], data: tasks})
         }).catch(next)
     })
 

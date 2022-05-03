@@ -3,13 +3,39 @@ import * as users from "../models/users";
 import { defineStore } from "pinia";
 import { api } from "./myFetch";
 import { useMessage } from "./messages";
+import { loadScript } from "./utils";
 
 export const useSession = defineStore('session', {
     state: () => ({
-        user: null as users.User | null,
+        user: undefined as users.User | undefined,
         destinationURL: null as string | null
     }),
     actions: {
+        async GoogleLogin(){
+            await loadScript('https://accounts.google.com/gsi/client', 'google-signin')
+            const auth_client = google.accounts.oauth2.initTokenClient({
+                client_id: <string>import.meta.env.VITE_GOOGLE_CLIENT_ID,
+                scope: 'email profile',
+                callback: async x => {
+                    const user = await fetch(`https://www.googleapis.com/oauth2/v3/userinfo`, {
+                        headers: {
+                            Authorization: `Bearer ${x.access_token}`
+                        }
+                    }).then(x => x.json())
+                    console.log(user)
+                    this.user = {
+                        _id: user.sub,
+                        email: user.email,
+                        firstName: user.given_name,
+                        lastName: user.family_name,
+                        password: '',
+                        friends: [],
+                    }
+                    router.push(this.destinationURL ?? '/overview')
+                }
+              });
+            auth_client.requestAccessToken()
+        },
         async Login(email: string, password: string) {
             const messages = useMessage()
 
@@ -37,7 +63,7 @@ export const useSession = defineStore('session', {
             }
         },
         Logout(){
-            this.user = null
+            this.user = undefined
             router.push('/')
         },
         async api(url: string, data?: any, method?: 'POST' | 'PATCH' | 'DELETE' | 'GET', headers: any = {}) {

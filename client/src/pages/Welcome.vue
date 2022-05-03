@@ -61,7 +61,7 @@ import { useMessage } from '../models/messages';
                         
                         <div class="field is-grouped is-flex is-justify-content-center submit">
                             <div class="control">
-                            <button class="button is-link">Sign In</button>
+                              <button class="button is-link">Sign In</button>
                             </div>
                         </div>
                     </div>
@@ -69,8 +69,11 @@ import { useMessage } from '../models/messages';
                 </form>
                 <hr>
                 <div class="bottom-content has-text-centered">
-                <h4>Don't have an account? </h4>
-                <router-link to="/register">Register</router-link>
+                   <div class="control">
+                      <button class="button is-link" @click.prevent="session.GoogleLogin()">Sign in with Google</button>
+                    </div>
+                  <h4 class="mt-5">Don't have an account? </h4>
+                  <router-link to="/register">Register</router-link>
                 </div>
             </div>
         </div>
