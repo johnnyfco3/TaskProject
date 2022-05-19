@@ -25,6 +25,12 @@ app
             res.send({ success: true, errors: [], data: user })
         }).catch(next)
     })
+    .get('/search/email/:email', (req,res,next)=>{
+        userModel.searchByEmail(req.params.email)
+        .then(users => {
+            res.send({ success: true, errors: [], data: users })
+        }).catch(next)
+    })
 
     // POST
     .post('/', (req,res, next)=>{

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
 import { useSession } from '../models/session';
+import { useUsers } from '../models/users';
 import router from '../router';
   
   const session = useSession();
@@ -25,6 +26,44 @@ import router from '../router';
         }
       }
   }
+
+  const users = useUsers()
+  users.fetchUsers()
+
+  const searchData = reactive({
+    data: users.list,
+    keepFirst: false,
+    openOnFocus: false,
+    name: '',
+    selected: null
+  })
+    
+  async function filteredDataObj() {
+
+    //What I tried implementing to fix "Invalid prop: type check failed for prop "data". Expected Array, got Promise"
+    // await users.searchByEmail(searchData.name).then(res => {
+    //   return res.filter(option => {
+    //     return (
+    //       option.email
+    //         .toString()
+    //         .toLowerCase()
+    //         .indexOf(searchData.name.toLowerCase()) >= 0
+    //     )
+    //   })
+    // })
+
+
+    const search = await users.searchByEmail(searchData.name)
+    return search.filter(option => {
+      return (
+        option.email
+          .toString()
+          .toLowerCase()
+          .indexOf(searchData.name.toLowerCase()) >= 0
+      )
+    })
+  }
+
 </script>
 
 <template>
@@ -46,6 +85,22 @@ import router from '../router';
                         <button class="button is-danger pr-6 pl-6 pt-3 pb-3"><i class="fas fa-plus-circle" aria-hidden="true"></i> Add New</button>
                     </div>
                 </form>
+                <p class="content"><b>Selected:</b> {{ searchData.selected }}</p>
+                  <o-field label="Find a name">
+                    <o-autocomplete
+                      v-model="searchData.name"
+                      placeholder="e.g. name@gmail.com"
+                      :keep-first="searchData.keepFirst"
+                      :open-on-focus="searchData.openOnFocus"
+                      :data="filteredDataObj()"
+                      field="email"
+                      @select="option => searchData.selected = option"
+                    >
+
+                    <!-- Another thought I had was adding :data="filteredDataObj().then(res => res)" to fix issue but did not work-->
+                    
+                    </o-autocomplete>
+    </o-field>
             </div>
         </div>
     </main>

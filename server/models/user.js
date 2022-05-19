@@ -44,6 +44,11 @@ async function getByEmail(email){
     return { ...user, password: undefined };
 }
 
+async function searchByEmail(email){
+    const users = await collection.find({ email: { $regex: email, $options: 'i' } }).toArray();
+    return users.map(user => ({ ...user, password: undefined }));
+}
+
 async function remove(id){
     const user = await collection.findOneAndDelete({ _id: new ObjectId(id) });
 
@@ -130,6 +135,7 @@ module.exports = {
     removeFriends,
     addFriends,
     getByEmail,
+    searchByEmail,
     seed,
     async getList(){
         return (await collection.find().toArray()).map(user => ({ ...user, password: undefined }));
